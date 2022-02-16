@@ -186,7 +186,7 @@ export default defineComponent({
                   style={readonly && { pointerEvents: 'none' }}
                   teleported={false}
                   v-click-outside={($down, $up): void => {
-                    if (document.getElementById(this.$refs[`popper`].popperId)?.contains($up)) return;
+                    if (this.$refs[`popper`].popperRef.contentRef?.contains($up)) return;
                     this.visible = !1;
                   }}
                   onRemoveTag={(tag) => {

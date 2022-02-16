@@ -122,11 +122,7 @@ export default defineComponent({
       return values.map((x, i) => this.tabs[i]?.find((k) => k.value === x)?.text).join('/');
     },
     setMinWidth(): void {
-      setStyle(
-        document.getElementById(this.$refs[`popper`].popperId) as HTMLElement,
-        'minWidth',
-        `${this.$refs[`select`].$el.getBoundingClientRect().width}px`
-      );
+      setStyle(this.$refs[`popper`].popperRef.contentRef, 'minWidth', `${this.$refs[`select`].$el.getBoundingClientRect().width}px`);
     },
     setSoftFocus(): void {
       this._is_lock = true;
@@ -278,7 +274,7 @@ export default defineComponent({
                   style={readonly && { pointerEvents: 'none' }}
                   teleported={false}
                   v-click-outside={($down, $up): void => {
-                    if (document.getElementById(this.$refs[`popper`].popperId)?.contains($up)) return;
+                    if (this.$refs[`popper`].popperRef.contentRef?.contains($up)) return;
                     this.visible = !1;
                   }}
                   onFocus={(): void => {
