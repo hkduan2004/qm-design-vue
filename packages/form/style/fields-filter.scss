@@ -1,0 +1,34 @@
+/*
+ * @Author: 焦质晔
+ * @Date: 2021-02-26 16:41:10
+ * @Last Modified by: 焦质晔
+ * @Last Modified time: 2021-09-07 15:03:00
+ */
+@import '../../style/src/common';
+
+$prefix: '#{$qm-prefix}-fields-filter';
+
+.#{$prefix}__popper {
+  padding: 0 !important;
+  .fields-filter--wrap {
+    padding: $padding-base 12px;
+    max-width: 150px;
+    overflow-y: auto;
+    box-sizing: border-box;
+    .filter-item {
+      display: flex;
+      align-items: center;
+      line-height: 1.75;
+      @include text-overflow-cut;
+      .el-checkbox {
+        height: auto;
+      }
+      .handle {
+        padding: 2px 4px;
+        color: $text-color-secondary;
+        cursor: s-resize;
+        transform: scale(0.9);
+      }
+    }
+  }
+}

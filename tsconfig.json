@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    "target": "ES6",
+    "module": "ESNext",
+    "strict": false,
+    "declaration": true,
+    "skipLibCheck": true,
+    "importHelpers": true,
+    "noImplicitAny": false,
+    "strictNullChecks": true,
+    "moduleResolution": "Node",
+    "esModuleInterop": true,
+    "jsx": "preserve",
+    "noLib": false,
+    "allowJs": true,
+    "sourceMap": true,
+    "lib": ["ESNext", "DOM"],
+    "allowSyntheticDefaultImports": true,
+    "baseUrl": ".",
+    "outDir": "/"
+  },
+  "exclude": ["node_modules", "lib"]
+}

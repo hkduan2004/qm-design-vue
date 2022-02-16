@@ -1,0 +1,302 @@
+/*
+ * @Author: 焦质晔
+ * @Date: 2021-02-09 09:27:46
+ * @Last Modified by: 焦质晔
+ * @Last Modified time: 2021-02-22 11:16:14
+ */
+@import '../../style/src/common';
+
+$prefix: '#{$qm-prefix}-spin';
+
+.#{$prefix} {
+  @include reset-component();
+  position: absolute;
+  display: none;
+  color: $primary-color;
+  text-align: center;
+  vertical-align: middle;
+  opacity: 0;
+  transition: transform 0.3s cubic-bezier(0.78, 0.14, 0.15, 0.86);
+
+  &-spinning {
+    position: static;
+    display: inline-block;
+    opacity: 1;
+  }
+
+  &-nested-loading {
+    position: relative;
+    > div > .#{$prefix} {
+      position: absolute;
+      z-index: 4;
+      display: block;
+      width: 100%;
+      height: 100%;
+      .#{$prefix}-dot {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        margin: -20px;
+      }
+      .#{$prefix}-point {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+      .#{$prefix}-text {
+        position: absolute;
+        top: 50%;
+        width: 100%;
+        padding-top: $padding-base;
+      }
+      &.#{$prefix}-show-text > .#{$prefix}-dot {
+        margin-top: -36px;
+      }
+    }
+
+    > div > .#{$prefix}--medium {
+      .#{$prefix}-dot {
+        margin: -16px;
+      }
+      &.#{$prefix}-show-text .#{$prefix}-dot {
+        margin-top: -28px;
+      }
+    }
+
+    > div > .#{$prefix}--small {
+      .#{$prefix}-dot {
+        margin: -13px;
+      }
+      &.#{$prefix}-show-text .#{$prefix}-dot {
+        margin-top: -20px;
+      }
+    }
+
+    > div > .#{$prefix}--mini {
+      .#{$prefix}-dot {
+        margin: -10px;
+      }
+      &.#{$prefix}-show-text .#{$prefix}-dot {
+        margin-top: -14px;
+      }
+      &.#{$prefix}-show-text .#{$prefix}-text {
+        font-size: $font-size-sm;
+      }
+    }
+  }
+
+  &-container {
+    position: relative;
+    transition: opacity 0.3s;
+    &::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      z-index: 10;
+      width: 100%;
+      height: 100%;
+      background: #fff;
+      opacity: 0;
+      transition: all 0.3s;
+      pointer-events: none;
+    }
+  }
+
+  &-blur {
+    clear: both;
+    overflow: hidden;
+    opacity: 0.5;
+    user-select: none;
+    pointer-events: none;
+    &::after {
+      opacity: 0.4;
+      pointer-events: auto;
+    }
+  }
+
+  // dots
+  &-dot {
+    position: relative;
+    display: inline-block;
+
+    width: 38px;
+    height: 38px;
+
+    i {
+      position: absolute;
+      display: block;
+      width: 17px;
+      height: 17px;
+      background-color: $primary-color;
+      border-radius: 100%;
+      transform: scale(0.75);
+      transform-origin: 50% 50%;
+      opacity: 0.3;
+      animation: antSpinMove 1s infinite linear alternate;
+
+      &:nth-child(1) {
+        top: 0;
+        left: 0;
+      }
+      &:nth-child(2) {
+        top: 0;
+        right: 0;
+        animation-delay: 0.4s;
+      }
+      &:nth-child(3) {
+        right: 0;
+        bottom: 0;
+        animation-delay: 0.8s;
+      }
+      &:nth-child(4) {
+        bottom: 0;
+        left: 0;
+        animation-delay: 1.2s;
+      }
+    }
+
+    &-spin {
+      transform: rotate(45deg);
+      animation: antRotate 1.2s infinite linear;
+    }
+  }
+
+  // points
+  &-point {
+    position: relative;
+    display: inline-block;
+
+    width: 76px;
+    height: 16px;
+
+    i {
+      position: absolute;
+      display: block;
+      width: 16px;
+      height: 16px;
+      border-radius: 100%;
+      transform: scale(0.6);
+      transform-origin: 50% 50%;
+      animation: antPointMove 0.8s infinite normal;
+
+      &:nth-child(1) {
+        background-color: #fd6154;
+        left: 0;
+        animation-delay: 0.1s;
+      }
+
+      &:nth-child(2) {
+        background-color: #ffb726;
+        left: 20px;
+        animation-delay: 0.25s;
+      }
+
+      &:nth-child(3) {
+        background-color: #4cd084;
+        left: 40px;
+        animation-delay: 0.4s;
+      }
+
+      &:nth-child(4) {
+        background-color: #57a3f1;
+        left: 60px;
+        animation-delay: 0.55s;
+      }
+    }
+  }
+
+  // ------ size ------
+  // 40  36  32  28
+  &--medium {
+    .#{$prefix}-dot {
+      width: 32px;
+      height: 32px;
+      i {
+        width: 14px;
+        height: 14px;
+      }
+    }
+    .#{$prefix}-point {
+      width: 74px;
+      height: 14px;
+      i {
+        width: 14px;
+        height: 14px;
+      }
+    }
+  }
+
+  &--small {
+    .#{$prefix}-dot {
+      width: 26px;
+      height: 26px;
+      i {
+        width: 12px;
+        height: 12px;
+      }
+    }
+    .#{$prefix}-point {
+      width: 72px;
+      height: 12px;
+      i {
+        width: 12px;
+        height: 12px;
+      }
+    }
+  }
+
+  &--mini {
+    .#{$prefix}-dot {
+      width: 20px;
+      height: 20px;
+      i {
+        width: 9px;
+        height: 9px;
+      }
+    }
+    .#{$prefix}-point {
+      width: 70px;
+      height: 10px;
+      i {
+        width: 10px;
+        height: 10px;
+      }
+    }
+    .#{$prefix}-text {
+      font-size: $font-size-sm;
+    }
+  }
+}
+
+@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+  /* IE10+ */
+  .#{$prefix}-blur {
+    background: #fff;
+    opacity: 0.5;
+  }
+}
+
+@keyframes antSpinMove {
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes antRotate {
+  to {
+    transform: rotate(405deg);
+  }
+}
+
+@keyframes antPointMove {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(0.6);
+  }
+}

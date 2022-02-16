@@ -1,0 +1,78 @@
+/*
+ * @Author: 焦质晔
+ * @Date: 2021-02-09 09:27:46
+ * @Last Modified by: 焦质晔
+ * @Last Modified time: 2021-02-21 15:32:05
+ */
+@import '../../style/src/common';
+
+$prefix: '#{$qm-prefix}-anchor';
+
+.#{$prefix} {
+  @include reset-component();
+  display: flex;
+  flex-direction: row;
+  &__label {
+    width: 90px;
+  }
+  &-nav {
+    height: 100%;
+    margin-right: $padding-base;
+    border-right: 1px solid $border-color-base;
+    &__item {
+      height: 40px;
+      line-height: 40px;
+      padding-right: $padding-base;
+      position: relative;
+      cursor: pointer;
+      &.actived {
+        color: $primary-color;
+        &::after {
+          content: '';
+          position: absolute;
+          right: -2px;
+          top: 0;
+          width: 2px;
+          height: 100%;
+          background-color: $primary-color;
+        }
+      }
+      span {
+        @include text-overflow-cut();
+        display: block;
+        text-align: right;
+      }
+    }
+  }
+  &__container {
+    flex: 1;
+    overflow-x: hidden !important;
+    overflow-y: auto;
+  }
+  // ------ size ------
+  // 40  36  32  28
+  &--medium {
+    .#{$prefix}-nav {
+      &__item {
+        height: 36px;
+        line-height: 36px;
+      }
+    }
+  }
+  &--small {
+    .#{$prefix}-nav {
+      &__item {
+        height: 32px;
+        line-height: 32px;
+      }
+    }
+  }
+  &--mini {
+    .#{$prefix}-nav {
+      &__item {
+        height: 28px;
+        line-height: 28px;
+      }
+    }
+  }
+}

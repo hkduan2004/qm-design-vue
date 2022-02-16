@@ -1,0 +1,85 @@
+/*
+ * @Author: 焦质晔
+ * @Date: 2021-02-23 21:56:33
+ * @Last Modified by: 焦质晔
+ * @Last Modified time: 2021-10-19 15:15:34
+ */
+import { defineComponent } from 'vue';
+import { useLocale } from '../../hooks';
+import { noop } from './utils';
+import { getParserWidth } from '../../_utils/util';
+import type { JSXNode } from '../../_utils/types';
+
+import InputNumber from './InputNumber';
+
+export default defineComponent({
+  name: 'FormRangeInputNumber',
+  inheritAttrs: false,
+  inject: ['$$form'],
+  props: ['option'],
+  render(): JSXNode {
+    const { form } = this.$$form;
+    const { t } = useLocale();
+    const {
+      type,
+      label,
+      fieldName,
+      labelWidth,
+      labelOptions,
+      descOptions,
+      options = {},
+      placeholder = [],
+      clearable,
+      readonly,
+      disabled,
+      onChange = noop,
+    } = this.option;
+    const { min = 0, max, step = 1, precision } = options;
+    const [startVal = min, endVal = max] = form[fieldName];
+    this.$$form.setViewValue(fieldName, form[fieldName].join('-'));
+    return (
+      <el-form-item
+        key={fieldName}
+        label={label}
+        labelWidth={labelWidth ? getParserWidth(labelWidth) : ''}
+        prop={fieldName}
+        v-slots={{
+          label: (): JSXNode => labelOptions && this.$$form.createFormItemLabel({ label, ...labelOptions }),
+        }}
+      >
+        <div>
+          <InputNumber
+            v-model={form[fieldName][0]}
+            min={min}
+            max={endVal}
+            step={step}
+            precision={precision}
+            controls={false}
+            placeholder={!disabled ? placeholder[0] ?? t('qm.form.rangeInputNumberPlaceholder.0') : ''}
+            clearable={clearable}
+            readonly={readonly}
+            disabled={disabled}
+            style={{ width: `calc(50% - 7px)` }}
+            onChange={() => onChange(form[fieldName])}
+          />
+          <span style="display: inline-block; text-align: center; width: 14px;">-</span>
+          <InputNumber
+            v-model={form[fieldName][1]}
+            min={startVal}
+            max={max}
+            step={step}
+            precision={precision}
+            controls={false}
+            placeholder={!disabled ? placeholder[1] ?? t('qm.form.rangeInputNumberPlaceholder.1') : ''}
+            clearable={clearable}
+            readonly={readonly}
+            disabled={disabled}
+            style={{ width: `calc(50% - 7px)` }}
+            onChange={() => onChange(form[fieldName])}
+          />
+        </div>
+        {descOptions && this.$$form.createFormItemDesc({ fieldName, ...descOptions })}
+      </el-form-item>
+    );
+  },
+});

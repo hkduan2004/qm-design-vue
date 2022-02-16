@@ -1,0 +1,138 @@
+/*
+ * @Author: 焦质晔
+ * @Date: 2020-05-23 13:15:51
+ * @Last Modified by: 焦质晔
+ * @Last Modified time: 2021-11-02 10:51:05
+ */
+// The prefix to use on all css classes.
+$qm-prefix: qm;
+
+// An override for the html selector for theme prefixes
+$html-selector: html;
+
+// -------- Colors -----------
+$primary-color: #1890ff !default;
+
+$info-color: $primary-color;
+$success-color: #52c41a;
+$error-color: #f5222d;
+$warning-color: #faad14;
+$normal-color: #d9d9d9;
+$white: #fff;
+$black: #000;
+
+// Color used by default to control hover and active backgrounds and for
+$primary-light-1: mix($white, $primary-color, 10%);
+$primary-light-2: mix($white, $primary-color, 20%);
+$primary-light-3: mix($white, $primary-color, 30%);
+$primary-light-4: mix($white, $primary-color, 40%);
+$primary-light-5: mix($white, $primary-color, 50%);
+$primary-light-6: mix($white, $primary-color, 60%);
+$primary-light-7: mix($white, $primary-color, 70%);
+$primary-light-8: mix($white, $primary-color, 80%);
+$primary-light-9: mix($white, $primary-color, 90%);
+
+$primary-drak-1: mix($black, $primary-color, 10%);
+$primary-drak-2: mix($black, $primary-color, 20%);
+$primary-drak-3: mix($black, $primary-color, 30%);
+$primary-drak-4: mix($black, $primary-color, 40%);
+$primary-drak-5: mix($black, $primary-color, 50%);
+$primary-drak-6: mix($black, $primary-color, 60%);
+$primary-drak-7: mix($black, $primary-color, 70%);
+$primary-drak-8: mix($black, $primary-color, 80%);
+$primary-drak-9: mix($black, $primary-color, 90%);
+
+// Background color for `<body>`
+$body-background: $white;
+
+// Base background color for most components
+$component-background: $white;
+
+// Popover background color
+$popover-background: rgba($black, 0.4);
+
+// Fonts
+$font-family: 'Helvetica Neue', Helvetica, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', '微软雅黑', Arial, sans-serif;
+
+// Text color
+$text-color-base: rgba($black, 0.85);
+$text-color-secondary-dark: rgba($black, 0.65);
+$text-color-secondary: rgba($black, 0.45);
+
+// Iconfont
+$icon-color: $text-color-secondary-dark;
+
+// Font-size
+$font-size-base: 14px;
+$font-size-lg: $font-size-base + 2px;
+$font-size-sm: $font-size-base - 2px;
+
+// Line-height
+$line-height-base: 1.5715;
+
+$font-variant-base: tabular-nums;
+$font-feature-settings-base: 'tnum';
+
+// Vertical paddings
+$padding-base: 10px;
+$padding-lg: 12px;
+$padding-sm: 8px;
+
+// Vertical margins
+$margin-base: 10px;
+$margin-lg: 12px;
+$margin-sm: 8px;
+
+// Height rules
+$height-base: 32px;
+$height-lg: 40px;
+$height-sm: 24px;
+
+// LINK
+$link-color: $primary-color;
+$link-hover-color: $primary-light-2;
+$link-active-color: $primary-drak-2;
+
+// Animation
+$ease-base-out: cubic-bezier(0.7, 0.3, 0.1, 1);
+$ease-base-in: cubic-bezier(0.9, 0, 0.3, 0.7);
+$ease-out: cubic-bezier(0.215, 0.61, 0.355, 1);
+$ease-in: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+$ease-in-out: cubic-bezier(0.645, 0.045, 0.355, 1);
+$ease-out-back: cubic-bezier(0.12, 0.4, 0.29, 1.46);
+$ease-in-back: cubic-bezier(0.71, -0.46, 0.88, 0.6);
+$ease-in-out-back: cubic-bezier(0.71, -0.46, 0.29, 1.46);
+$ease-out-circ: cubic-bezier(0.08, 0.82, 0.17, 1);
+$ease-in-circ: cubic-bezier(0.6, 0.04, 0.98, 0.34);
+$ease-in-out-circ: cubic-bezier(0.78, 0.14, 0.15, 0.86);
+$ease-out-quint: cubic-bezier(0.23, 1, 0.32, 1);
+$ease-in-quint: cubic-bezier(0.755, 0.05, 0.855, 0.06);
+$ease-in-out-quint: cubic-bezier(0.86, 0, 0.07, 1);
+
+// Border color
+$border-color-base: #d9d9d9;
+$border-color-secondary: #e8e8e8;
+$border-width-base: 1px;
+$border-style-base: solid;
+$border-radius-base: 2px;
+$border-radius-sm: $border-radius-base;
+
+// Outline
+$outline-width: 2px;
+$outline-color: $primary-color;
+
+// Backgroun color
+$background-color: #f2f2f2;
+$background-color-cecondary: #f5f5f5;
+
+// Disabled states
+$disabled-color: rgba($black, 0.25);
+$disabled-bg: $background-color;
+
+// Shadow
+$shadow-color: rgba($black, 0.15);
+$shadow-1-up: 0 -2px 8px $shadow-color;
+$shadow-1-down: 0 2px 8px $shadow-color;
+$shadow-1-left: -2px 0 8px $shadow-color;
+$shadow-1-right: 2px 0 8px $shadow-color;
+$box-shadow-base: $shadow-1-down;

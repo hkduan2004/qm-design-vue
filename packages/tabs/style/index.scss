@@ -1,0 +1,81 @@
+/*
+ * @Author: 焦质晔
+ * @Date: 2021-02-09 09:27:46
+ * @Last Modified by: 焦质晔
+ * @Last Modified time: 2021-02-23 14:15:50
+ */
+@import '../../style/src/common';
+
+$prefix: '#{$qm-prefix}-tabs';
+
+.#{$prefix} {
+  position: relative;
+  .#{$prefix}__extra {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    height: 40px;
+    right: 0;
+    top: 0;
+    z-index: 2;
+  }
+  .el-tabs__header.is-top {
+    margin-bottom: $margin-base;
+  }
+  .el-tabs__nav-wrap.is-top {
+    .el-tabs__item {
+      &::before {
+        content: ' ';
+        display: inline-block;
+        width: $margin-base;
+      }
+      &::after {
+        content: ' ';
+        display: inline-block;
+        width: $margin-base;
+      }
+    }
+    &::after {
+      height: 1px;
+    }
+  }
+  .el-tabs__nav-wrap.is-left {
+    &::after {
+      width: 1px;
+    }
+  }
+  .el-tabs__item {
+    padding: 0 5px;
+  }
+  .el-tabs__content {
+    position: static;
+  }
+  // 40  36  32  28
+  &--medium {
+    .#{$prefix}__extra {
+      height: 36px;
+    }
+    .el-tabs__item {
+      height: 36px;
+      line-height: 36px;
+    }
+  }
+  &--small {
+    .#{$prefix}__extra {
+      height: 32px;
+    }
+    .el-tabs__item {
+      height: 32px;
+      line-height: 32px;
+    }
+  }
+  &--mini {
+    .#{$prefix}__extra {
+      height: 28px;
+    }
+    .el-tabs__item {
+      height: 28px;
+      line-height: 28px;
+    }
+  }
+}

@@ -1,0 +1,81 @@
+/*
+ * @Author: 焦质晔
+ * @Date: 2020-02-28 22:13:50
+ * @Last Modified by: 焦质晔
+ * @Last Modified time: 2021-11-06 17:03:13
+ */
+$prefix: '#{$qm-prefix}-table';
+
+.#{$prefix}-column-filter {
+  display: inline-block;
+  padding: 5px 0 5px 3px;
+  line-height: 1;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  .icon {
+    font-size: 1.05em;
+    margin-right: 2px;
+  }
+  &:hover,
+  &.selected {
+    color: $v-primary-color;
+  }
+}
+
+.column-filter__popper {
+  padding: 0 !important;
+  .column-filter--wrap {
+    padding: $v-module-distance;
+    min-width: 150px;
+    max-width: 200px;
+    overflow-y: auto;
+    @extend %boxSizing;
+    li.item {
+      position: relative;
+      line-height: 1.75;
+      @include text-overflow-cut;
+      .handle {
+        padding: 2px;
+        color: $v-font-secondary-color;
+        cursor: s-resize;
+        transform: scale(0.9);
+      }
+      .fixed {
+        position: absolute;
+        right: 0;
+        i {
+          color: $icon-color;
+          cursor: pointer;
+        }
+      }
+    }
+    .reset {
+      text-align: right;
+      .el-button {
+        padding: 2px 0;
+        line-height: 0;
+        min-height: auto;
+      }
+    }
+    .left {
+      li {
+        padding-right: 15px;
+      }
+    }
+    .main {
+      li {
+        padding-right: 30px;
+      }
+    }
+    .right {
+      li {
+        padding-right: 15px;
+      }
+    }
+    .divider {
+      height: 0;
+      border-top: 1px solid $v-table-resizable-color;
+      margin: 4px 0;
+    }
+  }
+}

@@ -1,0 +1,90 @@
+/*
+ * @Author: 焦质晔
+ * @Date: 2021-02-09 09:27:46
+ * @Last Modified by: 焦质晔
+ * @Last Modified time: 2021-11-05 13:06:41
+ */
+@import '../../style/src/common';
+
+$prefix: '#{$qm-prefix}-dialog';
+
+.#{$prefix} {
+  &__flex {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 0 !important;
+    .el-dialog__body {
+      flex: 1;
+      height: 0;
+    }
+  }
+  &.is-fullscreen {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+  .el-dialog__header {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+    height: 52px;
+    margin: 0;
+    padding: 0 10px 0 15px;
+    border-bottom: 1px solid $border-color-base;
+    box-sizing: border-box;
+    .dialog-title {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      font-size: $font-size-lg;
+      .title {
+        flex: 1;
+      }
+      .fullscreen {
+        padding: 5px;
+        padding-right: 2px;
+        font-size: 15px;
+        color: $text-color-secondary;
+        cursor: pointer;
+        &:hover {
+          color: $primary-color;
+        }
+      }
+    }
+    .el-dialog__headerbtn {
+      position: static;
+      font-size: 20px;
+      color: $text-color-secondary;
+      padding: 5px;
+      margin-right: -5px;
+      line-height: 0;
+      outline: none;
+    }
+  }
+  .el-dialog__body {
+    padding: 0;
+    .dialog-container {
+      height: 100%;
+      padding: $padding-base;
+      word-break: normal;
+      overflow-y: auto;
+      box-sizing: border-box;
+    }
+  }
+  // ------ size ------
+  // 40  36  32  28
+  &--medium {
+    .el-dialog__header {
+      height: 48px;
+    }
+  }
+  &--small {
+    .el-dialog__header {
+      height: 44px;
+    }
+  }
+  &--mini {
+    .el-dialog__header {
+      height: 40px;
+    }
+  }
+}
