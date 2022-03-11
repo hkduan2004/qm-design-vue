@@ -10,6 +10,7 @@ $prefix: '#{$qm-prefix}-table';
   margin-top: $v-module-distance;
   text-align: right;
   .el-pagination {
+    justify-content: flex-end;
     padding: 0;
     .el-pagination__jump {
       margin-left: $margin-base;

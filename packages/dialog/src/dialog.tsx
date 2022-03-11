@@ -8,7 +8,7 @@ import { defineComponent, PropType, CSSProperties } from 'vue';
 import addEventListener from 'add-dom-event-listener';
 import classnames from 'classnames';
 import PropTypes from '../../_utils/vue-types';
-import { setStyle, stop } from '../../_utils/dom';
+import { setStyle, getParentNode, stop } from '../../_utils/dom';
 import { isValidComponentSize, isValidWidthUnit } from '../../_utils/validators';
 import { useSize, useLocale, useGlobalConfig } from '../../hooks';
 import { getParserWidth, isNumber, isUndefined } from '../../_utils/util';
@@ -82,9 +82,6 @@ export default defineComponent({
     };
   },
   computed: {
-    $dialog() {
-      return this.$refs[`dialog`].dialogRef;
-    },
     disTop(): string {
       const val: string = this.height === 'auto' || this.height === 'none' ? this.top : `calc((100vh - ${getParserWidth(this.height)}) / 2)`;
       return !this.fullscreen ? val : '0';
@@ -128,18 +125,25 @@ export default defineComponent({
       // 恢复默认弹出位置
       this.resetDialogPosition();
     },
+    getElements(): void {
+      this.$dialog = getParentNode(this.$refs[`titleRef`], 'el-dialog')!;
+      this.$dialogHeader = this.$dialog.querySelector('.el-dialog__header');
+      this.$dialogBody = this.$dialog.querySelector('.el-dialog__body');
+      this.$dialogContainer = this.$dialog.querySelector('.dialog-container');
+    },
     setDialogStyle(): void {
       if (this.height === 'auto' || this.height === 'none') return;
       setStyle(this.$dialog, { height: this.fullscreen ? 'auto' : getParserWidth(this.height) });
     },
     setDialogBodyStyle(): void {
       this.$nextTick(() => {
-        const maxHeight: string =
-          this.height !== 'auto' || this.fullscreen
-            ? 'none'
-            : `calc(100vh - ${this.disTop} * 2 - ${this.$dialog.querySelector('.el-dialog__header').offsetHeight}px)`;
-        setStyle(this.$dialog.querySelector('.el-dialog__body'), { maxHeight });
-        setStyle(this.$dialog.querySelector('.dialog-container'), { maxHeight });
+        if (!this.$dialog) {
+          this.getElements();
+        }
+        const maxHeight =
+          this.height !== 'auto' || this.fullscreen ? 'none' : `calc(100vh - ${this.disTop} * 2 - ${this.$dialogHeader.offsetHeight}px)`;
+        setStyle(this.$dialogBody, { maxHeight });
+        setStyle(this.$dialogContainer, { maxHeight });
       });
     },
     resetDialogPosition(): void {
@@ -175,7 +179,8 @@ export default defineComponent({
       const { title, fullscreen, showFullScreen } = this;
       const { t } = useLocale();
       return (
-        <div class="dialog-title" v-draggable>
+        // <div class="dialog-title" v-draggable>
+        <div ref="titleRef" class="dialog-title">
           <span class="title">{title}</span>
           {showFullScreen && (
             <span
@@ -222,6 +227,7 @@ export default defineComponent({
       // withHeader: $props.showHeader,
       showClose: $props.showClose,
       fullscreen,
+      draggable: true,
       beforeClose: this.beforeCloseHandle,
       closeOnClickModal: $props.closeOnClickModal ?? global?.closeOnClickModal ?? false,
       closeOnPressEscape: $props.closeOnPressEscape,
