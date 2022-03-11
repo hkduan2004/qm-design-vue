@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-02-09 09:03:59
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-03-11 20:32:30
+ * @Last Modified time: 2022-03-11 23:17:04
  */
 import { defineComponent, PropType, Component } from 'vue';
 import PropTypes from '../../_utils/vue-types';
@@ -41,7 +41,9 @@ export default defineComponent({
     disabled: PropTypes.bool,
     round: PropTypes.bool,
     circle: PropTypes.bool,
-    icon: PropTypes.string,
+    icon: {
+      type: Object as PropType<Component>,
+    },
     click: PropTypes.func.def(noop),
   },
   data() {

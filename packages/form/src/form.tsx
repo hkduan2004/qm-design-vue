@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-02-09 09:03:59
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2021-12-07 15:43:01
+ * @Last Modified time: 2022-03-11 23:09:35
  */
 import { ComponentPublicInstance, defineComponent } from 'vue';
 import scrollIntoView from 'scroll-into-view-if-needed';
@@ -661,7 +661,7 @@ export default defineComponent({
           </Space>
           {isFieldsDefine ? this.createFieldsDefine() : null}
           {showFilterCollapse ? (
-            <Button type="text" size={$size} onClick={() => (this.collapse = !collapse)}>
+            <Button type="text" size={$size} style={{ marginLeft: '8px' }} onClick={() => (this.collapse = !collapse)}>
               {collapse ? t('qm.form.collect') : t('qm.form.spread')}
               <i class="svgicon" style={{ marginLeft: '2px' }}>
                 {collapse ? <UpIcon /> : <DownIcon />}

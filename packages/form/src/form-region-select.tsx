@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-02-23 21:56:33
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-02-16 10:23:55
+ * @Last Modified time: 2022-03-11 23:20:46
  */
 import { defineComponent } from 'vue';
 import { get } from 'lodash-es';
@@ -18,7 +18,7 @@ import ClickOutside from '../../directives/click-outside';
 import Tabs from '../../tabs';
 import TabPane from '../../tab-pane';
 
-import chinaData from './china-data';
+import chinaData from 'china-area-data';
 
 const formatChinaData = (data: any, key: string): IDictDeep[] | undefined => {
   if (!data[key]) return;

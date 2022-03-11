@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-02-08 19:28:20
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2021-11-14 14:39:34
+ * @Last Modified time: 2022-03-11 23:15:12
  */
 import { CSSProperties } from 'vue';
 import { camelize, isObject } from '@vue/shared';
@@ -211,4 +211,30 @@ export const contains = (el: HTMLElement, container: HTMLElement): boolean => {
   }
 
   return false;
+};
+
+const cubic = (value: number): number => Math.pow(value, 3);
+
+const easeInOutCubic = (value: number): number => (value < 0.5 ? cubic(value * 2) / 2 : 1 - cubic((1 - value) * 2) / 2);
+
+/**
+ * @description 滚动到指定位置，动画效果
+ * @param {HTMLNode} el 带滚动条元素
+ * @param {number} t 滚动条上边距
+ * @returns
+ */
+export const scrollToY = (el: HTMLElement, t: number) => {
+  const beginTime = Date.now();
+  const beginValue = el.scrollTop;
+  const rAF = window.requestAnimationFrame;
+  const frameFunc = () => {
+    const progress = (Date.now() - beginTime) / 500;
+    if (progress < 1) {
+      el.scrollTop = beginValue + (t - beginValue) * easeInOutCubic(progress);
+      rAF(frameFunc);
+    } else {
+      el.scrollTop = t;
+    }
+  };
+  rAF(frameFunc);
 };

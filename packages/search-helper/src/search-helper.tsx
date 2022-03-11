@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-02-09 09:03:59
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-03-11 21:17:52
+ * @Last Modified time: 2022-03-11 23:21:47
  */
 import { defineComponent, PropType } from 'vue';
 import PropTypes from '../../_utils/vue-types';
@@ -73,6 +73,7 @@ export default defineComponent({
       selection: {
         type: 'radio',
         defaultSelectFirstRow: !0,
+        clearableAfterFetched: !0,
         onChange: this.selectedRowChange,
       },
       fetch: {

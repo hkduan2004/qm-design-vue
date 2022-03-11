@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-02-09 09:03:59
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2021-10-25 18:27:28
+ * @Last Modified time: 2022-03-11 23:14:41
  */
 import { defineComponent, PropType, CSSProperties } from 'vue';
 import { sleep } from '../../_utils/util';
@@ -206,7 +206,7 @@ export default defineComponent({
       let pageHeight: number = setting.fixedLogo ? this.workspaceHeight - config.logoHeight : this.workspaceHeight;
 
       // 临时数组
-      let tmpArr: HTMLElement[] = [];
+      let tmpArr: string[] = [];
       this.previewHtmls = [] as unknown[];
 
       // 针式打印机  连续打印
@@ -268,7 +268,7 @@ export default defineComponent({
       // 滚动条返回顶部
       this.previewEl.parentNode.scrollTop = 0;
     },
-    createPrintHtml(printPageNumber): string {
+    createPrintHtml(printPageNumber?: number): string {
       let __html__: string = `<table cellspacing="0" cellpadding="0" border="0" class="${this.templateEl.className}">`;
       if (typeof printPageNumber !== 'undefined') {
         let curData = [...this.previewHtmls[printPageNumber - 1]];

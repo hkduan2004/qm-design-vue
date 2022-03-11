@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-03-31 09:27:45
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-03-11 19:57:49
+ * @Last Modified time: 2022-03-11 23:20:42
  */
 import { defineComponent } from 'vue';
 import scrollIntoView from 'scroll-into-view-if-needed';
@@ -16,7 +16,7 @@ import type { JSXNode } from '../../_utils/types';
 
 import ClickOutside from '../../directives/click-outside';
 
-import chinaData from './china-data';
+import chinaData from 'china-area-data';
 
 type ICity = {
   l: string;

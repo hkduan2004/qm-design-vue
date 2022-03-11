@@ -2,9 +2,9 @@
  * @Author: 焦质晔
  * @Date: 2021-02-09 09:03:59
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2021-12-05 10:17:18
+ * @Last Modified time: 2022-03-11 23:17:37
  */
-import { defineComponent, PropType } from 'vue';
+import { defineComponent, PropType, Component } from 'vue';
 import axios from 'axios';
 import PropTypes from '../../_utils/vue-types';
 import { QmMessage } from '../../index';
@@ -50,7 +50,9 @@ export default defineComponent({
     disabled: PropTypes.bool,
     round: PropTypes.bool,
     circle: PropTypes.bool,
-    icon: PropTypes.string,
+    icon: {
+      type: Object as PropType<Component>,
+    },
   },
   data() {
     return {

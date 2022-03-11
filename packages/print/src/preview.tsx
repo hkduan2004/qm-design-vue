@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-02-09 09:03:59
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-03-11 20:34:31
+ * @Last Modified time: 2022-03-11 23:13:27
  */
 import { defineComponent, PropType } from 'vue';
 import localforage from 'localforage';
@@ -116,7 +116,7 @@ export default defineComponent({
       if (isObject(res) && Object.keys(res).length) {
         merge(this.form, {
           ...res,
-          printerName: this.printerItems.find((x) => x.text === res?.printerName)?.value ?? -1,
+          printerName: this.printerItems.find((x) => x.text === res.printerName)?.value ?? -1,
         });
       }
     } catch (err) {}
@@ -137,6 +137,7 @@ export default defineComponent({
     },
     async printClickHandle(): Promise<void> {
       this.doPrint(this.$refs[`container`].createPrintHtml(this.printPage));
+      if (!this.printerKey) return;
       // 存储配置信息
       try {
         const printConfig = deepToRaw({

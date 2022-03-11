@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-02-23 21:56:33
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2021-11-06 18:43:19
+ * @Last Modified time: 2022-03-11 23:18:59
  */
 import { defineComponent } from 'vue';
 import { get } from 'lodash-es';
@@ -216,7 +216,7 @@ export default defineComponent({
                       .filter((x) => !x.hidden)
                       .map((x) => (
                         <td key={x.dataIndex}>
-                          <span>{item[x.dataIndex]}</span>
+                          <span>{get(item, x.dataIndex)}</span>
                         </td>
                       ))
                 : itemRender(item);
