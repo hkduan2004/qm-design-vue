@@ -19,17 +19,12 @@ $prefix: '#{$qm-prefix}-empty';
   }
   // ------ size ------
   // 40  36  32  28
-  &--medium {
+  &--large {
     .description {
       font-size: $font-size-base;
     }
   }
   &--small {
-    .description {
-      font-size: $font-size-base;
-    }
-  }
-  &--mini {
     .description {
       font-size: $font-size-sm;
     }

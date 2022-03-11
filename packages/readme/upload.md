@@ -7,7 +7,7 @@
 | actionUrl    | 文件上传的地址，必要参数                 | string                                                  | -                                    |
 | headers      | 上传/下载请求，header 头携带的自定义参数 | object                                                  | -                                    |
 | params       | 上传接口的额外参数                       | object                                                  | -                                    |
-| size         | 尺寸                                     | medium \| small \| mini                                 | -                                    |
+| size         | 尺寸                                     | large \| default \| small                               | -                                    |
 | initialValue | 默认显示的文件列表，[配置项](#item)      | array                                                   | -                                    |
 | fileTypes    | 限制上传附件的类型                       | string[]                                                | ['jpg', 'png', 'pdf', 'xls', 'xlsx'] |
 | isOnlyButton | 是否仅显示上传按钮                       | boolean                                                 | false                                |

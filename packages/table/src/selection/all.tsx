@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2020-03-06 21:30:12
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-02-16 10:20:55
+ * @Last Modified time: 2022-03-11 19:57:29
  */
 import { defineComponent } from 'vue';
 import { get, intersection, union, xor } from 'lodash-es';
@@ -30,7 +30,7 @@ export default defineComponent({
   },
   computed: {
     size(): string {
-      return this.$$table.tableSize !== 'mini' ? 'small' : 'mini';
+      return this.$$table.tableSize !== 'small' ? 'default' : 'small';
     },
     isFilterable(): boolean {
       const { rowSelection } = this.$$table;

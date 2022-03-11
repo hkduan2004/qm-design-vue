@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2020-03-09 13:18:43
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-02-16 10:20:52
+ * @Last Modified time: 2022-03-11 19:57:40
  */
 import { defineComponent } from 'vue';
 import classnames from 'classnames';
@@ -33,7 +33,7 @@ export default defineComponent({
   },
   computed: {
     size(): ComponentSize {
-      return this.$$table.tableSize !== 'mini' ? 'small' : 'mini';
+      return this.$$table.tableSize !== 'small' ? 'default' : 'small';
     },
     dataKey(): string {
       const { dataIndex, filter } = this.column;
@@ -351,9 +351,9 @@ export default defineComponent({
     const prefixCls = getPrefixCls('table');
     const popperCls = {
       [`${prefixCls}__popper`]: true,
-      [`${prefixCls}__popper--medium`]: tableSize === 'medium',
+      [`${prefixCls}__popper--large`]: tableSize === 'large',
+      [`${prefixCls}__popper--default`]: tableSize === 'default',
       [`${prefixCls}__popper--small`]: tableSize === 'small',
-      [`${prefixCls}__popper--mini`]: tableSize === 'mini',
     };
     const filterCls = [
       `cell--filter`,

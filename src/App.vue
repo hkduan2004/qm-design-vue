@@ -725,7 +725,7 @@ export default defineComponent({
       // this.loading = false;
       // this.visible = true;
       this.locale = this.locale === 'zh-cn' ? 'en' : 'zh-cn';
-      this.size = 'mini';
+      this.size = 'small';
       // this.formList.find((x) => x.fieldName === 'z').searchHelper = undefined;
       // setTimeout(() => {
       //   this.$refs.asdasd.DO_CLOSE();

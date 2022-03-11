@@ -38,7 +38,7 @@
 | maxHeight            | 表格的最大高度，单位 px                                | number                                                 | -      |
 | loading              | 页面是否加载中                                         | boolean                                                | -      |
 | resizable            | 所有列是否允许拖动列宽调整大小                         | boolean                                                | true   |
-| size                 | 表格尺寸                                               | medium \| small \| mini                                | -      |
+| size                 | 表格尺寸                                               | large \| default \| small                              | -      |
 | uniqueKey            | 设置表格各种配置信息的本地缓存，不能重复               | string                                                 | -      |
 | customClass          | 自定义选择器类名                                       | string                                                 | -      |
 | showHeader           | 是否显示表头                                           | boolean                                                | true   |

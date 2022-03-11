@@ -75,7 +75,7 @@
 | 参数     | 说明                                     | 类型                                                    | 默认值 |
 | -------- | ---------------------------------------- | ------------------------------------------------------- | ------ |
 | click    | 点击时执行的方法，用于防止 ajax 重复提交 | function                                                | -      |
-| size     | 尺寸                                     | medium \| small \| mini                                 | -      |
+| size     | 尺寸                                     | large \| default \| small                               | -      |
 | type     | 类型                                     | primary \| success \| warning \| danger \| info \| text | -      |
 | icon     | 图标组件                                 | string \| VueNode                                       | -      |
 | loading  | 是否加载中状态                           | boolean                                                 | false  |

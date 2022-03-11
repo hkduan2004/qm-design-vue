@@ -6,7 +6,7 @@
 | ------------------ | -------------------------------------------------------------------------- | -------------------------------- | ------ |
 | v-model:visible    | 是否显示 Dialog                                                            | boolean                          | -      |
 | title              | 标题名称                                                                   | string                           | -      |
-| size               | 尺寸                                                                       | medium \| small \| mini          | -      |
+| size               | 尺寸                                                                       | large \| default \| small        | -      |
 | width              | 宽度                                                                       | number \| string                 | 65%    |
 | height             | 高度                                                                       | number \| string \| auto \| none | auto   |
 | top                | 上边距                                                                     | string                           | 10vh   |

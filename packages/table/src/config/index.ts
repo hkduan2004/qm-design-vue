@@ -11,10 +11,9 @@ const config = {
   selectionColumnWidth: 50,
   // 行高的映射表
   rowHeightMaps: {
-    default: 44,
-    medium: 40,
-    small: 36,
-    mini: 32,
+    large: 44,
+    default: 36,
+    small: 28,
   },
   // 排序方式
   sortDirections: ['ascend', 'descend'],

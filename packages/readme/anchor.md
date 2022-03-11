@@ -2,11 +2,11 @@
 
 ### Anchor 参数
 
-| 参数       | 说明                                   | 类型                    | 默认值 |
-| ---------- | -------------------------------------- | ----------------------- | ------ |
-| labelWidth | lable 标签宽度，单位 px                | number \| string        | 80     |
-| size       | 尺寸                                   | medium \| small \| mini | -      |
-| labelList  | label 的配置列表，[配置项](#labelList) | array                   | -      |
+| 参数       | 说明                                   | 类型                      | 默认值 |
+| ---------- | -------------------------------------- | ------------------------- | ------ |
+| labelWidth | lable 标签宽度，单位 px                | number \| string          | 80     |
+| size       | 尺寸                                   | large \| default \| small | -      |
+| labelList  | label 的配置列表，[配置项](#labelList) | array                     | -      |
 
 ### 方法
 

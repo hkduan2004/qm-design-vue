@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2020-03-22 14:34:21
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2021-11-06 18:50:18
+ * @Last Modified time: 2022-03-11 19:57:49
  */
 import { defineComponent } from 'vue';
 import dayjs from 'dayjs';
@@ -42,7 +42,7 @@ export default defineComponent({
       return this.$$table.store;
     },
     size(): string {
-      return this.$$table.tableSize !== 'mini' ? 'small' : 'mini';
+      return this.$$table.tableSize !== 'small' ? 'default' : 'small';
     },
     options(): IEditerReturn {
       return this.column.editRender(this.record, this.column);

@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2020-02-28 22:13:54
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2021-03-11 19:23:37
+ * @Last Modified time: 2022-03-11 19:56:02
  */
 .body--column {
   .cell--edit {
@@ -49,7 +49,7 @@
       }
       .cell-error {
         position: absolute;
-        font-size: $v-font-size-mini;
+        font-size: $v-font-size-small;
         color: $v-danger-color;
         right: $v-module-distance;
         pointer-events: none;

@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-02-09 09:03:59
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2021-12-05 10:17:01
+ * @Last Modified time: 2022-03-11 19:55:27
  */
 import { defineComponent, PropType } from 'vue';
 import { useLocale } from '../../hooks';
@@ -51,7 +51,7 @@ export default defineComponent({
         <Button
           class="editor-upload-btn"
           icon={<UploadIcon />}
-          size="mini"
+          size="small"
           type="primary"
           onClick={() => {
             this.visible = true;

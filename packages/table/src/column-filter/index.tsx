@@ -261,9 +261,9 @@ export default defineComponent({
     const prefixCls = getPrefixCls('table');
     const popperCls = {
       [`${prefixCls}__popper`]: true,
-      [`${prefixCls}__popper--medium`]: tableSize === 'medium',
+      [`${prefixCls}__popper--large`]: tableSize === 'large',
+      [`${prefixCls}__popper--default`]: tableSize === 'default',
       [`${prefixCls}__popper--small`]: tableSize === 'small',
-      [`${prefixCls}__popper--mini`]: tableSize === 'mini',
     };
     return (
       <el-popover

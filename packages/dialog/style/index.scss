@@ -26,7 +26,7 @@ $prefix: '#{$qm-prefix}-dialog';
     display: flex;
     align-items: center;
     flex-shrink: 0;
-    height: 52px;
+    height: 46px;
     margin: 0;
     padding: 0 10px 0 15px;
     border-bottom: 1px solid $border-color-base;
@@ -77,17 +77,12 @@ $prefix: '#{$qm-prefix}-dialog';
   }
   // ------ size ------
   // 40  36  32  28
-  &--medium {
+  &--large {
     .el-dialog__header {
-      height: 48px;
+      height: 52px;
     }
   }
   &--small {
-    .el-dialog__header {
-      height: 44px;
-    }
-  }
-  &--mini {
     .el-dialog__header {
       height: 40px;
     }

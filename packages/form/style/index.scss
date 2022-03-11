@@ -20,7 +20,7 @@ $prefix: '#{$qm-prefix}-form';
       align-items: center;
       justify-content: flex-end;
       padding-right: $padding-base;
-      height: 40px;
+      height: 32px;
       line-height: 1.2;
       word-break: break-all;
       .custom-label__wrap {
@@ -161,24 +161,17 @@ $prefix: '#{$qm-prefix}-form';
   }
   // ------ size ------
   // 40  36  32  28
-  &--medium {
+  &--large {
     .el-form-item {
       .el-form-item__label {
-        height: 36px;
+        height: 40px;
       }
     }
   }
   &--small {
     .el-form-item {
       .el-form-item__label {
-        height: 32px;
-      }
-    }
-  }
-  &--mini {
-    .el-form-item {
-      .el-form-item__label {
-        height: 28px;
+        height: 24px;
         font-size: $font-size-sm;
       }
       .desc-text {

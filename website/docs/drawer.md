@@ -86,7 +86,7 @@
 | v-model:visible    | 是否显示 Drawer                                                            | boolean                        | -      |
 | title              | 标题名称                                                                   | string                         | -      |
 | position           | Drawer 打开的方向                                                          | right \| left \| top \| bottom | right  |
-| size               | 尺寸                                                                       | medium \| small \| mini        | -      |
+| size               | 尺寸                                                                       | large \| default \| small      | -      |
 | width              | 宽度                                                                       | number \| string               | 65%    |
 | height             | 高度                                                                       | number \| string               | 60%    |
 | level              | Drawer 的层级                                                              | number                         | 1      |

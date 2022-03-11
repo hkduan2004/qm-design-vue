@@ -722,9 +722,9 @@ export default defineComponent({
     };
     const cls = {
       [prefixCls]: true,
-      [`${prefixCls}--medium`]: $size === 'medium',
+      [`${prefixCls}--large`]: $size === 'large',
+      [`${prefixCls}--default`]: $size === 'default',
       [`${prefixCls}--small`]: $size === 'small',
-      [`${prefixCls}--mini`]: $size === 'mini',
       [`${prefixCls}__only-show`]: formType === 'onlyShow',
       [`${prefixCls}__label-error-color`]: global?.form?.showLabelErrorColor ?? false,
       [customClass]: !!customClass,

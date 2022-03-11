@@ -39,7 +39,7 @@
 | -------------- | ------------------------------------------------------------------------- | ------------------------------ | ------ |
 | v-model        | 选项卡绑定值，选中选项卡的 name                                           | string                         | -      |
 | tabPosition    | 选项卡所在位置                                                            | top \| right \| bottom \| left | top    |
-| size           | 尺寸                                                                      | medium \| small \| mini        | -      |
+| size           | 尺寸                                                                      | large \| default \| small      | -      |
 | lazyLoad       | 是否延迟渲染                                                              | boolean                        | true   |
 | tabCustomClass | 选项卡的自定义 class 名称                                                 | string                         | -      |
 | extraNode      | 对选项卡顶部区域的扩展                                                    | string \| JSXNode              | -      |

@@ -93,7 +93,7 @@
 | formType       | 表单类型，[配置项](#formType)                  | default \| search \| onlyShow | default |
 | list           | 表单配置项列表，[配置项](#formItem)，必要参数  | array                         | -       |
 | initialValue   | 表单初始值                                     | object                        | -       |
-| size           | 尺寸                                           | medium \| small \| mini       | -       |
+| size           | 尺寸                                           | large \| default \| small     | -       |
 | labelWidth     | label 标签宽度                                 | number \| string              | 80      |
 | cols           | 每行显示的列数(被 24 整除)，不设置默认为自适应 | number                        | -       |
 | uniqueKey      | 用于表单配置项的本地缓存，不能重复             | string                        | -       |

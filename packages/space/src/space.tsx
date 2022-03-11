@@ -25,10 +25,9 @@ enum Arrange {
 }
 
 enum Space {
-  default = 14,
-  medium = 12,
-  small = 10,
-  mini = 8,
+  large = 12,
+  default = 10,
+  small = 8,
 }
 
 export default defineComponent({

@@ -83,9 +83,9 @@ export default defineComponent({
 
     const cls = {
       [prefixCls]: true,
-      [`${prefixCls}--medium`]: $size === 'medium',
+      [`${prefixCls}--large`]: $size === 'large',
+      [`${prefixCls}--default`]: $size === 'default',
       [`${prefixCls}--small`]: $size === 'small',
-      [`${prefixCls}--mini`]: $size === 'mini',
     };
 
     const wrapProps = {

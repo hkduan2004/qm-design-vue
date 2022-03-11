@@ -24,17 +24,16 @@ export type CustomHTMLElement<T> = HTMLElement & T;
 
 export type SFCWithInstall<T> = T & { install(app: App): void };
 
-export type ComponentSize = 'medium' | 'small' | 'mini';
+export type ComponentSize = 'large' | 'default' | 'small';
 
 export type TimeoutHandle = ReturnType<typeof setTimeout>;
 
 export type IntervalHandle = ReturnType<typeof setInterval>;
 
 export enum SizeHeight {
-  default = 40,
-  medium = 36,
-  small = 32,
-  mini = 28,
+  large = 40,
+  default = 32,
+  small = 24,
 }
 
 export type StyleValue = string | CSSProperties | Array<StyleValue>;

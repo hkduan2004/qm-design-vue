@@ -13,7 +13,7 @@ $prefix: '#{$qm-prefix}-divider';
   display: flex;
   align-items: center;
   padding: 0 $padding-base;
-  height: 40px;
+  height: 32px;
   border: 1px solid $border-color-base;
   border-radius: $border-radius-base;
   background-color: $background-color-cecondary;
@@ -40,13 +40,10 @@ $prefix: '#{$qm-prefix}-divider';
   }
   // ------ size ------
   // 40  36  32  28
-  &--medium {
-    height: 36px;
+  &--large {
+    height: 40px;
   }
   &--small {
-    height: 32px;
-  }
-  &--mini {
-    height: 28px;
+    height: 24px;
   }
 }

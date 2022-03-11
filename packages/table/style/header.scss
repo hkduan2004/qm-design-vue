@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2020-02-28 22:11:53
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2021-10-18 12:45:50
+ * @Last Modified time: 2022-03-11 19:55:54
  */
 $prefix: '#{$qm-prefix}-table';
 
@@ -83,7 +83,7 @@ $prefix: '#{$qm-prefix}-table';
     .icon {
       padding: 2px;
       margin-left: 2px;
-      font-size: $v-font-size-mini;
+      font-size: $v-font-size-small;
       color: $v-icon-color;
       cursor: pointer;
     }

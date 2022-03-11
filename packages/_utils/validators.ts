@@ -14,4 +14,4 @@ export const isValidWidthUnit = (val: string | number): boolean => {
   }
 };
 
-export const isValidComponentSize = (val: string): boolean => ['', 'medium', 'small', 'mini'].includes(val);
+export const isValidComponentSize = (val: string): boolean => ['', 'large', 'default', 'small'].includes(val);

@@ -1,5 +1,5 @@
 <template>
-  <qm-config-provider size="medium" locale="zh-cn">
+  <qm-config-provider size="default" locale="zh-cn">
     <router-view />
   </qm-config-provider>
 </template>

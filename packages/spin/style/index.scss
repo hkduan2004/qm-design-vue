@@ -36,7 +36,7 @@ $prefix: '#{$qm-prefix}-spin';
         position: absolute;
         top: 50%;
         left: 50%;
-        margin: -20px;
+        margin: -13px;
       }
       .#{$prefix}-point {
         position: absolute;
@@ -51,11 +51,11 @@ $prefix: '#{$qm-prefix}-spin';
         padding-top: $padding-base;
       }
       &.#{$prefix}-show-text > .#{$prefix}-dot {
-        margin-top: -36px;
+        margin-top: -20px;
       }
     }
 
-    > div > .#{$prefix}--medium {
+    > div > .#{$prefix}--large {
       .#{$prefix}-dot {
         margin: -16px;
       }
@@ -65,15 +65,6 @@ $prefix: '#{$qm-prefix}-spin';
     }
 
     > div > .#{$prefix}--small {
-      .#{$prefix}-dot {
-        margin: -13px;
-      }
-      &.#{$prefix}-show-text .#{$prefix}-dot {
-        margin-top: -20px;
-      }
-    }
-
-    > div > .#{$prefix}--mini {
       .#{$prefix}-dot {
         margin: -10px;
       }
@@ -123,14 +114,14 @@ $prefix: '#{$qm-prefix}-spin';
     position: relative;
     display: inline-block;
 
-    width: 38px;
-    height: 38px;
+    width: 26px;
+    height: 26px;
 
     i {
       position: absolute;
       display: block;
-      width: 17px;
-      height: 17px;
+      width: 12px;
+      height: 12px;
       background-color: $primary-color;
       border-radius: 100%;
       transform: scale(0.75);
@@ -170,14 +161,14 @@ $prefix: '#{$qm-prefix}-spin';
     position: relative;
     display: inline-block;
 
-    width: 76px;
-    height: 16px;
+    width: 72px;
+    height: 12px;
 
     i {
       position: absolute;
       display: block;
-      width: 16px;
-      height: 16px;
+      width: 12px;
+      height: 12px;
       border-radius: 100%;
       transform: scale(0.6);
       transform-origin: 50% 50%;
@@ -211,7 +202,7 @@ $prefix: '#{$qm-prefix}-spin';
 
   // ------ size ------
   // 40  36  32  28
-  &--medium {
+  &--large {
     .#{$prefix}-dot {
       width: 32px;
       height: 32px;
@@ -231,25 +222,6 @@ $prefix: '#{$qm-prefix}-spin';
   }
 
   &--small {
-    .#{$prefix}-dot {
-      width: 26px;
-      height: 26px;
-      i {
-        width: 12px;
-        height: 12px;
-      }
-    }
-    .#{$prefix}-point {
-      width: 72px;
-      height: 12px;
-      i {
-        width: 12px;
-        height: 12px;
-      }
-    }
-  }
-
-  &--mini {
     .#{$prefix}-dot {
       width: 20px;
       height: 20px;

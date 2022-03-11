@@ -6,7 +6,7 @@
 | -------------- | ------------------------------------------------------------ | ------------------------------------------------------- | ------- |
 | dataSource     | 打印数据，必要参数                                           | array \| object                                         | -       |
 | templateRender | 打印模板组件，必要参数                                       | object                                                  | -       |
-| size           | 尺寸                                                         | medium \| small \| mini                                 | -       |
+| size           | 尺寸                                                         | large \| default \| small                               | -       |
 | uniqueKey      | 用于打印配置项的本地缓存，不能重复                           | string                                                  | -       |
 | defaultConfig  | 默认的打印参数设置，[配置项](#defaultConfig)                 | object                                                  | -       |
 | preview        | 是否开启打印预览                                             | boolean                                                 | true    |

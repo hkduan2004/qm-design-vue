@@ -117,9 +117,9 @@ export default defineComponent({
 
     const popperCls = {
       [`${prefixCls}__popper`]: true,
-      [`${prefixCls}__popper--medium`]: size === 'medium',
+      [`${prefixCls}__popper--large`]: size === 'large',
+      [`${prefixCls}__popper--default`]: size === 'default',
       [`${prefixCls}__popper--small`]: size === 'small',
-      [`${prefixCls}__popper--mini`]: size === 'mini',
     };
 
     return (

@@ -76,9 +76,9 @@ export default defineComponent({
 
     const spinClassName = {
       [prefixCls]: true,
-      [`${prefixCls}--medium`]: $size === 'medium',
+      [`${prefixCls}--large`]: $size === 'large',
+      [`${prefixCls}--default`]: $size === 'default',
       [`${prefixCls}--small`]: $size === 'small',
-      [`${prefixCls}--mini`]: $size === 'mini',
       [`${prefixCls}-spinning`]: sSpinning,
       [`${prefixCls}-show-text`]: !!tip,
     };

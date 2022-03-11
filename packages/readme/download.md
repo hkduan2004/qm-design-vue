@@ -6,7 +6,7 @@
 | --------------- | --------------------------------------------- | ------------------------------------------------------- | ------- |
 | actionUrl       | 下载地址                                      | string                                                  | -       |
 | fileName        | 文件名                                        | string                                                  | -       |
-| size            | 按钮的尺寸                                    | medium \| small \| mini                                 | -       |
+| size            | 按钮的尺寸                                    | large \| default \| small                               | -       |
 | headers         | 下载请求的 header 头信息                      | object                                                  | -       |
 | params          | 下载请求的额外参数                            | object                                                  | -       |
 | withCredentials | 请求时是否携带 cookie                         | boolean                                                 | false   |

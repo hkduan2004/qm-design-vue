@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-03-31 09:27:45
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-02-16 10:20:36
+ * @Last Modified time: 2022-03-11 19:57:49
  */
 import { defineComponent } from 'vue';
 import scrollIntoView from 'scroll-into-view-if-needed';
@@ -198,7 +198,7 @@ export default defineComponent({
     renderType(): JSXNode {
       const { t } = useLocale();
       return (
-        <el-radio-group v-model={this.select_type} size="mini">
+        <el-radio-group v-model={this.select_type} size="small">
           <el-radio-button label="0">{t('qm.form.citySelectType.0')}</el-radio-button>
           <el-radio-button label="1">{t('qm.form.citySelectType.1')}</el-radio-button>
         </el-radio-group>
@@ -218,7 +218,7 @@ export default defineComponent({
       const { fieldName, onChange = noop } = this.option;
       return (
         <el-select
-          size="mini"
+          size="small"
           v-model={form[fieldName]}
           placeholder={t('qm.form.selectPlaceholder')}
           filterable

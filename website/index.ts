@@ -31,7 +31,7 @@ app.component('RightNav', RightNav);
 app.component('SideNav', SideNav);
 
 app.use(router).use(QmDesign, {
-  size: 'medium',
+  size: 'default',
 });
 
 app.mount('#app');
