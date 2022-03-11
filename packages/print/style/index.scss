@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-02-09 09:27:46
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-03-11 20:36:29
+ * @Last Modified time: 2022-03-11 21:11:04
  */
 @import '../../style/src/common';
 
@@ -13,7 +13,7 @@ $prefix-container: '#{$qm-prefix}-print-container';
   @include reset-component();
   margin: -$padding-base;
   height: calc(100% + 20px);
-  min-height: calc(80vh - 48px);
+  min-height: calc(80vh - 46px);
   .outer {
     display: flex;
     flex-direction: column;
@@ -82,7 +82,11 @@ $prefix-container: '#{$qm-prefix}-print-container';
     }
   }
   // size
+  &--large {
+    min-height: calc(80vh - 52px);
+  }
   &--small {
+    min-height: calc(80vh - 40px);
     font-size: $font-size-sm;
   }
 }
