@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-02-09 09:03:59
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2021-11-15 14:53:20
+ * @Last Modified time: 2022-03-11 20:34:31
  */
 import { defineComponent, PropType } from 'vue';
 import localforage from 'localforage';
@@ -39,7 +39,7 @@ export default defineComponent({
       $$preview: this,
     };
   },
-  props: ['dataSource', 'templateRender', 'preview', 'uniqueKey', 'defaultConfig', 'closeOnPrinted'],
+  props: ['size', 'dataSource', 'templateRender', 'preview', 'uniqueKey', 'defaultConfig', 'closeOnPrinted'],
   data() {
     return {
       form: {
@@ -171,7 +171,7 @@ export default defineComponent({
     },
   },
   render(): JSXNode {
-    const { form, preview, printerTypeItems, printerItems, currentPage, totalPage, visible, pageSize, dataSource, templateRender } = this;
+    const { size, form, preview, printerTypeItems, printerItems, currentPage, totalPage, visible, pageSize, dataSource, templateRender } = this;
     const { t } = useLocale();
     const prefixCls = getPrefixCls('print-preview');
     const dialogProps = {
@@ -187,6 +187,7 @@ export default defineComponent({
       },
     };
     const paginationProps = {
+      small: size === 'small',
       currentPage,
       pageCount: totalPage,
       pagerCount: 5,
@@ -197,6 +198,9 @@ export default defineComponent({
     };
     const cls = {
       [prefixCls]: true,
+      [`${prefixCls}--small`]: size === 'small',
+      [`${prefixCls}--default`]: size === 'default',
+      [`${prefixCls}--large`]: size === 'large',
     };
     return preview ? (
       <div class={cls}>

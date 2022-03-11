@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-03-08 13:54:33
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2021-10-18 09:50:00
+ * @Last Modified time: 2022-03-11 20:06:50
  */
 import { defineComponent } from 'vue';
 import { getPrefixCls } from '../../../_utils/prefix';
@@ -30,6 +30,7 @@ export default defineComponent({
     const prefixCls = getPrefixCls('table');
     const pageProps = {
       size: $props.size,
+      small: $props.size === 'small',
       total: $props.total || 0,
       currentPage: $props.currentPage || currentPage,
       pageSize: $props.pageSize || pageSize,

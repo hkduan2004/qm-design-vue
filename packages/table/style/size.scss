@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2020-05-30 14:13:37
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-03-11 19:55:43
+ * @Last Modified time: 2022-03-11 20:04:20
  */
 @use 'sass:math';
 $prefix: '#{$qm-prefix}-table';
@@ -72,9 +72,9 @@ $prefix: '#{$qm-prefix}-table';
 
 .#{$prefix}__popper--small {
   .head-filter--wrap {
-    // ...
+    font-size: $v-font-size-small;
   }
   .column-filter--wrap {
-    // ...
+    font-size: $v-font-size-small;
   }
 }

@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-02-09 09:03:59
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2021-12-05 10:12:22
+ * @Last Modified time: 2022-03-11 20:32:30
  */
 import { defineComponent, PropType, Component } from 'vue';
 import PropTypes from '../../_utils/vue-types';
@@ -71,6 +71,7 @@ export default defineComponent({
     createRender(): Nullable<JSXNode> {
       const { $props } = this;
       const { t } = useLocale();
+      const { $size } = useSize($props);
       const dialogProps = {
         visible: this.visible,
         title: t('qm.print.preview'),
@@ -85,6 +86,7 @@ export default defineComponent({
       };
       const previewProps = {
         ref: 'preview',
+        size: $size,
         dataSource: $props.dataSource,
         templateRender: $props.templateRender,
         uniqueKey: $props.uniqueKey,

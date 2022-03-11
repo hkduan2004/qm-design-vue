@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-02-09 09:27:46
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2021-11-28 11:05:26
+ * @Last Modified time: 2022-03-11 20:58:25
  */
 @import '../../style/src/common';
 @import './fields-filter';
@@ -143,7 +143,8 @@ $prefix: '#{$qm-prefix}-form';
       .el-input__inner,
       .el-textarea__inner {
         color: $text-color-base;
-        border-style: dashed;
+        outline: 1px dashed #c6c6c6;
+        box-shadow: none;
         background-color: $body-background;
       }
       .el-input-group__append {
@@ -216,7 +217,9 @@ $prefix: '#{$qm-prefix}-form';
         margin-bottom: 10px;
         display: flex;
         &__type {
-          display: inline-block;
+          .el-radio-group {
+            display: flex;
+          }
         }
         &__search {
           margin-left: 10px;

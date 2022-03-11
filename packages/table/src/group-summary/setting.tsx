@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2020-05-19 16:19:58
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2021-12-05 10:15:41
+ * @Last Modified time: 2022-03-11 20:29:16
  */
 import { defineComponent } from 'vue';
 import localforage from 'localforage';
@@ -291,8 +291,13 @@ export default defineComponent({
       groupTableData,
       summaryTableData,
     } = this;
+    const { tableSize } = this.$$table;
     const { t } = useLocale();
     const prefixCls = getPrefixCls('table');
+    const cls = {
+      [`${prefixCls}-group-summary__setting`]: true,
+      [`${prefixCls}-group-summary--small`]: tableSize === 'small',
+    };
     const wrapProps = {
       visible,
       title: t('qm.table.groupSummary.resultText'),
@@ -305,7 +310,7 @@ export default defineComponent({
       },
     };
     return (
-      <div class={`${prefixCls}-group-summary__setting`}>
+      <div class={cls}>
         <div class="main">
           <div class="container" style={{ width: '280px' }}>
             <VTable

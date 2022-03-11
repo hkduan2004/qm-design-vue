@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2020-07-12 16:26:19
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2021-12-05 10:16:18
+ * @Last Modified time: 2022-03-11 20:26:25
  */
 import { defineComponent } from 'vue';
 import localforage from 'localforage';
@@ -358,8 +358,13 @@ export default defineComponent({
     const { list, searchColumns, form, savedItems, currentKey, query, confirmDisabled, loading } = this;
     const { t } = useLocale();
     const prefixCls = getPrefixCls('table');
+    const { tableSize } = this.$$table;
+    const cls = {
+      [`${prefixCls}-super-search__setting`]: true,
+      [`${prefixCls}-super-search--small`]: tableSize === 'small',
+    };
     return (
-      <div class={`${prefixCls}-super-search__setting`}>
+      <div class={cls}>
         <div class="main">
           <div class="container">
             <VTable

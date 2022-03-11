@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2020-02-28 23:04:58
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2021-12-28 12:58:59
+ * @Last Modified time: 2022-03-11 20:21:36
  */
 import { PropType } from 'vue';
 import PropTypes from '../../../_utils/vue-types';
@@ -132,7 +132,7 @@ export default {
   size: {
     type: String as PropType<ITableSize>,
     validator: (val: string): boolean => {
-      return val === 'default' || isValidComponentSize(val);
+      return isValidComponentSize(val);
     },
   },
   // 表格的高度

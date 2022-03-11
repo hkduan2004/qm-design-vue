@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-02-26 14:53:54
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-02-16 10:20:31
+ * @Last Modified time: 2022-03-11 20:12:07
  */
 import { defineComponent, PropType } from 'vue';
 import classNames from 'classnames';
@@ -95,7 +95,7 @@ export default defineComponent({
                 const label: string = this.$$form.getFormItemLabel(item);
                 return (
                   <li class="filter-item">
-                    <el-checkbox {...checkboxProps} />
+                    <el-checkbox {...checkboxProps} size="default" />
                     <i class="svgicon handle" title={t('qm.form.draggable')}>
                       <HolderIcon />
                     </i>

@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-02-09 09:27:46
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2021-11-05 13:06:41
+ * @Last Modified time: 2022-03-11 20:40:13
  */
 @import '../../style/src/common';
 
@@ -81,10 +81,16 @@ $prefix: '#{$qm-prefix}-dialog';
     .el-dialog__header {
       height: 52px;
     }
+    .el-dialog__headerbtn {
+      top: 8px;
+    }
   }
   &--small {
     .el-dialog__header {
       height: 40px;
+    }
+    .el-dialog__headerbtn {
+      top: 5px;
     }
   }
 }
