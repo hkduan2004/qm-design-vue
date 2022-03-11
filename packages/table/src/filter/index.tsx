@@ -365,7 +365,7 @@ export default defineComponent({
     return (
       <el-popover
         popper-class={`${classnames(popperCls)}`}
-        v-model={[this.visible, 'visible']}
+        // v-model={[this.visible, 'visible']}
         width="auto"
         trigger="click"
         placement="bottom-end"
@@ -379,9 +379,15 @@ export default defineComponent({
         onShow={() => {
           this.popperVisibleHandle(true);
         }}
+        onBeforeEnter={() => {
+          this.visible = true;
+        }}
+        onAfterLeave={() => {
+          this.visible = false;
+        }}
         v-slots={{
           reference: (): JSXNode => (
-            <div class={filterCls} title={t('qm.table.filter.text')}>
+            <div class={filterCls} title={t('qm.table.filter.text')} onClick={(ev) => ev.stopPropagation()}>
               <span class="svgicon icon">
                 <FilterFilledIcon />
               </span>

@@ -813,7 +813,7 @@ export default defineComponent({
             formType={this.formType}
             list={this.formList}
             initialValue={{ aa: '0', d: 123123 }}
-            authConfig={this.authConfig2}
+            // authConfig={this.authConfig2}
             onFinish={this.finish}
             onCollapse={this.collapse}
             fieldsChange={(list) => {

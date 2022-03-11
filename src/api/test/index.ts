@@ -6,7 +6,7 @@
  */
 import axios from '../fetch';
 
-export const getTableData = (params) => axios.get(`/api/design/getTableData`, { params });
+export const getTableData = (params) => axios.post(`/api/design/getTableData`, params);
 
 export const getTableKeys = (params) => axios.get(`/api/design/getTableKeys`, { params });
 

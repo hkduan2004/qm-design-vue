@@ -136,7 +136,7 @@ export default defineComponent({
     return (
       <el-popover
         popper-class={`${classnames(popperCls, 'column-filter__popper')}`}
-        v-model={[this.visible, 'visible']}
+        // v-model={[this.visible, 'visible']}
         width="auto"
         trigger="click"
         placement="right"
@@ -145,6 +145,12 @@ export default defineComponent({
         teleported={true}
         stop-popper-mouse-event={false}
         gpu-acceleration={false}
+        onBeforeEnter={() => {
+          this.visible = true;
+        }}
+        onAfterLeave={() => {
+          this.visible = false;
+        }}
         v-slots={{
           reference: (): JSXNode => (
             <span class={{ [`${prefixCls}-column-filter`]: !0, [`selected`]: visible }} title={t('qm.table.columnFilter.text')}>
