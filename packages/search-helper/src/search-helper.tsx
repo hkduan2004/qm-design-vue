@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-02-09 09:03:59
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-03-11 21:07:27
+ * @Last Modified time: 2022-03-11 21:17:52
  */
 import { defineComponent, PropType } from 'vue';
 import PropTypes from '../../_utils/vue-types';
@@ -246,7 +246,7 @@ export default defineComponent({
     calcTableHeight(): void {
       const dialogOffsetTop = getParentNode(this.$refs[`search-helper`], 'el-dialog')?.offsetTop || 0;
       const containerHeight = window.innerHeight - dialogOffsetTop * 2 - (SizeHeight[this.$size as ISize] + 20) * 2;
-      const tableHeight = containerHeight - this.$refs[`top-filter`].$el.offsetHeight - SizeHeight[this.$size as ISize] - 64;
+      const tableHeight = containerHeight - this.$refs[`top-filter`].$el.offsetHeight - SizeHeight[this.$size as ISize] - 66;
       if (tableHeight === this.height) return;
       this.height = tableHeight;
     },

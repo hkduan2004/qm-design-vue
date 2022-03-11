@@ -723,7 +723,7 @@ export default defineComponent({
       // this.$refs[`gprint`].DO_PRINT();
       // this.$message.success('asdasd');
       // this.loading = false;
-      // this.visible = true;
+      this.visible = true;
       this.locale = this.locale === 'zh-cn' ? 'en' : 'zh-cn';
       this.size = 'small';
       // this.formList.find((x) => x.fieldName === 'z').searchHelper = undefined;
@@ -798,7 +798,7 @@ export default defineComponent({
   },
   render(): VNode {
     return (
-      <qm-config-provider size={'default'} locale={this.locale}>
+      <qm-config-provider size={'small'} locale={this.locale}>
         <qm-button confirm={{}} click={this.clickHandle}>
           按钮
         </qm-button>
