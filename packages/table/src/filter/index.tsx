@@ -105,16 +105,18 @@ export default defineComponent({
       this.$$table.clearSuperSearch();
       // 设置父组件 filters 值
       this.$$header.filters = Object.assign({}, cloneDeep(this.filters), cloneDeep(this.filterValues));
-      this.visible = false;
+      this.hidePopper();
     },
     doReset(): void {
       if (this.isFilterEmpty && !this.isActived) {
-        this.visible = false;
-        return;
+        return this.hidePopper();
       }
       // 恢复初始值
       this.filterValues = this.initialFilterValue();
       this.doFinish();
+    },
+    hidePopper(): void {
+      this.$refs[`popoverRef`].hide();
     },
     renderContent(): Nullable<JSXNode> {
       const { type } = this.column.filter;
@@ -307,6 +309,7 @@ export default defineComponent({
               type="date"
               {...datePropsFn('>')}
               placeholder={t('qm.table.filter.gtPlaceholder')}
+              teleported={false}
               style={{ width: '150px' }}
             />
           </li>
@@ -317,6 +320,7 @@ export default defineComponent({
               type="date"
               {...datePropsFn('<')}
               placeholder={t('qm.table.filter.ltPlaceholder')}
+              teleported={false}
               style={{ width: '150px' }}
             />
           </li>
@@ -327,6 +331,7 @@ export default defineComponent({
               type="date"
               {...datePropsFn('==')}
               placeholder={t('qm.table.filter.eqPlaceholder')}
+              teleported={false}
               style={{ width: '150px' }}
             />
           </li>
@@ -337,6 +342,7 @@ export default defineComponent({
               type="date"
               {...datePropsFn('!=')}
               placeholder={t('qm.table.filter.neqPlaceholder')}
+              teleported={false}
               style={{ width: '150px' }}
             />
           </li>
@@ -364,6 +370,7 @@ export default defineComponent({
     ];
     return (
       <el-popover
+        ref="popoverRef"
         popper-class={`${classnames(popperCls)}`}
         // v-model={[this.visible, 'visible']}
         width="auto"
