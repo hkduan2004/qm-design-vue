@@ -55,7 +55,7 @@
     "classnames": "^2.3.1",
     "countup.js": "^2.0.8",
     "cropperjs": "^1.5.12",
-    "dayjs": "^1.10.7",
+    "dayjs": "^1.10.8",
     "element-plus": "2.0.5",
     "exceljs": "^4.3.0",
     "localforage": "^1.10.0",
