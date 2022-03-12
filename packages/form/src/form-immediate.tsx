@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-02-23 21:56:33
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-03-11 23:18:59
+ * @Last Modified time: 2022-03-12 13:01:52
  */
 import { defineComponent } from 'vue';
 import { get } from 'lodash-es';
@@ -92,7 +92,9 @@ export default defineComponent({
       warn('Form', '[IMMEDIATE] 类型的 `fieldAliasMap` 参数不正确');
     }
 
-    const fieldKeys = Object.keys(fieldAliasMap?.() ?? {});
+    // 字段的映射别名
+    const alias: Record<string, string> = fieldAliasMap?.() || {};
+    const fieldKeys = Object.keys(alias);
 
     // 其他表单项的 fieldName
     this.extraKeys = fieldKeys.filter((x) => x !== fieldName && x !== 'extra' && !x.endsWith('__desc'));
@@ -121,7 +123,7 @@ export default defineComponent({
       searchHelperChangeHandle('');
     };
 
-    const prefixCls = getPrefixCls('search-helper');
+    const prefixCls = getPrefixCls('immediate');
 
     this.$$form.setViewValue(fieldName, form[fieldName]);
 
@@ -144,8 +146,8 @@ export default defineComponent({
           readonly={readonly}
           disabled={disabled}
           style={{ ...style }}
+          value-key={alias[fieldName]}
           onSelect={(val): void => {
-            const alias: Record<string, string> = fieldAliasMap();
             for (let key in alias) {
               if (key !== 'extra' && !key.endsWith('__desc')) {
                 form[key] = val[alias[key]];
