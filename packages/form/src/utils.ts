@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-02-24 10:24:37
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2021-11-06 18:45:29
+ * @Last Modified time: 2022-03-12 11:53:35
  */
 import { transform, isEqual } from 'lodash-es';
 import { isObject } from '../../_utils/util';
@@ -10,6 +10,8 @@ import dayjs from 'dayjs';
 import type { AnyObject, Nullable } from '../../_utils/types';
 
 export const noop = (): void => {};
+
+export const isEmptyValue = (value: unknown) => value === '' || value === undefined || value === null;
 
 // 转日期对象
 export const toDate = (val: string | string[]): Date | Date[] => {

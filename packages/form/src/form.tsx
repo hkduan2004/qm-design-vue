@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-02-09 09:03:59
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-03-11 23:09:35
+ * @Last Modified time: 2022-03-12 12:07:38
  */
 import { ComponentPublicInstance, defineComponent } from 'vue';
 import scrollIntoView from 'scroll-into-view-if-needed';
@@ -11,7 +11,7 @@ import { getParserWidth, isObject, isFunction } from '../../_utils/util';
 import { getPrefixCls } from '../../_utils/prefix';
 import { useSize, useLocale, useGlobalConfig } from '../../hooks';
 import { warn } from '../../_utils/error';
-import { noop, difference, secretFormat } from './utils';
+import { noop, difference, secretFormat, isEmptyValue } from './utils';
 import { FormColsMixin } from './form-cols-mixin';
 import { PublicMethodsMixin } from './public-methods-mixin';
 import { AuthMixin } from './auth-mixin';
@@ -435,30 +435,19 @@ export default defineComponent({
     },
     // 处理 from data 数据
     excuteFormValue(form: IFormData): void {
-      this.flattenItems
-        .filter((x) => FORMAT_TYPE.includes(x.type))
-        .map((x) => x.fieldName)
-        .forEach((fieldName) => {
-          if ((form[fieldName] as Array<unknown>).length > 0) {
-            let isEmpty = (form[fieldName] as Array<unknown>).every((x) => {
-              let val = x ?? '';
-              return val === '';
-            });
-            if (isEmpty) {
-              form[fieldName] = [];
-            } else {
-              form[fieldName] = Object.assign([], [undefined, undefined], form[fieldName]);
+      for (let key in form) {
+        const val = form[key];
+        if (Array.isArray(val)) {
+          val.forEach((x, i) => {
+            if (isEmptyValue(x)) {
+              val[i] = '';
             }
-          }
-        });
-      for (let attr in form) {
-        if (form[attr] === '' || form[attr] === null) {
-          form[attr] = undefined;
+          });
         }
-        if (attr.includes('|') && Array.isArray(form[attr])) {
-          let [start, end] = attr.split('|');
-          form[start] = (form[attr] as ValueOf<IFormData>[])[0];
-          form[end] = (form[attr] as ValueOf<IFormData>[])[1];
+        if (key.includes('|') && Array.isArray(val)) {
+          let [start, end] = key.split('|');
+          form[start] = val[0] ?? '';
+          form[end] = val[1] ?? '';
         }
       }
     },
@@ -466,8 +455,8 @@ export default defineComponent({
     formatFormValue(form: IFormData): IFormData {
       const formData = {};
       for (let key in form) {
-        if (typeof form[key] !== 'undefined') continue;
-        !this.isFilterType && (formData[key] = '');
+        if (!isEmptyValue(form[key])) continue;
+        this.isFilterType ? (formData[key] = undefined) : (formData[key] = '');
       }
       return cloneDeep(Object.assign({}, form, formData));
     },
