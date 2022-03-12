@@ -178,7 +178,7 @@ export default defineComponent({
           },
         },
         {
-          type: 'INPUT',
+          type: 'SEARCH_HELPER',
           label: '条件1',
           fieldName: 'z',
           searchHelper: {

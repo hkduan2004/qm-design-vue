@@ -52,6 +52,7 @@ export type IFormItemType =
   | 'CHECKBOX'
   | 'MULTIPLE_CHECKBOX'
   | 'TEXT_AREA'
+  | 'SEARCH_HELPER'
   | 'IMMEDIATE'
   | 'DATE'
   | 'RANGE_DATE'
