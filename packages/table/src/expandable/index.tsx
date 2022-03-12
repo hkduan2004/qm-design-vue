@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2020-03-30 15:59:26
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2021-10-18 09:54:58
+ * @Last Modified time: 2022-03-12 19:39:30
  */
 import { defineComponent } from 'vue';
 import { getPrefixCls } from '../../../_utils/prefix';
@@ -25,7 +25,8 @@ export default defineComponent({
     },
   },
   methods: {
-    clickHandle(): void {
+    clickHandle(ev: MouseEvent): void {
+      ev.stopPropagation();
       const { rowExpandedKeys } = this.$$table;
       // 展开状态 -> 收起
       const result = this.expanded ? rowExpandedKeys.filter((x) => x !== this.rowKey) : [...rowExpandedKeys, this.rowKey];
