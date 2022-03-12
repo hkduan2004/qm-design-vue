@@ -2,11 +2,11 @@
  * @Author: 焦质晔
  * @Date: 2020-03-05 10:27:24
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2021-10-18 09:55:11
+ * @Last Modified time: 2022-03-12 19:27:33
  */
 import { warn } from '../../../_utils/error';
 import type { Nullable } from '../../../_utils/types';
-import type { IDerivedColumn } from '../table/types';
+import type { IDerivedColumn, IRowKey } from '../table/types';
 import config from '../config';
 
 const expandableMixin = {
@@ -26,18 +26,18 @@ const expandableMixin = {
     },
     // 展开行，已展开的 keys
     createRowExpandedKeys(): string[] {
-      const { expandable, selectionKeys, allRowKeys, treeStructure, isTreeTable } = this;
-      if (isTreeTable && expandable) {
-        warn('Table', '树结构表格不能再设置展开行 `expandable` 参数');
+      const { expandable, selectionKeys, allRowKeys, isTreeTable } = this;
+      if (isTreeTable && expandable?.expandedRowRender) {
+        warn('Table', '树结构表格不能再设置展开行的 `expandedRowRender` 参数');
       }
+      const { defaultExpandAllRows, expandedRowKeys = [] } = expandable || {};
       // 树结构
       if (isTreeTable) {
-        const { defaultExpandAllRows, defaultFoldAllRows, expandedRowKeys = [] } = treeStructure || {};
-        if (defaultFoldAllRows) {
+        if (!defaultExpandAllRows) {
           return [];
         }
         const mergedRowKeys = [...selectionKeys, ...expandedRowKeys];
-        const result: string[] = [];
+        const result: IRowKey[] = [];
         if (mergedRowKeys.length) {
           mergedRowKeys.forEach((x) => {
             result.push(...this.findParentRowKeys(this.deriveRowKeys, x));
@@ -47,7 +47,6 @@ const expandableMixin = {
       }
       // 展开行
       if (expandable) {
-        const { defaultExpandAllRows, expandedRowKeys = [] } = expandable || {};
         return defaultExpandAllRows && !expandedRowKeys.length ? [...allRowKeys] : [...expandedRowKeys];
       }
       return [];

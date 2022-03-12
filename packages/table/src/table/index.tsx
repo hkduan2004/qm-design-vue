@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-02-09 09:03:59
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2021-12-21 13:20:28
+ * @Last Modified time: 2022-03-12 19:20:44
  */
 import { defineComponent, CSSProperties } from 'vue';
 import { isEqual } from 'lodash-es';
@@ -324,9 +324,6 @@ export default defineComponent({
       }
     },
     [`expandable.expandedRowKeys`](): void {
-      this.rowExpandedKeys = this.createRowExpandedKeys();
-    },
-    [`treeStructure.expandedRowKeys`](): void {
       this.rowExpandedKeys = this.createRowExpandedKeys();
     },
     rowExpandedKeys(next: string[], prev: string[]): void {

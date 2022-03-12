@@ -2,10 +2,11 @@
  * @Author: 焦质晔
  * @Date: 2020-02-28 23:01:43
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2021-12-21 10:32:17
+ * @Last Modified time: 2022-03-12 19:32:19
  */
 import { defineComponent, CSSProperties } from 'vue';
 import addEventListener from 'add-dom-event-listener';
+import classNames from 'classnames';
 import { isEqual } from 'lodash-es';
 import { parseHeight, throttle, getCellValue, getVNodeText, deepFindRowKey, isArrayContain } from '../utils';
 import { getPrefixCls } from '../../../_utils/prefix';
@@ -178,14 +179,14 @@ export default defineComponent({
         rows.push(this.renderRow(row, rowIndex, rowKey, depth));
         // 展开行
         if (expandable) {
-          const { rowExpandable = trueNoop } = expandable;
+          const { expandedRowClassName, rowExpandable = trueNoop } = expandable;
           const expandColumnCls = [`body--column`];
           // 展开状态
           if (rowExpandable(row) && rowExpandedKeys.includes(rowKey)) {
             rows.push(
               <tr key={`expand_${rowKey}`} class="body--row-expanded">
                 <td colspan={this.flattenColumns.length} class={expandColumnCls} style={{ paddingLeft: !rowSelection ? `50px` : `100px` }}>
-                  <div class="cell">{expandable.expandedRowRender(row, rowIndex)}</div>
+                  <div class={classNames('cell', expandedRowClassName)}>{expandable.expandedRowRender?.(row, rowIndex)}</div>
                 </td>
               </tr>
             );

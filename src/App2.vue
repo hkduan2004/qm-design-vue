@@ -398,9 +398,6 @@ export default defineComponent({
       exportExcel: {
         fileName: '导出文件.xlsx',
       },
-      treeStructure: {
-        defaultExpandAllRows: true,
-      },
       summation: {
         groupItems: [{ dataIndex: 'pinpaiText' }, { dataIndex: 'chexingText' }, { dataIndex: 'chexiText' }],
       },
@@ -497,7 +494,6 @@ export default defineComponent({
             webPagination={true}
             spanMethod={this.spanMethod}
             summation={this.summation}
-            treeStructure={this.treeStructure}
             rowSelection={this.selection}
             tablePrint={this.tablePrint}
             exportExcel={this.exportExcel}

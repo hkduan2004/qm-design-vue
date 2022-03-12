@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2020-02-28 23:04:58
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-03-11 20:21:36
+ * @Last Modified time: 2022-03-12 19:33:19
  */
 import { PropType } from 'vue';
 import PropTypes from '../../../_utils/vue-types';
@@ -225,15 +225,10 @@ export default {
     defaultExpandAllRows: PropTypes.bool, // 默认展开所有行
     expandedRowKeys: PropTypes.array, // 展开行的 key 数组，支持动态赋值
     rowExpandable: PropTypes.func, // 是否允许行展开，参数：row，返回值 bool
-    expandedRowRender: PropTypes.func.isRequired, // 额外的展开行渲染方法
+    expandedRowClassName: PropTypes.string, // 展开行的 className
+    expandedRowRender: PropTypes.func, // 额外的展开行渲染方法
     onExpand: PropTypes.func, // 点击展开图标时触发
     onChange: PropTypes.func, // 展开的行变化时触发
-  }),
-  // 树结构配置项 - 计划未来要删除
-  treeStructure: PropTypes.shape({
-    defaultExpandAllRows: PropTypes.bool, // 默认展开所有行
-    defaultFoldAllRows: PropTypes.bool, // 默认收起所有行
-    expandedRowKeys: PropTypes.array, // 展开行的 key 数组，支持动态赋值
   }),
   // 合计功能
   summation: PropTypes.shape({

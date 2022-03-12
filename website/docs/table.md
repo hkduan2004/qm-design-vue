@@ -50,7 +50,6 @@
 | rowSelection         | 列表项是否可选择，[配置项](#rowSelection)              | object                                                 | -      |
 | rowHighlight         | 列表行高亮选中，[配置项](#rowHighlight)                | object                                                 | -      |
 | expandable           | 展开行配置项，[配置项](#expandable)                    | object                                                 | -      |
-| treeStructure        | 树结构选项，[配置项](#treeStructure)                   | object                                                 | -      |
 | summation            | 表格合计，包含底部合计和分组合计，[配置项](#summation) | array                                                  | -      |
 | footRender           | 表格底部自定义渲染                                     | function(columns, tableData, tableFullData): JSX Node  | -      |
 | multipleSort         | 是否为多列排序模式                                     | boolean                                                | true   |
@@ -330,14 +329,6 @@
 | pageSize        | 每页显示条目个数     | number   | 20                               |
 | pagerCount      | 页码按钮的数量       | number   | 7                                |
 | pageSizeOptions | 个数选择器的选项列表 | number[] | [10, 20, 30, 40, 50]             |
-
-### treeStructure
-
-| 参数                 | 说明                   | 类型     | 默认值 |
-| -------------------- | ---------------------- | -------- | ------ |
-| defaultExpandAllRows | 默认展开树表格的所有行 | boolean  | -      |
-| defaultFoldAllRows   | 默认收起树表格的所有行 | boolean  | -      |
-| expandedRowKeys      | 展开行的 rowKey 数组   | string[] | -      |
 
 ### authConfig
 
