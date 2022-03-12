@@ -294,6 +294,7 @@
 | defaultExpandAllRows | 默认展开所有行                 | boolean                              | -      |
 | expandedRowKeys      | 展开行的 rowKey 数组           | string[]                             | -      |
 | rowExpandable        | 是否允许行展开                 | function(row): boolean               | -      |
+| expandedRowClassName | 展开行的 className             | string                               | -      |
 | expandedRowRender    | 额外的展开行渲染方法，必要参数 | function(row, index): JSX Node       | -      |
 | onExpand             | 点击展开图标时触发             | function(expanded, row)              | -      |
 | onChange             | 展开的行变化时触发             | function(expandedKeys, expandedRows) | -      |
