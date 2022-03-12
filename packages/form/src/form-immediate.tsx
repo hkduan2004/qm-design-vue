@@ -41,7 +41,7 @@ export default defineComponent({
     async querySearchAsync(request, fieldName: string, columns: Array<IColumn>, queryString = '', cb): Promise<void> {
       const { fetchApi, params = {}, dataKey = '' } = request;
       if (!fetchApi) {
-        return warn('Form', '[SEARCH_HELPER] 类型的 `fetchApi` 参数不正确');
+        return warn('Form', '[IMMEDIATE] 类型的 `fetchApi` 参数不正确');
       }
       try {
         const res = await fetchApi({ ...{ [fieldName]: queryString }, ...params });
@@ -89,7 +89,7 @@ export default defineComponent({
     const { columns = [], onlySelect = !0, fieldAliasMap, itemRender } = options;
 
     if (!isFunction(fieldAliasMap)) {
-      warn('Form', '[SEARCH_HELPER] 类型的 `fieldAliasMap` 参数不正确');
+      warn('Form', '[IMMEDIATE] 类型的 `fieldAliasMap` 参数不正确');
     }
 
     const fieldKeys = Object.keys(fieldAliasMap?.() ?? {});

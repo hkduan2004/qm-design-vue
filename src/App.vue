@@ -224,7 +224,7 @@ export default defineComponent({
           },
         },
         {
-          type: 'SEARCH_HELPER',
+          type: 'IMMEDIATE',
           fieldName: 'ff',
           label: '表单项9',
           request: {

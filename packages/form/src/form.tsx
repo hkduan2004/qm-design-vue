@@ -39,7 +39,7 @@ import FromCheckbox from './form-checkbox';
 import FormCheckboxGroup from './form-checkbox-group';
 import FormTextArea from './form-text-area';
 import FormDivider from './form-divider';
-import FormSearchHelper from './form-search-helper';
+import FormiImmediate from './form-immediate';
 import FormTime from './form-time';
 import FormRangeTime from './form-range-time';
 import FormTimeSelect from './form-time-select';
@@ -384,8 +384,8 @@ export default defineComponent({
     TEXT_AREA(option: IFormItem): JSXNode {
       return <FormTextArea ref={option.fieldName} option={option} />;
     },
-    SEARCH_HELPER(option: IFormItem): JSXNode {
-      return <FormSearchHelper ref={option.fieldName} option={option} />;
+    IMMEDIATE(option: IFormItem): JSXNode {
+      return <FormiImmediate ref={option.fieldName} option={option} />;
     },
     TIME(option: IFormItem): JSXNode {
       return <FormTime ref={option.fieldName} option={option} />;
@@ -509,7 +509,7 @@ export default defineComponent({
           this.SET_FIELDS_VALUE({ [x.fieldName]: cloneDeep(this.initialValues[x.fieldName]) });
         }
         // 搜索帮助
-        if (x.type === 'INPUT' || x.type === 'SEARCH_HELPER') {
+        if (x.type === 'INPUT' || x.type === 'IMMEDIATE') {
           this.$$(x.fieldName)?.reset();
         }
       });

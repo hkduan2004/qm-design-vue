@@ -76,7 +76,7 @@
 | CHECKBOX             | 复选框                 |
 | MULTIPLE_CHECKBOX    | 复选框，多选           |
 | TEXT_AREA            | 文本域                 |
-| SEARCH_HELPER        | 及时反馈               |
+| IMMEDIATE            | 及时反馈               |
 | DATE                 | 日期类型               |
 | RANGE_DATE           | 日期区间类型，单独选择 |
 | RANGE_DATE_EL        | 日期区间类型，拖拽选择 |
