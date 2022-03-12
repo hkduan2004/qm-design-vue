@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-02-09 09:03:59
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-01-13 14:57:36
+ * @Last Modified time: 2022-03-12 22:38:33
  */
 import { defineComponent, PropType } from 'vue';
 import axios from 'axios';
@@ -186,7 +186,10 @@ export default defineComponent({
       this.loading = false;
     },
     setUploadWrapHeight(): void {
-      this.$refs[`upload`].$el.querySelector('.el-upload').style.height = `${this.calcHeight}px`;
+      const $upload = this.$refs[`upload`].$el.querySelector('.el-upload');
+      if ($upload) {
+        $upload.style.height = `${this.calcHeight}px`;
+      }
     },
     async downloadHandle(index): Promise<void> {
       try {
@@ -304,7 +307,6 @@ export default defineComponent({
         {this.renderPictureCard()}
         <el-upload
           ref="upload"
-          class={cls}
           {...uploadProps}
           v-slots={{
             default: (): JSXNode => (
