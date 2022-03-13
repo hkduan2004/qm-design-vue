@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-02-24 13:02:36
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2021-11-13 08:39:51
+ * @Last Modified time: 2022-03-13 10:07:01
  */
 import { CSSProperties, PropType, Component } from 'vue';
 import PropTypes from '../../_utils/vue-types';
@@ -53,6 +53,7 @@ export type IFormItemType =
   | 'MULTIPLE_CHECKBOX'
   | 'TEXT_AREA'
   | 'SEARCH_HELPER'
+  | 'MULTIPLE_SEARCH_HELPER'
   | 'IMMEDIATE'
   | 'DATE'
   | 'RANGE_DATE'
@@ -72,6 +73,7 @@ export const ARRAY_TYPE: IFormItemType[] = [
   'MULTIPLE_CASCADER',
   'MULTIPLE_SELECT',
   'MULTIPLE_CHECKBOX',
+  'MULTIPLE_SEARCH_HELPER',
   'RANGE_DATE',
   'RANGE_DATE_EL',
   'RANGE_TIME',

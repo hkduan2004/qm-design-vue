@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-02-09 09:03:59
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-03-12 12:07:38
+ * @Last Modified time: 2022-03-13 10:08:14
  */
 import { ComponentPublicInstance, defineComponent } from 'vue';
 import scrollIntoView from 'scroll-into-view-if-needed';
@@ -40,6 +40,7 @@ import FormCheckboxGroup from './form-checkbox-group';
 import FormTextArea from './form-text-area';
 import FormDivider from './form-divider';
 import FormSearchHelper from './form-search-helper';
+import FormMultipleSearchHelper from './form-multiple-search-helper';
 import FormiImmediate from './form-immediate';
 import FormTime from './form-time';
 import FormRangeTime from './form-range-time';
@@ -387,6 +388,9 @@ export default defineComponent({
     },
     SEARCH_HELPER(option: IFormItem): JSXNode {
       return <FormSearchHelper ref={option.fieldName} option={option} />;
+    },
+    MULTIPLE_SEARCH_HELPER(option: IFormItem): JSXNode {
+      return <FormMultipleSearchHelper ref={option.fieldName} option={option} />;
     },
     IMMEDIATE(option: IFormItem): JSXNode {
       return <FormiImmediate ref={option.fieldName} option={option} />;

@@ -80,7 +80,7 @@ export default defineComponent({
           },
         },
         {
-          type: 'SEARCH_HELPER',
+          type: 'MULTIPLE_SEARCH_HELPER',
           label: '条件1',
           fieldName: 'z',
           searchHelper: {
