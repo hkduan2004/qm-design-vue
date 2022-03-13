@@ -208,10 +208,6 @@ export default defineComponent({
             params: {},
             dataKey: 'records',
           },
-          style: { width: `calc(100% - 80px)` },
-          descOptions: {
-            style: { width: '70px' },
-          },
         },
         {
           type: 'SELECT',
