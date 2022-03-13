@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-02-08 14:35:05
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2021-12-17 10:54:48
+ * @Last Modified time: 2022-03-13 09:26:49
  */
 'use strict';
 
@@ -28,7 +28,7 @@ module.exports = {
   },
   resolve: {
     // 配置解析规则
-    extensions: ['mjs', '.ts', '.tsx', '.js', '.jsx', '.vue', '.json'],
+    extensions: ['.mjs', '.ts', '.tsx', '.js', '.jsx', '.vue', '.json'],
     alias: {
       vue$: 'vue/dist/vue.esm-bundler.js',
       '@': path.resolve(__dirname, '../website'),
@@ -45,7 +45,9 @@ module.exports = {
       {
         test: /\.mjs$/,
         resolve: {
-          fullySpecified: false,
+          byDependency: {
+            esm: { fullySpecified: false },
+          },
         },
         include: [/node_modules/],
       },
