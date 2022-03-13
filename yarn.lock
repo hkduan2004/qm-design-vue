@@ -2369,7 +2369,7 @@ chalk@^0.5.0:
     strip-ansi "^0.3.0"
     supports-color "^0.2.0"
 
-chalk@^2.0.0, chalk@^2.3.0:
+chalk@^2.0.0:
   version "2.4.2"
   resolved "https://registry.npmmirror.com/chalk/download/chalk-2.4.2.tgz#cd42541677a54333cf541a49108c1432b44c9424"
   integrity sha1-zUJUFnelQzPPVBpJEIwUMrRMlCQ=
@@ -4257,20 +4257,6 @@ gulp-cssmin@^0.2.0:
     map-stream "0.0.4"
     temp-write "~0.1.0"
 
-gulp-dart-sass@^1.0.2:
-  version "1.0.2"
-  resolved "https://registry.npmmirror.com/gulp-dart-sass/download/gulp-dart-sass-1.0.2.tgz#20e33c236b48d557c91e8dfe67a2aef2b8a2e328"
-  integrity sha1-IOM8I2tI1VfJHo3+Z6Ku8rii4yg=
-  dependencies:
-    chalk "^2.3.0"
-    lodash.clonedeep "^4.3.2"
-    plugin-error "^1.0.1"
-    replace-ext "^1.0.0"
-    sass "^1.26.3"
-    strip-ansi "^4.0.0"
-    through2 "^2.0.0"
-    vinyl-sourcemaps-apply "^0.2.0"
-
 gulp-ignore@^3.0.0:
   version "3.0.0"
   resolved "https://registry.npmmirror.com/gulp-ignore/download/gulp-ignore-3.0.0.tgz#be9dfda29c6de4048b8348fe396ebe1d1a8711ce"
@@ -4297,6 +4283,18 @@ gulp-rename@~1.1.0:
   integrity sha1-kwkKqvTThsB/IFOKaIjxXvunJ6E=
   dependencies:
     map-stream ">=0.0.4"
+
+gulp-sass@^5.1.0:
+  version "5.1.0"
+  resolved "https://registry.yarnpkg.com/gulp-sass/-/gulp-sass-5.1.0.tgz#bb3d9094f39a260f62a8d0a6797b95ab826f9663"
+  integrity sha512-7VT0uaF+VZCmkNBglfe1b34bxn/AfcssquLKVDYnCDJ3xNBaW7cUuI3p3BQmoKcoKFrs9jdzUxyb+u+NGfL4OQ==
+  dependencies:
+    lodash.clonedeep "^4.5.0"
+    picocolors "^1.0.0"
+    plugin-error "^1.0.1"
+    replace-ext "^2.0.0"
+    strip-ansi "^6.0.1"
+    vinyl-sourcemaps-apply "^0.2.1"
 
 gulp-typescript@^6.0.0-alpha.1:
   version "6.0.0-alpha.1"
@@ -5409,9 +5407,9 @@ lodash._shimkeys@~2.4.1:
   dependencies:
     lodash._objecttypes "~2.4.1"
 
-lodash.clonedeep@^4.3.2:
+lodash.clonedeep@^4.5.0:
   version "4.5.0"
-  resolved "https://registry.npmmirror.com/lodash.clonedeep/download/lodash.clonedeep-4.5.0.tgz#e23f3f9c4f8fbdde872529c1071857a086e5ccef"
+  resolved "https://registry.yarnpkg.com/lodash.clonedeep/-/lodash.clonedeep-4.5.0.tgz#e23f3f9c4f8fbdde872529c1071857a086e5ccef"
   integrity sha1-4j8/nE+Pvd6HJSnBBxhXoIblzO8=
 
 lodash.debounce@^4.0.8:
@@ -6899,6 +6897,11 @@ replace-ext@^1.0.0:
   resolved "https://registry.npmmirror.com/replace-ext/download/replace-ext-1.0.1.tgz#2d6d996d04a15855d967443631dd5f77825b016a"
   integrity sha1-LW2ZbQShWFXZZ0Q2Md1fd4JbAWo=
 
+replace-ext@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/replace-ext/-/replace-ext-2.0.0.tgz#9471c213d22e1bcc26717cd6e50881d88f812b06"
+  integrity sha512-UszKE5KVK6JvyD92nzMn9cDapSk6w/CaFZ96CnmDMUqH9oowfxF/ZjRITD25H4DnOQClLA4/j7jLGXXLVKxAug==
+
 replace-homedir@^1.0.0:
   version "1.0.0"
   resolved "https://registry.npmmirror.com/replace-homedir/download/replace-homedir-1.0.0.tgz#e87f6d513b928dde808260c12be7fec6ff6e798c"
@@ -7096,13 +7099,6 @@ sass-loader@^12.6.0:
   dependencies:
     klona "^2.0.4"
     neo-async "^2.6.2"
-
-sass@^1.26.3:
-  version "1.43.5"
-  resolved "https://registry.npmmirror.com/sass/download/sass-1.43.5.tgz#25a9d91dd098793ef7229d7b04dd3daae2fc4a65"
-  integrity sha512-WuNm+eAryMgQluL7Mbq9M4EruyGGMyal7Lu58FfnRMVWxgUzIvI7aSn60iNt3kn5yZBMR7G84fAGDcwqOF5JOg==
-  dependencies:
-    chokidar ">=3.0.0 <4.0.0"
 
 sass@^1.49.0:
   version "1.49.7"
@@ -8219,7 +8215,7 @@ vinyl-sourcemap@^1.1.0:
     remove-bom-buffer "^3.0.0"
     vinyl "^2.0.0"
 
-vinyl-sourcemaps-apply@^0.2.0, vinyl-sourcemaps-apply@^0.2.1:
+vinyl-sourcemaps-apply@^0.2.1:
   version "0.2.1"
   resolved "https://registry.npmmirror.com/vinyl-sourcemaps-apply/download/vinyl-sourcemaps-apply-0.2.1.tgz#ab6549d61d172c2b1b87be5c508d239c8ef87705"
   integrity sha1-q2VJ1h0XLCsbh75cUI0jnI74dwU=
