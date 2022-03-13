@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-02-23 21:56:33
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-03-11 23:20:46
+ * @Last Modified time: 2022-03-13 10:54:13
  */
 import { defineComponent } from 'vue';
 import { get } from 'lodash-es';
@@ -249,7 +249,7 @@ export default defineComponent({
           label: (): JSXNode => labelOptions && this.$$form.createFormItemLabel({ label, ...labelOptions }),
         }}
       >
-        <div class="region-select">
+        <div class="region-select" style={style}>
           <el-popover
             ref="popper"
             popper-class={`${prefixCls}__popper`}
@@ -305,9 +305,7 @@ export default defineComponent({
               ),
             }}
           >
-            <div class="container" style={{ ...style }}>
-              {this.isLoaded && this.renderTabs()}
-            </div>
+            <div class="container">{this.isLoaded && this.renderTabs()}</div>
           </el-popover>
         </div>
         {descOptions && this.$$form.createFormItemDesc({ fieldName, ...descOptions })}

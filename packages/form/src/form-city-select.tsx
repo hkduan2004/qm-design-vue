@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-03-31 09:27:45
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-03-11 23:20:42
+ * @Last Modified time: 2022-03-13 10:54:31
  */
 import { defineComponent } from 'vue';
 import scrollIntoView from 'scroll-into-view-if-needed';
@@ -279,7 +279,7 @@ export default defineComponent({
           label: (): JSXNode => labelOptions && this.$$form.createFormItemLabel({ label, ...labelOptions }),
         }}
       >
-        <div class="city-select">
+        <div class="city-select" style={style}>
           <el-popover
             ref="popper"
             popper-class={`${prefixCls}__popper`}
@@ -335,7 +335,7 @@ export default defineComponent({
               ),
             }}
           >
-            <div class="container" style={{ ...style }}>
+            <div class="container">
               {this.isLoaded && (
                 <div class="city-drop">
                   <div class="city-drop-toper">

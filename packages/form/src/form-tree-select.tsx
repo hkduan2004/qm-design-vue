@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-02-23 21:56:33
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-02-16 10:20:41
+ * @Last Modified time: 2022-03-13 10:53:29
  */
 import { defineComponent, CSSProperties } from 'vue';
 import { get } from 'lodash-es';
@@ -154,7 +154,7 @@ export default defineComponent({
           label: (): JSXNode => labelOptions && this.$$form.createFormItemLabel({ label, ...labelOptions }),
         }}
       >
-        <div class="tree-select">
+        <div class="tree-select" style={style}>
           <el-popover
             ref="popper"
             popper-class={`${prefixCls}__popper`}
@@ -223,7 +223,7 @@ export default defineComponent({
               ),
             }}
           >
-            <div style={{ ...innerStyle, ...style }}>
+            <div style={{ ...innerStyle }}>
               {this.isLoaded && (
                 <>
                   <el-input

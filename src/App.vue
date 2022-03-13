@@ -129,7 +129,7 @@ export default defineComponent({
               return ['a1'];
             },
             fieldAliasMap: () => {
-              return { z: 'date', code: 'id', z__desc: 'date', d__desc: 'date' };
+              return { textKey: 'date', valueKey: 'id' };
             },
           },
           style: { width: `calc(100% - 80px)` },
@@ -148,6 +148,10 @@ export default defineComponent({
             fetchApi: getTreeData,
             params: {},
             dataKey: 'records',
+          },
+          style: { width: `calc(100% - 80px)` },
+          descOptions: {
+            style: { width: '70px' },
           },
         },
         {

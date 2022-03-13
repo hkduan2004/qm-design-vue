@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-02-09 09:27:46
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-03-13 10:26:20
+ * @Last Modified time: 2022-03-13 11:02:31
  */
 @import '../../style/src/common';
 @import './fields-filter';
@@ -105,9 +105,22 @@ $prefix: '#{$qm-prefix}-form';
     .region-select,
     .city-select,
     .multiple-sh {
+      display: flex;
       width: 100%;
       .select-option {
         display: none !important;
+      }
+    }
+    .multiple-sh {
+      position: relative;
+      .search-btn {
+        position: absolute;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        width: 2.6em;
+        cursor: pointer;
+        z-index: 9;
       }
     }
     .el-range-editor {
