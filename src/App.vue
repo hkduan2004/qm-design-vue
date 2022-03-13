@@ -80,6 +80,66 @@ export default defineComponent({
           },
         },
         {
+          type: 'SEARCH_HELPER',
+          label: '条件123',
+          fieldName: 'zz',
+          searchHelper: {
+            filters: [
+              {
+                type: 'INPUT',
+                label: '条件1',
+                fieldName: 'a1',
+              },
+              {
+                type: 'INPUT',
+                label: '条件2',
+                fieldName: 'a2',
+              },
+              {
+                type: 'INPUT',
+                label: '条件3',
+                fieldName: 'a3',
+              },
+              {
+                type: 'INPUT',
+                label: '条件4',
+                fieldName: 'a4',
+              },
+            ],
+            table: {
+              columns: [
+                {
+                  title: '创建时间',
+                  dataIndex: 'date',
+                },
+                {
+                  title: '姓名',
+                  dataIndex: 'person.name',
+                },
+              ],
+              rowKey: (record) => record.id,
+              fetch: {
+                api: getTableData,
+                params: {},
+                dataKey: 'records',
+              },
+            },
+            filterAliasMap: () => {
+              return ['a1'];
+            },
+            fieldAliasMap: () => {
+              return { zz: 'date', code: 'id', z__desc: 'date', d: 'date', d__desc: 'date' };
+            },
+          },
+          style: { width: `calc(100% - 80px)` },
+          descOptions: {
+            style: { width: '70px' },
+          },
+          onChange: (val) => {
+            console.log(1234, val);
+          },
+        },
+        {
           type: 'MULTIPLE_SEARCH_HELPER',
           label: '条件1',
           fieldName: 'z',
@@ -124,7 +184,6 @@ export default defineComponent({
                 dataKey: 'records',
               },
             },
-            closeServerMatch: false,
             filterAliasMap: () => {
               return ['a1'];
             },

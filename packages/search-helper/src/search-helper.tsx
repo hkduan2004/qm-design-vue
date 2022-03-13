@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-02-09 09:03:59
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-03-11 23:21:47
+ * @Last Modified time: 2022-03-13 11:49:05
  */
 import { defineComponent, PropType } from 'vue';
 import PropTypes from '../../_utils/vue-types';
@@ -44,6 +44,7 @@ export default defineComponent({
       validator: isValidComponentSize,
     },
     uniqueKey: PropTypes.string,
+    multiple: PropTypes.bool,
     filters: PropTypes.array.def([]),
     initialValue: PropTypes.object.def({}),
     showFilterCollapse: PropTypes.bool.def(true),
@@ -71,9 +72,9 @@ export default defineComponent({
       columns: this.createTableColumns(),
       tableList: [],
       selection: {
-        type: 'radio',
+        type: !this.multiple ? 'radio' : 'checkbox',
         defaultSelectFirstRow: !0,
-        clearableAfterFetched: !0,
+        clearableAfterFetched: !this.multiple,
         onChange: this.selectedRowChange,
       },
       fetch: {
@@ -200,14 +201,15 @@ export default defineComponent({
       this.$nextTick(() => this.calcTableHeight());
     },
     selectedRowChange(keys: string[], rows: AnyObject<any>[]): void {
-      this.result = rows.length ? rows[0] : null;
+      this.result = rows.length ? (!this.multiple ? rows[0] : rows) : null;
     },
     dbClickHandle(row: AnyObject<any>): void {
+      if (this.multiple) return;
       this.result = row;
       this.confirmHandle();
     },
     rowEnterHandle(row: AnyObject<any>): void {
-      if (!row) return;
+      if (this.multiple || !row) return;
       this.dbClickHandle(row);
     },
     confirmHandle(): void {
