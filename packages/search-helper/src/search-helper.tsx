@@ -249,7 +249,7 @@ export default defineComponent({
     calcTableHeight(): void {
       const dialogOffsetTop = getParentNode(this.$refs[`search-helper`], 'el-dialog')?.offsetTop || 0;
       const containerHeight = window.innerHeight - dialogOffsetTop * 2 - (SizeHeight[this.$size as ISize] + 20) * 2;
-      const tableHeight = containerHeight - this.$refs[`top-filter`].$el.offsetHeight - SizeHeight[this.$size as ISize] - 66;
+      const tableHeight = containerHeight - this.$refs[`top-filter`].$el.offsetHeight - SizeHeight[this.$size as ISize] - 68;
       if (tableHeight === this.height) return;
       this.height = tableHeight;
     },

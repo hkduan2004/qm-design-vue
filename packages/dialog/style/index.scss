@@ -26,7 +26,7 @@ $prefix: '#{$qm-prefix}-dialog';
     display: flex;
     align-items: center;
     flex-shrink: 0;
-    height: 46px;
+    height: 44px;
     margin: 0;
     padding: 0 10px 0 15px;
     border-bottom: 1px solid $border-color-base;
@@ -53,7 +53,7 @@ $prefix: '#{$qm-prefix}-dialog';
   }
   .el-dialog__headerbtn {
     position: absolute;
-    top: 7px;
+    top: 6px;
     font-size: 21px;
     color: $text-color-secondary;
     width: auto;
@@ -80,10 +80,10 @@ $prefix: '#{$qm-prefix}-dialog';
   // 40  36  32  28
   &--large {
     .el-dialog__header {
-      height: 52px;
+      height: 48px;
     }
     .el-dialog__headerbtn {
-      top: 10px;
+      top: 8px;
     }
   }
   &--small {

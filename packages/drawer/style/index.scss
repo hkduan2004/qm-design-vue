@@ -16,7 +16,7 @@ $prefix: '#{$qm-prefix}-drawer';
     display: flex;
     align-items: center;
     flex-shrink: 0;
-    height: 46px;
+    height: 44px;
     margin: 0;
     padding: 0 10px 0 15px;
     color: inherit;
@@ -67,7 +67,7 @@ $prefix: '#{$qm-prefix}-drawer';
   // 40  36  32  28
   &--large {
     .el-drawer__header {
-      height: 52px;
+      height: 48px;
     }
   }
   &--small {

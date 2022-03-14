@@ -857,7 +857,7 @@ export default defineComponent({
   },
   render(): VNode {
     return (
-      <qm-config-provider size={'small'} locale={this.locale}>
+      <qm-config-provider size={'default'} locale={this.locale}>
         <qm-button confirm={{}} click={this.clickHandle}>
           按钮
         </qm-button>
