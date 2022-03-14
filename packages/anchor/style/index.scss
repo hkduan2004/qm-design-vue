@@ -46,7 +46,8 @@ $prefix: '#{$qm-prefix}-anchor';
   }
   &__container {
     flex: 1;
-    overflow-x: hidden !important;
+    width: 0;
+    padding-right: 5px;
     overflow-y: auto;
   }
   // ------ size ------

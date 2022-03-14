@@ -195,7 +195,7 @@ export default defineComponent({
       );
     },
     DO_CLOSE(): void {
-      this.$refs[`dialog`].handleClose();
+      // this.$refs[`dialog`].handleClose();
     },
     START_LOADING(): void {
       this.sloading = true;

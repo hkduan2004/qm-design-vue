@@ -8,9 +8,9 @@ import axios from '../fetch';
 
 export const getTableData = (params) => axios.post(`/api/design/getTableData`, params);
 
-export const getTableKeys = (params) => axios.get(`/api/design/getTableKeys`, { params });
+export const getTableKeys = (params) => axios.post(`/api/design/getTableKeys`, params);
 
-export const getSummationData = (params) => axios.get(`/api/design/getSummationData`, { params });
+export const getSummationData = (params) => axios.post(`/api/design/getSummationData`, params);
 
 export const getTableAuth = (params) => axios.get(`/api/design/getTableAuth`, { params });
 

@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2020-03-22 14:34:21
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-03-11 19:57:49
+ * @Last Modified time: 2022-03-14 19:33:52
  */
 import { defineComponent } from 'vue';
 import dayjs from 'dayjs';
@@ -429,16 +429,16 @@ export default defineComponent({
           before
             .then(() => {
               this.shDeriveValue = setHelperFilterValues(val);
-              this.shVisible = !0;
+              this.shVisible = true;
             })
             .catch(() => {});
         } else if (before !== false) {
           this.shDeriveValue = setHelperFilterValues(val);
-          this.shVisible = !0;
+          this.shVisible = true;
         }
       };
       const doClose = () => {
-        this.$refs[`sh-dialog-${this.dataKey}`].DO_CLOSE();
+        this.shVisible = false;
       };
       const dialogProps = {
         ref: `sh-dialog-${this.dataKey}`,
