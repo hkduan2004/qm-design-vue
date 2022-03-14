@@ -330,7 +330,7 @@ export default {
  * DO_REFRESH: 刷新表格数据，同时会清空列选中状态
  * INSERT_RECORDS: 插入表格行数据，参数 row|rows, bottom(默认)|top
  * REMOVE_RECORDS: 移除表格数据，参数 rowKeys|rows|row
- * FORM_VALIDATE: 触发表格中的表单校验，返回值：object
+ * FIELD_VALIDATE: 触发表格中的表单校验，返回值：object
  * OPEN_SEARCH_HELPER: 打开单元格搜索帮助面板，参数 rowKey, dataIndex
  * GET_LOG: 获取操作记录，非空校验、格式校验、数据操作记录，返回值：object
  * CLEAR_LOG: 清空表格操作记录

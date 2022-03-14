@@ -187,7 +187,7 @@ export default {
     }
   },
   // 表单校验
-  FORM_VALIDATE(): Pick<ITableLog, 'required' | 'validate'> {
+  FIELD_VALIDATE(): Pick<ITableLog, 'required' | 'validate'> {
     const editableColumns = this.flattenColumns.filter((column) => isFunction(column.editRender));
     this.allTableData.forEach((record) => {
       editableColumns.forEach((column) => {

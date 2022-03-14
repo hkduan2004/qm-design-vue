@@ -96,7 +96,7 @@
 | CLEAR_TABLE_FOCUS   | 清空表格焦点                                   | -                                 | -      |
 | INSERT_RECORDS      | 插入表格行数据                                 | function(rows \| row)             | -      |
 | REMOVE_RECORDS      | 移除表格数据                                   | function(rowKeys \| rows \| row ) | -      |
-| FORM_VALIDATE       | 表格中的表单校验                               | -                                 | object |
+| FIELD_VALIDATE      | 表格中的表单校验                               | -                                 | object |
 
 ### column
 
