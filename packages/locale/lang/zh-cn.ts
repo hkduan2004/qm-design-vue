@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-06-19 08:45:54
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2021-10-17 12:58:56
+ * @Last Modified time: 2022-03-16 19:22:11
  */
 export default {
   name: 'zh-cn',
@@ -241,6 +241,22 @@ export default {
         condition: '条件值',
         logic: '逻辑',
         noEmpty: '字段名不能为空',
+      },
+      fastSearch: {
+        text: '数据定位查找',
+        settingTitle: '数据定位查找设置',
+        closeButton: '关 闭',
+        savedSetting: '保存的数据查找设置',
+        queryCondition: '请输入查询条件',
+        notMatch: '没有符合条件的记录！',
+        toTheEnd: '已查找到表格末尾，是否从头开始查找？',
+        toStart: '已查找到表格开始，是否从末尾开始查找',
+        tabPanes: ['查找条件', '更多条件'],
+        matchCase: '大小写匹配',
+        matchFullchar: '全字符匹配',
+        clear: '清空条件',
+        queryPrev: '查找上一个',
+        queryNext: '查找下一个',
       },
     },
   },

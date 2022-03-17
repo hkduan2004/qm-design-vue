@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2020-05-19 16:19:58
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-03-11 20:29:16
+ * @Last Modified time: 2022-03-17 15:58:38
  */
 import { defineComponent } from 'vue';
 import localforage from 'localforage';
@@ -319,6 +319,7 @@ export default defineComponent({
               dataSource={groupList}
               columns={groupColumns}
               showFullScreen={false}
+              showFastSearch={false}
               showColumnDefine={false}
               rowKey={(record) => record.index}
               columnsChange={(columns) => (this.groupColumns = columns)}
@@ -341,6 +342,7 @@ export default defineComponent({
               dataSource={summaryList}
               columns={summaryColumns}
               showFullScreen={false}
+              showFastSearch={false}
               showColumnDefine={false}
               rowKey={(record) => record.index}
               columnsChange={(columns) => (this.summaryColumns = columns)}

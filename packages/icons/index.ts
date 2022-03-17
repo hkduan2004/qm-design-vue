@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-11-01 13:54:59
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2021-11-02 12:37:13
+ * @Last Modified time: 2022-03-17 16:02:23
  */
 // 提供了 40 个 svg 图标组件
 export { default as FullscreenIcon } from './fullscreen';
@@ -45,3 +45,4 @@ export { default as CheckIcon } from './check';
 export { default as CheckCircleIcon } from './check-circle';
 export { default as LineHeightIcon } from './line-height';
 export { default as PictureIcon } from './picture';
+export { default as MonitorIcon } from './monitor';

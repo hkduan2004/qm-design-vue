@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2020-05-20 09:36:38
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2021-11-29 15:06:51
+ * @Last Modified time: 2022-03-17 15:57:42
  */
 import { defineComponent } from 'vue';
 import dayjs from 'dayjs';
@@ -149,6 +149,7 @@ export default defineComponent({
       showFullScreen: !1,
       exportExcel,
       tablePrint,
+      showFastSearch: false,
       columnsChange: (columns) => (this.vColumns = columns),
     };
     return (

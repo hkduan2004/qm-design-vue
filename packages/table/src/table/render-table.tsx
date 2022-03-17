@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2020-02-29 22:17:28
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2021-11-11 21:44:30
+ * @Last Modified time: 2022-03-16 19:25:03
  */
 import { getPrefixCls } from '../../../_utils/prefix';
 import { EAlign } from './types';
@@ -19,6 +19,7 @@ import ColumnFilter from '../column-filter';
 import SelectCollection from '../select-collection';
 import GroupSummary from '../group-summary';
 import HighSearch from '../high-search';
+import FastSearch from '../fast-search';
 import FullScreen from '../full-screen';
 import Export from '../export';
 import PrintTable from '../print';
@@ -72,6 +73,7 @@ export default {
       exportExcel,
       isSelectCollection,
       isSuperSearch,
+      isFastSearch,
       isGroupSummary,
       showColumnDefine,
     } = this;
@@ -158,6 +160,8 @@ export default {
             {permission.export && exportExcel && <Export {...exportProps} />}
             {/* 多选集合 */}
             {isSelectCollection && <SelectCollection columns={tableColumns} />}
+            {/* 快速定位查找 */}
+            {isFastSearch && <FastSearch />}
             {/* 高级检索 */}
             {isSuperSearch && <HighSearch columns={flattenColumns} />}
             {/* 分组汇总 */}

@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2020-05-20 09:36:38
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2021-12-05 10:16:40
+ * @Last Modified time: 2022-03-17 15:59:11
  */
 import { defineComponent } from 'vue';
 import { cloneDeep } from 'lodash-es';
@@ -76,6 +76,7 @@ export default defineComponent({
           minHeight={300}
           webPagination={true}
           showFullScreen={false}
+          showFastSearch={false}
           showColumnDefine={false}
           columnsChange={(columns) => (this.vColumns = columns)}
         />

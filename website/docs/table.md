@@ -65,6 +65,7 @@
 | tablePrint           | 表格打印，[配置项](#tablePrint)                        | object                                                 | -      |
 | showSelectCollection | 是否显示行选合集                                       | boolean                                                | true   |
 | showSuperSearch      | 是否显示高级检索                                       | boolean                                                | true   |
+| showFastSearch       | 是否显示数据定位查找                                   | boolean                                                | true   |
 | showGroupSummary     | 是否显示分组汇总                                       | boolean                                                | true   |
 | showColumnDefine     | 是否显示列定义                                         | boolean                                                | true   |
 

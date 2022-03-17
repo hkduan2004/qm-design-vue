@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2020-02-28 23:04:58
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-03-12 19:33:19
+ * @Last Modified time: 2022-03-17 15:56:12
  */
 import { PropType } from 'vue';
 import PropTypes from '../../../_utils/vue-types';
@@ -298,6 +298,8 @@ export default {
   showSelectCollection: PropTypes.bool.def(true),
   // 是否显示高级检索
   showSuperSearch: PropTypes.bool.def(true),
+  // 是否显示数据定位查找
+  showFastSearch: PropTypes.bool.def(false),
   // 是否显示分组汇总
   showGroupSummary: PropTypes.bool.def(true),
   // 是否显示列定义

@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-06-19 08:46:00
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2021-10-17 13:00:16
+ * @Last Modified time: 2022-03-17 15:55:51
  */
 export default {
   name: 'en',
@@ -241,6 +241,22 @@ export default {
         condition: 'Condition value',
         logic: 'Logic',
         noEmpty: 'Can not be empty',
+      },
+      fastSearch: {
+        text: 'Records location search',
+        settingTitle: 'Records location search setting',
+        closeButton: 'Close',
+        savedSetting: 'Saved configuration',
+        queryCondition: 'Please enter query condition',
+        notMatch: 'There are no qualified records!',
+        toTheEnd: 'It has been found to the end. Do you want to find it from the beginning?',
+        toStart: 'The start has been found. Do you want to start from the end?',
+        tabPanes: ['Search condition', 'More conditions'],
+        matchCase: 'Case matching',
+        matchFullchar: 'Full character matching',
+        clear: 'Clear condition',
+        queryPrev: 'Find previous',
+        queryNext: 'Find next',
       },
     },
   },
