@@ -38,7 +38,7 @@ export default defineComponent({
     const wrapProps = {
       visible,
       title: t('qm.table.fastSearch.settingTitle'),
-      width: '700px',
+      width: '600px',
       loading: false,
       showFullScreen: false,
       destroyOnClose: true,
