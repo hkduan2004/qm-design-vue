@@ -52,7 +52,7 @@ export default defineComponent({
   },
   computed: {
     highSearchKey(): string {
-      return this.$$table.uniqueKey ? `search_${this.$$table.uniqueKey}` : '';
+      return this.$$table.uniqueKey ? `superSearch_${this.$$table.uniqueKey}` : '';
     },
     filterColumns(): IColumn[] {
       return this.columns.filter((column) => !!column.filter);

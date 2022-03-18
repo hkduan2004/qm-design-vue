@@ -299,7 +299,7 @@ export default {
   // 是否显示高级检索
   showSuperSearch: PropTypes.bool.def(true),
   // 是否显示数据定位查找
-  showFastSearch: PropTypes.bool.def(false),
+  showFastSearch: PropTypes.bool.def(true),
   // 是否显示分组汇总
   showGroupSummary: PropTypes.bool.def(true),
   // 是否显示列定义

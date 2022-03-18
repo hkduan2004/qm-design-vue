@@ -107,10 +107,14 @@ const keyboardMixin = {
       this.$el.scrollLeft = elementStore[`$tableBody`].querySelectorAll('tbody > tr > td')[v].offsetLeft - fixedWidth;
     },
     scrollYToRecord(rowKey: string, index: number): void {
-      const { scrollYStore, allRowKeys } = this.$$table;
-      const v = isUndefined(index) ? allRowKeys.findIndex((x) => x === rowKey) : index;
-      if (v < 0) return;
-      this.$el.scrollTop = v * scrollYStore.rowHeight;
+      const { scrollYStore, tableData, tableFullData, isWebPagination, getRowKey } = this.$$table;
+      if (index >= 0) {
+        this.$el.scrollTop = index * scrollYStore.rowHeight;
+      } else {
+        const pageTableData = getAllTableData(isWebPagination ? tableData : tableFullData);
+        const v = pageTableData.findIndex((row) => rowKey === getRowKey(row, row.index));
+        this.$el.scrollTop = (v < 0 ? 0 : v) * scrollYStore.rowHeight;
+      }
     },
     resetTableBodyScroll(): void {
       this.$el.scrollTop = 0;

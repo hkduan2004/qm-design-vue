@@ -14,7 +14,7 @@ $prefix: '#{$qm-prefix}-tabs';
     position: absolute;
     display: flex;
     align-items: center;
-    height: 32px;
+    height: 34px;
     right: 0;
     top: 0;
     z-index: 2;
@@ -24,6 +24,8 @@ $prefix: '#{$qm-prefix}-tabs';
   }
   .el-tabs__nav-wrap.is-top {
     .el-tabs__item {
+      height: 34px;
+      line-height: 34px;
       &::before {
         content: ' ';
         display: inline-block;
@@ -55,18 +57,24 @@ $prefix: '#{$qm-prefix}-tabs';
     .#{$prefix}__extra {
       height: 40px;
     }
-    .el-tabs__item {
-      height: 40px;
-      line-height: 40px;
+    .el-tabs__nav-wrap.is-top {
+      .el-tabs__item {
+        height: 40px;
+        line-height: 40px;
+      }
     }
   }
   &--small {
     .#{$prefix}__extra {
-      height: 24px;
+      height: 28px;
+      font-size: $font-size-sm;
     }
-    .el-tabs__item {
-      height: 24px;
-      line-height: 24px;
+    .el-tabs__nav-wrap.is-top {
+      .el-tabs__item {
+        height: 28px;
+        line-height: 28px;
+        font-size: $font-size-sm;
+      }
     }
   }
 }

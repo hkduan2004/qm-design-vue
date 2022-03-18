@@ -11,11 +11,11 @@ import { SizeHeight } from '../../../_utils/types';
 import type { JSXNode } from '../../../_utils/types';
 
 import { MonitorIcon } from '../../../icons';
+import FastSearchSetting from './setting';
 import Dialog from '../../../dialog';
 
 export default defineComponent({
   name: 'FastSearch',
-  props: ['columns'],
   inject: ['$$table'],
   data() {
     return {
@@ -26,8 +26,8 @@ export default defineComponent({
     clickHandle(): void {
       this.visible = true;
     },
-    closeHandle(val: boolean): void {
-      this.visible = val;
+    closeHandle(): void {
+      this.visible = false;
     },
   },
   render(): JSXNode {
@@ -54,7 +54,9 @@ export default defineComponent({
             <MonitorIcon />
           </i>
         </span>
-        <Dialog {...wrapProps}>开发中...</Dialog>
+        <Dialog {...wrapProps}>
+          <FastSearchSetting onClose={this.closeHandle} />
+        </Dialog>
       </>
     );
   },

@@ -887,10 +887,11 @@ export default defineComponent({
             height={'auto'}
             stripe={true}
             columns={this.columns}
-            fetch={this.fetch}
+            dataSource={this.list}
             rowKey={(row) => row.id}
             scrollPagination={true}
             footRender={this.footRender}
+            webPagination
             spanMethod={this.spanMethod}
             rowSelection={this.selection}
             authConfig={this.authConfig}
