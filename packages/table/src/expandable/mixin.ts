@@ -13,7 +13,7 @@ const expandableMixin = {
   methods: {
     // 创建展开列
     createExpandableColumn(options): Nullable<IDerivedColumn> {
-      if (!options) {
+      if (!options?.expandedRowRender) {
         return null;
       }
       return {

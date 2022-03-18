@@ -178,7 +178,7 @@ export default defineComponent({
         // 普通行
         rows.push(this.renderRow(row, rowIndex, rowKey, depth));
         // 展开行
-        if (expandable) {
+        if (expandable?.expandedRowRender) {
           const { expandedRowClassName, rowExpandable = trueNoop } = expandable;
           const expandColumnCls = [`body--column`];
           // 展开状态
@@ -186,7 +186,7 @@ export default defineComponent({
             rows.push(
               <tr key={`expand_${rowKey}`} class="body--row-expanded">
                 <td colspan={this.flattenColumns.length} class={expandColumnCls} style={{ paddingLeft: !rowSelection ? `50px` : `100px` }}>
-                  <div class={classNames('cell', expandedRowClassName)}>{expandable.expandedRowRender?.(row, rowIndex)}</div>
+                  <div class={classNames('cell', expandedRowClassName)}>{expandable.expandedRowRender(row, rowIndex)}</div>
                 </td>
               </tr>
             );
