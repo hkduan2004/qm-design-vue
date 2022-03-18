@@ -90,6 +90,9 @@ export default defineComponent({
   mounted() {
     this.setDialogStyle();
   },
+  beforeUnmount() {
+    this.clearElements();
+  },
   deactivated() {
     this.close();
   },
@@ -127,9 +130,9 @@ export default defineComponent({
     },
     getElements(): void {
       this.$dialog = getParentNode(this.$refs[`titleRef`], 'el-dialog')!;
-      this.$dialogHeader = this.$dialog.querySelector('.el-dialog__header');
-      this.$dialogBody = this.$dialog.querySelector('.el-dialog__body');
-      this.$dialogContainer = this.$dialog.querySelector('.dialog-container');
+    },
+    clearElements(): void {
+      this.$dialog = null;
     },
     setDialogStyle(): void {
       if (this.height === 'auto' || this.height === 'none') return;
@@ -137,13 +140,13 @@ export default defineComponent({
     },
     setDialogBodyStyle(): void {
       this.$nextTick(() => {
-        if (!this.$dialog) {
-          this.getElements();
-        }
-        const maxHeight =
-          this.height !== 'auto' || this.fullscreen ? 'none' : `calc(100vh - ${this.disTop} * 2 - ${this.$dialogHeader.offsetHeight}px)`;
-        setStyle(this.$dialogBody, { maxHeight });
-        setStyle(this.$dialogContainer, { maxHeight });
+        this.getElements();
+        const $dialogHeader = this.$dialog.querySelector('.el-dialog__header');
+        const $dialogBody = this.$dialog.querySelector('.el-dialog__body');
+        const $dialogContainer = this.$dialog.querySelector('.dialog-container');
+        const maxHeight = this.height !== 'auto' || this.fullscreen ? 'none' : `calc(100vh - ${this.disTop} * 2 - ${$dialogHeader.offsetHeight}px)`;
+        setStyle($dialogBody, { maxHeight });
+        setStyle($dialogContainer, { maxHeight });
       });
     },
     resetDialogPosition(): void {
