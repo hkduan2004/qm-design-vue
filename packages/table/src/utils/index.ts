@@ -9,7 +9,7 @@ import { get, set, transform, intersection, cloneDeep, isEqual } from 'lodash-es
 import dayjs from 'dayjs';
 import { hasOwn, isVNode, isObject } from '../../../_utils/util';
 import { stringify, array_format } from '../filter-sql';
-import type { IColumn, IDerivedColumn, IDerivedRowKey, IRecord } from '../table/types';
+import type { IColumn, IDerivedColumn, IDerivedRowKey, IRecord, IRowKey } from '../table/types';
 import type { AnyFunction, AnyObject, Nullable } from '../../../_utils/types';
 
 export { hasOwn };
@@ -417,4 +417,18 @@ export const groupByProps = (array: IRecord[] = [], props: string[] = []): any[]
   return Object.keys(groups).map((group) => {
     return groups[group];
   });
+};
+
+export const deepGetRowkey = (arr: any[], value: IRowKey): IRowKey[] | undefined => {
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i].rowKey === value) {
+      return [value];
+    }
+    if (Array.isArray(arr[i].children)) {
+      const temp = deepGetRowkey(arr[i].children, value);
+      if (temp) {
+        return [arr[i].rowKey, temp].flat();
+      }
+    }
+  }
 };

@@ -9,7 +9,7 @@ import { omitBy } from 'lodash-es';
 import localforage from 'localforage';
 import { getPrefixCls } from '../../../_utils/prefix';
 import { useLocale } from '../../../hooks';
-import { getCellValue, createUidKey } from '../utils';
+import { getCellValue, createUidKey, deepGetRowkey } from '../utils';
 import { warn } from '../../../_utils/error';
 import { stop } from '../../../_utils/dom';
 import { deepToRaw, isEmpty } from '../../../_utils/util';
@@ -231,10 +231,14 @@ export default defineComponent({
         }
       }
       // 处理索引 END
-      // 树结构会有问题
+      const { getRowKey, isTreeTable, deriveRowKeys } = this.$$table;
       const curRecord = this.records[this.curIndex];
-      const curRowKey = this.$$table.getRowKey(curRecord, curRecord.index);
-      this.jumpToByRowkey(curRowKey, curRecord.index);
+      const curRowKey = getRowKey(curRecord, curRecord.index);
+      let index = curRecord.index;
+      if (isTreeTable) {
+        index = deepGetRowkey(deriveRowKeys, curRowKey)![0];
+      }
+      this.jumpToByRowkey(curRowKey, index);
       this.$$table.highlightKey = curRowKey;
     },
     clearFilters() {
