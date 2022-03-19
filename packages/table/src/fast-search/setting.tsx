@@ -234,11 +234,11 @@ export default defineComponent({
       const { getRowKey, isTreeTable, deriveRowKeys } = this.$$table;
       const curRecord = this.records[this.curIndex];
       const curRowKey = getRowKey(curRecord, curRecord.index);
-      let index = curRecord.index;
+      let firstLevelIndex = curRecord.index;
       if (isTreeTable) {
-        index = deepGetRowkey(deriveRowKeys, curRowKey)![0];
+        firstLevelIndex = deepGetRowkey(deriveRowKeys, curRowKey)![0];
       }
-      this.jumpToByRowkey(curRowKey, index);
+      this.jumpToByRowkey(curRowKey, firstLevelIndex);
       this.$$table.highlightKey = curRowKey;
     },
     clearFilters() {

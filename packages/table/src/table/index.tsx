@@ -338,8 +338,10 @@ export default defineComponent({
       );
     },
     highlightKey(next: string): void {
-      if (!this.rowHighlight) return;
-      const { onChange = noop } = this.rowHighlight;
+      const { onChange = noop } = this.rowHighlight || {};
+      if (this.isTreeTable) {
+        this.rowExpandedKeys = this.createRowExpandedKeys();
+      }
       onChange(next, this.allTableData[this.allRowKeys.findIndex((x) => x === next)] ?? null);
     },
     [`rowHighlight.currentRowKey`](next: string): void {

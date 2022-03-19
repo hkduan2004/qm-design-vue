@@ -26,17 +26,17 @@ const expandableMixin = {
     },
     // 展开行，已展开的 keys
     createRowExpandedKeys(): string[] {
-      const { expandable, selectionKeys, allRowKeys, isTreeTable } = this;
+      const { expandable, selectionKeys, allRowKeys, highlightKey, isTreeTable } = this;
       if (isTreeTable && expandable?.expandedRowRender) {
         warn('Table', '树结构表格不能再设置展开行的 `expandedRowRender` 参数');
       }
       const { defaultExpandAllRows, expandedRowKeys = [] } = expandable || {};
       // 树结构
       if (isTreeTable) {
-        if (!defaultExpandAllRows) {
-          return [];
-        }
         const mergedRowKeys = [...selectionKeys, ...expandedRowKeys];
+        if (highlightKey) {
+          mergedRowKeys.unshift(highlightKey);
+        }
         const result: IRowKey[] = [];
         if (mergedRowKeys.length) {
           mergedRowKeys.forEach((x) => {
