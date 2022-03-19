@@ -231,15 +231,16 @@ export default defineComponent({
         }
       }
       // 处理索引 END
-      const { getRowKey, isTreeTable, deriveRowKeys } = this.$$table;
-      const curRecord = this.records[this.curIndex];
-      const curRowKey = getRowKey(curRecord, curRecord.index);
-      let firstLevelIndex = curRecord.index;
-      if (isTreeTable) {
-        firstLevelIndex = deepGetRowkey(deriveRowKeys, curRowKey)![0];
+      const { getRowKey, isTreeTable, isWebPagination, deriveRowKeys } = this.$$table;
+      const result = this.records[this.curIndex];
+      const rowKey = getRowKey(result, result.index);
+      let firstLevelIndex = result.index;
+      if (isTreeTable && isWebPagination) {
+        const rk = deepGetRowkey(deriveRowKeys, rowKey)![0];
+        firstLevelIndex = this.$$table.tableFullData.findIndex((x) => getRowKey(x, x.index) === rk);
       }
-      this.jumpToByRowkey(curRowKey, firstLevelIndex);
-      this.$$table.highlightKey = curRowKey;
+      this.jumpToByRowkey(rowKey, firstLevelIndex);
+      this.$$table.highlightKey = rowKey;
     },
     clearFilters() {
       this.$refs['form1'].RESET_FORM();
