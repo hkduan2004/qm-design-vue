@@ -148,17 +148,17 @@ export default defineComponent({
         const { pageSize } = pagination;
         const pageNumber: number = Math.ceil((index + 1) / pageSize);
         pagerChangeHandle({ currentPage: pageNumber, pageSize });
-        tableBodyRef.scrollYToRecord('', index % pageSize);
+        tableBodyRef.scrollYToRecord(rowKey);
       } else {
         tableBodyRef.scrollYToRecord(rowKey);
       }
     },
     filterHandle(condition: IFilters) {
-      const { tableFullData } = this.$$table;
+      const { allTableData } = this.$$table;
       const results: IRecord[] = [];
 
-      for (let i = 0, len = tableFullData.length; i < len; i++) {
-        const row = tableFullData[i];
+      for (let i = 0, len = allTableData.length; i < len; i++) {
+        const row = allTableData[i];
         // 假设匹配上了
         let isPass = true;
         for (const key in condition) {
