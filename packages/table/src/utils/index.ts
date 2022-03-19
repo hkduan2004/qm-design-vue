@@ -419,7 +419,7 @@ export const groupByProps = (array: IRecord[] = [], props: string[] = []): any[]
   });
 };
 
-export const deepGetRowkey = (arr: any[], value: IRowKey): IRowKey[] | undefined => {
+export const deepGetRowkey = (arr: any[], value: string): string[] | undefined => {
   for (let i = 0; i < arr.length; i++) {
     if (arr[i].rowKey === value) {
       return [value];

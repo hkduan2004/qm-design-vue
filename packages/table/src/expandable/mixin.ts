@@ -4,10 +4,12 @@
  * @Last Modified by: 焦质晔
  * @Last Modified time: 2022-03-12 19:27:33
  */
+import { deepGetRowkey } from '../utils';
 import { warn } from '../../../_utils/error';
+import config from '../config';
+
 import type { Nullable } from '../../../_utils/types';
 import type { IDerivedColumn, IRowKey } from '../table/types';
-import config from '../config';
 
 const expandableMixin = {
   methods: {
@@ -39,8 +41,8 @@ const expandableMixin = {
         }
         const result: IRowKey[] = [];
         if (mergedRowKeys.length) {
-          mergedRowKeys.forEach((x) => {
-            result.push(...this.findParentRowKeys(this.deriveRowKeys, x));
+          mergedRowKeys.forEach((key) => {
+            result.push(...(deepGetRowkey(this.deriveRowKeys, key)?.slice(0, -1).reverse() || []));
           });
         }
         return defaultExpandAllRows && !expandedRowKeys.length ? [...allRowKeys] : [...new Set([...expandedRowKeys, ...result])];

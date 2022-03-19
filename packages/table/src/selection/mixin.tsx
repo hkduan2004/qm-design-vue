@@ -4,7 +4,7 @@
  * @Last Modified by: 焦质晔
  * @Last Modified time: 2021-10-18 09:48:36
  */
-import { deepFindRowKey, isArrayContain } from '../utils';
+import { deepFindRowKey, deepGetRowkey, isArrayContain } from '../utils';
 import type { Nullable } from '../../../_utils/types';
 import type { IDerivedColumn, IRecord } from '../table/types';
 import config from '../config';
@@ -33,7 +33,8 @@ const selectionMixin = {
         return result;
       }
       const childRowKeys = this.getAllChildRowKeys(target?.children || []);
-      const parentRowKeys = this.findParentRowKeys(deriveRowKeys, key);
+      // const parentRowKeys = this.findParentRowKeys(deriveRowKeys, key);
+      const parentRowKeys = deepGetRowkey(deriveRowKeys, key)?.slice(0, -1).reverse() || [];
       // 处理后代节点
       result = [...new Set([...arr, ...childRowKeys])];
       // 处理祖先节点

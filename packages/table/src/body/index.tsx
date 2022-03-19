@@ -8,7 +8,7 @@ import { defineComponent, CSSProperties } from 'vue';
 import addEventListener from 'add-dom-event-listener';
 import classNames from 'classnames';
 import { isEqual } from 'lodash-es';
-import { parseHeight, throttle, getCellValue, getVNodeText, deepFindRowKey, isArrayContain } from '../utils';
+import { parseHeight, throttle, getCellValue, getVNodeText, deepFindRowKey, isArrayContain, deepGetRowkey } from '../utils';
 import { getPrefixCls } from '../../../_utils/prefix';
 import { noop, isVNode, isFunction, isObject } from '../../../_utils/util';
 import { getParentNode } from '../../../_utils/dom';
@@ -445,7 +445,8 @@ export default defineComponent({
       // 后代节点 rowKeys
       const childRowKeys = getAllChildRowKeys(target?.children || []);
       // 祖先节点 rowKeys
-      const parentRowKeys = findParentRowKeys(deriveRowKeys, key);
+      // const parentRowKeys = findParentRowKeys(deriveRowKeys, key);
+      const parentRowKeys = deepGetRowkey(deriveRowKeys, key)?.slice(0, -1).reverse() || [];
       // 处理后代节点
       if (state === 'on') {
         result = [...new Set([...arr, key, ...childRowKeys])];
