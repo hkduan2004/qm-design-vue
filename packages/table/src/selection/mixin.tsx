@@ -49,7 +49,7 @@ const selectionMixin = {
       return result;
     },
     createSelectionRows(selectedKeys: string[]): IRecord[] {
-      const { allTableData, tableOriginData, allRowKeysMap, selectionRows, getRowKey, isFetch } = this;
+      const { allTableData, allRowKeysMap, selectionRows, getRowKey, isFetch } = this;
       if (isFetch) {
         return [
           ...selectionRows.filter((row) => selectedKeys.includes(getRowKey(row, row.index))),
@@ -63,7 +63,7 @@ const selectionMixin = {
       for (let i = 0, len = selectedKeys.length; i < len; i++) {
         let key = selectedKeys[i];
         if (!allRowKeysMap.has(key)) continue;
-        result.push(tableOriginData[allRowKeysMap.get(key)]);
+        result.push(allTableData[allRowKeysMap.get(key)]);
       }
       return result;
     },

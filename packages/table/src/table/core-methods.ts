@@ -42,6 +42,8 @@ export default {
     this.createTableOriginData(results);
     // 行选中 & 自动获得焦点
     this.$nextTick(() => {
+      // 设置 rowKey map 缓存
+      this.setRowKeysMap();
       // 设置选择列
       this.selectionKeys = this.createSelectionKeys();
       // 设置展开行
@@ -66,8 +68,11 @@ export default {
   // 创建表格原始数据
   createTableOriginData(list: IRecord[]): void {
     this.tableOriginData = [...list];
+  },
+  // rowKey map 缓存
+  setRowKeysMap() {
     this.allRowKeysMap.clear();
-    list.forEach((x, i) => this.allRowKeysMap.set(this.getRowKey(x, i), i));
+    this.allTableData.forEach((x, i) => this.allRowKeysMap.set(this.getRowKey(x, i), i));
   },
   // 服务端合计
   createSummation(data: Record<string, any>): void {
