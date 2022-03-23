@@ -13,15 +13,15 @@ const escapeKeyword = (keyword: string): string => {
   return keyword.toString().replace(SPAN_CHAR_REG, '\\$1');
 };
 
-const isPrimitive = (value: any): boolean => {
+const isPrimitive = (value: unknown): boolean => {
   return PRIMITIVE_VALUES.includes(typeof value);
 };
 
-const isDate = (value: any): boolean => {
+const isDate = (value: unknown): boolean => {
   if (typeof value !== 'string') {
     return false;
   }
-  return /^\d{4}-\d{2}-\d{2}(\s\d{2}:\d{2}:\d{2})?$/.test(value as string);
+  return /^\d{4}-\d{2}-\d{2}(\s+\d{2}:\d{2}:\d{2})?$/.test(value as string);
 };
 
 const createRegExp = (condition: string): RegExp => {
@@ -36,7 +36,7 @@ const createRegExp = (condition: string): RegExp => {
  * @returns {boolean}
  */
 export const matchWhere = (value: any, expression: string, condition: any): boolean => {
-  value = (isDate(value) ? value.slice(0, 10) : value) ?? '';
+  value = value ?? '';
   let res = true;
   switch (expression) {
     case 'like': {
@@ -70,28 +70,28 @@ export const matchWhere = (value: any, expression: string, condition: any): bool
     }
     case '!=':
     case '<>': {
-      res = value != condition;
+      res = (isDate(value) ? value.slice(0, 10) : value) != condition;
       break;
     }
     case '<': {
-      res = value < condition;
+      res = (isDate(value) ? value.slice(0, 10) : value) < condition;
       break;
     }
     case '<=': {
-      res = value <= condition;
+      res = (isDate(value) ? value.slice(0, 10) : value) <= condition;
       break;
     }
     case '>': {
-      res = value > condition;
+      res = (isDate(value) ? value.slice(0, 10) : value) > condition;
       break;
     }
     case '>=': {
-      res = value >= condition;
+      res = (isDate(value) ? value.slice(0, 10) : value) >= condition;
       break;
     }
     case '==':
     default: {
-      res = value == condition;
+      res = (isDate(value) ? value.slice(0, 10) : value) == condition;
     }
   }
   return res;

@@ -6,6 +6,7 @@
  */
 import sf from './lib/filter_string';
 import vr from './lib/variables_replacement';
+import { deepTreeFilter } from '../utils';
 import { matchWhere } from './lib/operations';
 import type { IRecord } from '../table/types';
 
@@ -19,18 +20,22 @@ export const array_format = sf.array_format;
 
 export const isBracketBalance = vr.isBracketBalance;
 
-export const where = <T extends IRecord>(array: T[], query: string): T[] => {
-  const result: T[] = [];
+export const where = <T extends IRecord>(array: T[], query: string, isTree?: boolean): T[] => {
+  let result: T[] = [];
 
   // replace AND, OR to &&, ||
   query = sf.replace_symbols(query);
-  query = vr.replace_variables(query, 'array[i]');
-  // console.log(`conditionals: `, query);
 
-  for (let i = 0, len = array.length; i < len; i++) {
-    if (eval(query)) {
-      result.push(array[i]);
+  if (!isTree) {
+    query = vr.replace_variables(query, 'array[i]');
+    for (let i = 0, len = array.length; i < len; i++) {
+      if (eval(query)) {
+        result.push(array[i]);
+      }
     }
+  } else {
+    query = vr.replace_variables(query, 'record');
+    result = deepTreeFilter(array, (record: T) => eval(query));
   }
 
   return result;

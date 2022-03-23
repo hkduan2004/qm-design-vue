@@ -432,3 +432,13 @@ export const deepGetRowkey = (arr: any[], value: string): string[] | undefined =
     }
   }
 };
+
+export const deepTreeFilter = (tree: any[], fn: (node: unknown) => boolean) => {
+  // 使用map复制一下节点，避免修改到原树
+  return tree
+    .map((node) => ({ ...node }))
+    .filter((node) => {
+      node.children = node.children && deepTreeFilter(node.children, fn);
+      return fn(node) || (node.children && node.children.length);
+    });
+};

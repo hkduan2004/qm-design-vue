@@ -280,13 +280,13 @@ export default defineComponent({
     },
     // 客户端筛选
     clientFilter(): void {
-      const { tableOriginData, superFilters, isGroupSubtotal, createGroupData, getGroupValidData } = this.$$table;
+      const { tableOriginData, superFilters, isTreeTable, isGroupSubtotal, createGroupData, getGroupValidData } = this.$$table;
       const sql = !superFilters.length ? createWhereSQL(this.filters) : createWhereSQL(superFilters);
       const result =
         sql !== ''
           ? !isGroupSubtotal
-            ? where(tableOriginData, sql)
-            : createGroupData(where(getGroupValidData(tableOriginData), sql))
+            ? where(tableOriginData, sql, isTreeTable)
+            : createGroupData(where(getGroupValidData(tableOriginData), sql, isTreeTable))
           : tableOriginData.slice(0);
       this.$$table.setTableFullData(result);
       this.clientSorter('filter');
