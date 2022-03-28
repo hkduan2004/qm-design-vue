@@ -10,7 +10,7 @@ import { isIE, isEmpty, deepToRaw, noop } from '../../../_utils/util';
 import { warn } from '../../../_utils/error';
 import { useSize } from '../../../hooks';
 import { getScrollBarWidth } from '../../../_utils/scrollbar-width';
-import { columnsFlatMap, convertToRows, getAllTableData, createOrderBy, parseHeight } from '../utils';
+import { columnsFlatMap, createFlatRowKeys, convertToRows, getAllTableData, createOrderBy, parseHeight } from '../utils';
 import { localeMixin } from '../../../mixins';
 import type { JSXNode } from '../../../_utils/types';
 import type { IColumn, IDerivedRowKey, ITableSize, IFetchParams, IRecord, IRowKey } from './types';
@@ -155,6 +155,9 @@ export default defineComponent({
     },
     deriveRowKeys(): IDerivedRowKey[] {
       return this.createDeriveRowKeys(this.tableFullData, null);
+    },
+    flattenRowKeys(): IRowKey[] {
+      return createFlatRowKeys(this.deriveRowKeys);
     },
     tableChange() {
       return [this.pagination, this.filters, this.sorter, { currentDataSource: [...this.tableFullData], allDataSource: [...this.tableOriginData] }];

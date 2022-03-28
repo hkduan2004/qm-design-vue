@@ -72,16 +72,16 @@ const selectionMixin = {
     createSelectionKeys(keys?: string[]): string[] {
       const { rowSelection, selectionKeys, isTreeTable } = this;
       const { type, checkStrictly = !0 } = rowSelection || {};
-      const rowSelectionKeys = Array.isArray(keys) ? keys : selectionKeys;
+      const selectedKeys = Array.isArray(keys) ? keys : selectionKeys;
       let result: string[] = [];
       if (isTreeTable && !checkStrictly) {
-        rowSelectionKeys.forEach((x) => {
-          result.push(...this.createTreeSelectionKeys(x, rowSelectionKeys));
+        selectedKeys.forEach((x) => {
+          result.push(...this.createTreeSelectionKeys(x, selectedKeys));
         });
       }
-      const selectedKeys = type === 'radio' ? rowSelectionKeys.slice(0, 1) : [...new Set([...rowSelectionKeys, ...result])];
-      this.selectionRows = this.createSelectionRows(selectedKeys);
-      return selectedKeys;
+      result = type === 'radio' ? selectedKeys.slice(0, 1) : [...new Set([...selectedKeys, ...result])];
+      this.selectionRows = this.createSelectionRows(result);
+      return result;
     },
   },
 };

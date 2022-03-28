@@ -123,6 +123,18 @@ export const deepFindRowKey = (rowKeys: IDerivedRowKey[], mark: string): Nullabl
   return result;
 };
 
+export const createFlatRowKeys = (deriveRowKeys: IDerivedRowKey[]): IRowKey[] => {
+  const result: IRowKey[] = [];
+  deriveRowKeys.forEach((x) => {
+    if (x.children) {
+      result.push(...createFlatRowKeys(x.children));
+    } else {
+      result.push(x.rowKey);
+    }
+  });
+  return result;
+};
+
 // 展平 tableData
 export const tableDataFlatMap = (list: IRecord[]): IRecord[] => {
   const result: IRecord[] = [];
@@ -441,4 +453,16 @@ export const deepTreeFilter = (tree: any[], fn: (node: unknown) => boolean) => {
       node.children = node.children && deepTreeFilter(node.children, fn);
       return fn(node) || (node.children && node.children.length);
     });
+};
+
+export const flatToTree = (list: any[], id: string, pid: string) => {
+  const info = list.reduce((map, node) => {
+    map[node[id]] = node;
+    node.children = [];
+    return map;
+  }, {});
+  return list.filter((node) => {
+    info[node[pid]]?.children.push(node);
+    return !node[pid];
+  });
 };

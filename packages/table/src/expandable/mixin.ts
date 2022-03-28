@@ -9,7 +9,7 @@ import { warn } from '../../../_utils/error';
 import config from '../config';
 
 import type { Nullable } from '../../../_utils/types';
-import type { IDerivedColumn, IRowKey } from '../table/types';
+import type { IDerivedColumn } from '../table/types';
 
 const expandableMixin = {
   methods: {
@@ -39,17 +39,18 @@ const expandableMixin = {
         if (highlightKey) {
           mergedRowKeys.unshift(highlightKey);
         }
-        const result: IRowKey[] = [];
+        let result: string[] = [];
         if (mergedRowKeys.length) {
           mergedRowKeys.forEach((key) => {
             result.push(...(deepGetRowkey(this.deriveRowKeys, key)?.slice(0, -1).reverse() || []));
           });
         }
-        return defaultExpandAllRows && !expandedRowKeys.length ? [...allRowKeys] : [...new Set([...expandedRowKeys, ...result])];
+        result = defaultExpandAllRows && !expandedRowKeys.length ? allRowKeys : [...new Set([...expandedRowKeys, ...result])];
+        return result.filter((key) => !this.flattenRowKeys.includes(key));
       }
       // 展开行
       if (expandable) {
-        return defaultExpandAllRows && !expandedRowKeys.length ? [...allRowKeys] : [...expandedRowKeys];
+        return defaultExpandAllRows && !expandedRowKeys.length ? allRowKeys.slice(0) : [...expandedRowKeys];
       }
       return [];
     },
