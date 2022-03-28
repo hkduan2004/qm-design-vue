@@ -97,10 +97,6 @@ export default {
   SELECT_FIRST_RECORD(): void {
     this.selectFirstRow(true);
   },
-  // 清空表格焦点
-  CLEAR_TABLE_FOCUS(): void {
-    this.tableBodyRef.setClickedValues([]);
-  },
   // 滚动到指定数据行
   SCROLL_TO_RECORD(rowKey: IRowKey): void {
     this.tableBodyRef.scrollYToRecord(rowKey);
@@ -187,7 +183,7 @@ export default {
     }
   },
   // 表单校验
-  FIELD_VALIDATE(): Pick<ITableLog, 'required' | 'validate'> {
+  VALIDATE_FIELDS(): Pick<ITableLog, 'required' | 'validate'> {
     const editableColumns = this.flattenColumns.filter((column) => isFunction(column.editRender));
     this.allTableData.forEach((record) => {
       editableColumns.forEach((column) => {

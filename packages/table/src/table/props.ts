@@ -332,7 +332,7 @@ export default {
  * DO_REFRESH: 刷新表格数据，同时会清空列选中状态
  * INSERT_RECORDS: 插入表格行数据，参数 row|rows, bottom(默认)|top
  * REMOVE_RECORDS: 移除表格数据，参数 rowKeys|rows|row
- * FIELD_VALIDATE: 触发表格中的表单校验，返回值：object
+ * VALIDATE_FIELDS: 触发表格中的表单校验，返回值：object
  * OPEN_SEARCH_HELPER: 打开单元格搜索帮助面板，参数 rowKey, dataIndex
  * GET_LOG: 获取操作记录，非空校验、格式校验、数据操作记录，返回值：object
  * CLEAR_LOG: 清空表格操作记录
@@ -340,7 +340,6 @@ export default {
  * SCROLL_TO_RECORD: 滚动到指定数据行，参数 rowKey
  * SCROLL_TO_COLUMN: 滚动到指定表格列，参数 dataIndex
  * SELECT_FIRST_RECORD: 选中表格首行，只针对单选类型有效
- * CLEAR_TABLE_FOCUS: 清空表格焦点
  */
 
 // 清空高级检索: 1. fetch.params 变化  2. headFilters 变化  3. 点击清空按钮

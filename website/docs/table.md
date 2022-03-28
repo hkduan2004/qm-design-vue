@@ -94,10 +94,9 @@
 | SCROLL_TO_RECORD    | 滚动到指定数据行                               | function(rowKey)                  | -      |
 | SCROLL_TO_COLUMN    | 滚动到指定表格列                               | function(dataIndex)               | -      |
 | SELECT_FIRST_RECORD | 选中表格首行，只针对单选类型有效               | -                                 | -      |
-| CLEAR_TABLE_FOCUS   | 清空表格焦点                                   | -                                 | -      |
 | INSERT_RECORDS      | 插入表格行数据                                 | function(rows \| row)             | -      |
 | REMOVE_RECORDS      | 移除表格数据                                   | function(rowKeys \| rows \| row ) | -      |
-| FIELD_VALIDATE      | 表格中的表单校验                               | -                                 | object |
+| VALIDATE_FIELDS     | 表格中的表单校验                               | -                                 | object |
 
 ### column
 
