@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-02-09 09:27:46
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-03-11 21:15:28
+ * @Last Modified time: 2022-03-28 11:12:35
  */
 @import '../../style/src/common';
 
@@ -33,7 +33,7 @@ $prefix: '#{$qm-prefix}-drawer';
       .fullscreen {
         padding: 5px;
         padding-right: 2px;
-        font-size: 15px;
+        font-size: 16px;
         color: $text-color-secondary;
         cursor: pointer;
         &:hover {

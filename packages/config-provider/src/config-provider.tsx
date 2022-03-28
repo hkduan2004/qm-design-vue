@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-02-09 09:03:59
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2021-12-13 09:19:05
+ * @Last Modified time: 2022-03-28 12:01:14
  */
 import { defineComponent, PropType, getCurrentInstance, provide, reactive, watch, ComponentInternalInstance } from 'vue';
 import { setLocale } from '../../locale';
@@ -104,7 +104,7 @@ export default defineComponent({
 
     return (): JSXNode => {
       return (
-        <el-config-provider size={props.size} locale={messages[props.locale][`el`]} button={buttonProps}>
+        <el-config-provider size={props.size === 'default' ? '' : props.size} locale={messages[props.locale][`el`]} button={buttonProps}>
           {slots.default?.()}
         </el-config-provider>
       );

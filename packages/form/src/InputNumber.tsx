@@ -2,11 +2,11 @@
  * @Author: 焦质晔
  * @Date: 2020-08-11 08:19:36
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2021-11-28 11:45:27
+ * @Last Modified time: 2022-03-28 11:01:30
  */
 import { defineComponent, inject } from 'vue';
 import PropTypes from '../../_utils/vue-types';
-import { elFormItemKey } from 'element-plus';
+import ElementPlus from 'element-plus';
 import { useSize } from '../../hooks';
 import type { JSXNode } from '../../_utils/types';
 
@@ -34,7 +34,7 @@ export default defineComponent({
     onKeyup: PropTypes.func,
   },
   setup() {
-    const elFormItem = inject(elFormItemKey, {} as any);
+    const elFormItem = inject((ElementPlus as any).formItemContextKey, {});
     return { elFormItem };
   },
   data() {
