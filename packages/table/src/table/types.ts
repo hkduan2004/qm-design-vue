@@ -188,7 +188,9 @@ export type IDerivedColumn = IColumn & {
 };
 
 export type IDerivedRowKey = {
+  level: number;
   rowKey: IRowKey;
+  rowKeyPath: string;
   parentRowKey?: IRowKey;
   children?: IDerivedRowKey[];
 };

@@ -305,12 +305,13 @@ export default {
     return deepToRaw(result);
   },
   // 创建派生的 rowKeys for treeTable
-  createDeriveRowKeys(tableData: IRecord[], key: string): IDerivedRowKey[] {
+  createDeriveRowKeys(tableData: IRecord[], key: string, path: string, depth = 0): IDerivedRowKey[] {
     return tableData.map((row) => {
       const rowKey = this.getRowKey(row, row.index);
-      const item: IDerivedRowKey = { rowKey };
+      const rowKeyPath = path ? `${path}-${rowKey}` : `${rowKey}`;
+      const item: IDerivedRowKey = { level: depth, rowKey, rowKeyPath };
       if (row.children) {
-        item.children = this.createDeriveRowKeys(row.children, rowKey);
+        item.children = this.createDeriveRowKeys(row.children, rowKey, rowKeyPath, depth + 1);
       }
       return key ? Object.assign({}, item, { parentRowKey: key }) : item;
     });

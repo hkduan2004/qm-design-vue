@@ -154,7 +154,7 @@ export default defineComponent({
       return this.allTableData.map((row) => this.getRowKey(row, row.index));
     },
     deriveRowKeys(): IDerivedRowKey[] {
-      return this.createDeriveRowKeys(this.tableFullData, null);
+      return this.createDeriveRowKeys(this.tableFullData, '', '');
     },
     flattenRowKeys(): IRowKey[] {
       return createFlatRowKeys(this.deriveRowKeys);

@@ -170,7 +170,7 @@ export default defineComponent({
       );
     },
     renderRows(list: IRecord[], depth: number = 0): JSXNode[] {
-      const { getRowKey, rowSelection, expandable, rowExpandedKeys } = this.$$table;
+      const { getRowKey, rowSelection, expandable, treeConfig, rowExpandedKeys } = this.$$table;
       const rows: JSXNode[] = [];
       list.forEach((row, rowIndex) => {
         // 行记录 rowKey
@@ -193,7 +193,7 @@ export default defineComponent({
           }
         }
         // 树表格
-        if (this.isTreeNode(row)) {
+        if (!treeConfig?.virtual && this.isTreeNode(row)) {
           // 展开状态
           if (rowExpandedKeys.includes(rowKey)) {
             rows.push(...this.renderRows(row.children, depth + 1));
@@ -267,7 +267,7 @@ export default defineComponent({
       );
     },
     renderCell(column: IColumn, row: IRecord, rowIndex: number, columnIndex: number, rowKey: string, depth: number): Nullable<JSXNode> | JSXNode[] {
-      const { expandable, selectionKeys, isTreeTable } = this.$$table;
+      const { expandable, treeConfig, selectionKeys, isTreeTable } = this.$$table;
       const { dataIndex, editRender, render } = column;
       const text = getCellValue(row, dataIndex);
       if (dataIndex === config.expandableColumn) {
@@ -288,7 +288,7 @@ export default defineComponent({
       // Tree Expandable + vNodeText
       if (isTreeTable && dataIndex === this.firstDataIndex) {
         return [
-          this.renderIndent(depth),
+          this.renderIndent(!treeConfig?.virtual ? depth : row._level),
           <Expandable record={row} rowKey={rowKey} style={this.isTreeNode(row) ? null : { visibility: 'hidden' }} />,
           vNodeText,
         ];
