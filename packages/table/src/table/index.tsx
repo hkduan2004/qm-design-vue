@@ -205,7 +205,7 @@ export default defineComponent({
       return this.showSuperSearch && this.isHeadFilter;
     },
     isFastSearch(): boolean {
-      return !this.isFetch && this.showFastSearch;
+      return !this.isFetch && this.showFastSearch && this.isHeadFilter;
     },
     isGroupSummary(): boolean {
       return this.flattenColumns.some((column) => !!column.groupSummary);
