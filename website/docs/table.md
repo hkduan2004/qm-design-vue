@@ -50,6 +50,7 @@
 | rowSelection         | 列表项是否可选择，[配置项](#rowSelection)              | object                                                 | -      |
 | rowHighlight         | 列表行高亮选中，[配置项](#rowHighlight)                | object                                                 | -      |
 | expandable           | 展开行配置项，[配置项](#expandable)                    | object                                                 | -      |
+| treeConfig           | 树结构表格配置项，[配置项](#treeConfig)                | object                                                 | -      |
 | summation            | 表格合计，包含底部合计和分组合计，[配置项](#summation) | array                                                  | -      |
 | footRender           | 表格底部自定义渲染                                     | function(columns, tableData, tableFullData): JSX Node  | -      |
 | multipleSort         | 是否为多列排序模式                                     | boolean                                                | true   |
@@ -320,6 +321,12 @@
 | expandedRowRender    | 额外的展开行渲染方法，必要参数 | function(row, index): JSX Node       | -      |
 | onExpand             | 点击展开图标时触发             | function(expanded, row)              | -      |
 | onChange             | 展开的行变化时触发             | function(expandedKeys, expandedRows) | -      |
+
+### treeConfig
+
+| 参数    | 说明                                     | 类型    | 默认值 |
+| ------- | ---------------------------------------- | ------- | ------ |
+| virtual | 是否开启虚拟渲染，用于大数据量树结构渲染 | boolean | -      |
 
 ### pagination
 

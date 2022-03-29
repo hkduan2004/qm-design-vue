@@ -220,6 +220,10 @@ export default {
     disabled: PropTypes.func, // 是否允许行高亮，参数：row，返回值 bool
     onChange: PropTypes.func, // 高亮行发生变化时触发
   }),
+  // 树表格配置
+  treeConfig: PropTypes.shape({
+    virtual: PropTypes.bool, // 是否开启虚拟滚动
+  }),
   // 展开行配置项
   expandable: PropTypes.shape({
     defaultExpandAllRows: PropTypes.bool, // 默认展开所有行
