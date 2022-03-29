@@ -40,11 +40,9 @@ const expandableMixin = {
           mergedRowKeys.unshift(highlightKey);
         }
         let result: string[] = [];
-        if (mergedRowKeys.length) {
-          mergedRowKeys.forEach((key) => {
-            result.push(...(deepGetRowkey(this.deriveRowKeys, key)?.slice(0, -1).reverse() || []));
-          });
-        }
+        mergedRowKeys.forEach((key) => {
+          result.push(...(deepGetRowkey(this.deriveRowKeys, key)?.slice(0, -1).reverse() || []));
+        });
         result = defaultExpandAllRows && !expandedRowKeys.length ? allRowKeys : [...new Set([...expandedRowKeys, ...result])];
         return result.filter((key) => !this.flattenRowKeys.includes(key));
       }
