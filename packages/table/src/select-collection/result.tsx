@@ -7,7 +7,7 @@
 import { defineComponent } from 'vue';
 import { cloneDeep } from 'lodash-es';
 import { useLocale } from '../../../hooks';
-import type { IColumn } from '../table/types';
+import type { IColumn, IRecord } from '../table/types';
 import type { JSXNode } from '../../../_utils/types';
 import config from '../config';
 
@@ -21,7 +21,7 @@ export default defineComponent({
   data() {
     return {
       vColumns: this.createColumns(),
-      list: cloneDeep(this.selectionRows),
+      list: this.createTableList(),
       selection: {
         type: 'checkbox',
         selectedRowKeys: [...this.selectionKeys],
@@ -32,6 +32,14 @@ export default defineComponent({
     };
   },
   methods: {
+    createTableList(): IRecord[] {
+      return cloneDeep(
+        this.selectionRows.map((row) => {
+          delete row.children;
+          return row;
+        })
+      );
+    },
     setSelectionKeys(keys: string[]): void {
       this.$$table.selectionKeys = keys;
     },
