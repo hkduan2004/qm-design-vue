@@ -39,6 +39,7 @@ $prefix: '#{$qm-prefix}-table';
     width: 100%;
     height: 0;
     z-index: 3;
+    pointer-events: none;
   }
   &:before {
     top: 0;
@@ -297,6 +298,7 @@ $prefix: '#{$qm-prefix}-table';
       width: 0;
       height: 100%;
       z-index: 3;
+      pointer-events: none;
     }
     &:before {
       left: 0;
