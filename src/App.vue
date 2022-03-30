@@ -233,7 +233,18 @@ export default defineComponent({
             actionUrl: 'http://127.0.0.1:3000/api/design/upload',
             fixedSize: [1.5, 1],
             isCalcHeight: true,
-            limit: 1,
+            limit: 2,
+            params: {},
+          },
+        },
+        {
+          type: 'UPLOAD_FILE',
+          fieldName: 'ccc',
+          label: '表单项4',
+          hidden: true,
+          upload: {
+            actionUrl: 'http://127.0.0.1:3000/api/design/upload',
+            limit: 2,
             params: {},
           },
         },
@@ -774,7 +785,16 @@ export default defineComponent({
   mounted() {
     setTimeout(() => {
       this.sumData = { price: 900 };
-      this.$refs.qweqwe.SET_FIELDS_VALUE({ a: ['9', '10'], f: '320000,320101,320502,3' });
+      this.$refs.qweqwe.SET_FIELDS_VALUE({
+        a: ['9', '10'],
+        f: '320000,320101,320502,3',
+        ccc: [
+          {
+            name: 'food.jpeg',
+            url: 'http://127.0.0.1:3000/upload_bf5e0713b201eb1e959426a469cca2ad.jpg',
+          },
+        ],
+      });
     }, 2000);
   },
   methods: {

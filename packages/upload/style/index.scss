@@ -2,11 +2,18 @@
  * @Author: 焦质晔
  * @Date: 2021-02-09 09:27:46
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2021-02-28 09:50:29
+ * @Last Modified time: 2022-03-30 20:12:26
  */
 @import '../../style/src/common';
 
-$prefix: '#{$qm-prefix}-upload';
+$prefix: '#{$qm-prefix}-upload-file';
 
 .#{$prefix} {
+  .el-upload-list {
+    margin-top: 5px;
+    .el-upload-list__item {
+      margin: 0;
+      line-height: 1.75;
+    }
+  }
 }

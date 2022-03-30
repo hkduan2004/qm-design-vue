@@ -267,7 +267,7 @@ export default defineComponent({
       drag: true,
       multiple: false,
       autoUpload: false,
-      showFileList: false,
+      showFileList: true,
       disabled,
       style: { display: fileList.length !== limit ? 'block' : 'none' },
       httpRequest: this.upload,

@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-02-09 09:03:59
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-03-11 23:17:37
+ * @Last Modified time: 2022-03-30 20:24:08
  */
 import { defineComponent, PropType, Component } from 'vue';
 import axios from 'axios';
@@ -10,6 +10,8 @@ import PropTypes from '../../_utils/vue-types';
 import { QmMessage } from '../../index';
 import { useSize, useLocale } from '../../hooks';
 import { localeMixin } from '../../mixins';
+import { getPrefixCls } from '../../_utils/prefix';
+import { debounce } from '../../_utils/util';
 import { download } from '../../_utils/download';
 import { isValidComponentSize } from '../../_utils/validators';
 import type { JSXNode, ComponentSize, Nullable } from '../../_utils/types';
@@ -26,7 +28,7 @@ export default defineComponent({
   name: 'QmUpload',
   componentName: 'QmUpload',
   inheritAttrs: false,
-  mixins: [localeMixin],
+  mixins: [localeMixin] as any,
   emits: ['change', 'success', 'error'],
   props: {
     size: {
@@ -56,23 +58,22 @@ export default defineComponent({
   },
   data() {
     return {
-      fileList: this.initialValue as Array<IFile>,
+      fileList: this.createValues(this.initialValue),
       loading: false,
     };
   },
   watch: {
     initialValue(val: Array<IFile>): void {
-      this.fileList = val;
-    },
-    fileList(val: Array<IFile>): void {
-      this.$emit('change', val);
-      if (val.length === this.limit) {
-        // 待测试
-        this.$parent.clearValidate && this.$parent.clearValidate();
-      }
+      this.fileList = this.createValues(val);
     },
   },
+  created() {
+    this.changeHandleDebouncer = debounce(this.changeHandle, 0);
+  },
   methods: {
+    createValues(list: any[]): Array<IFile> {
+      return list.map((x) => ({ name: x.name, url: x.url }));
+    },
     beforeUploadHandle(file): boolean {
       const isType = this.fileTypes.length ? this.fileTypes.includes(file.name.slice(file.name.lastIndexOf('.') + 1).toLowerCase()) : !0;
       const isLt5M = file.size / 1024 / 1024 < this.fileSize;
@@ -88,22 +89,30 @@ export default defineComponent({
       }
       return result;
     },
-    removeFileHandle(file, fileList): void {
-      this.fileList = fileList;
+    removeFile(file): void {
+      this.$refs[`upload`].handleRemove(file);
     },
     clearFiles(): void {
       this.$refs[`upload`].clearFiles();
     },
+    changeHandle(file, fileList): void {
+      if (!fileList) return;
+      const list = fileList.map((x) => ({
+        name: x.name,
+        url: x.url || x.response.data || '',
+      }));
+      this.$emit('change', list);
+    },
+    removeHandle(file, fileList): void {
+      const list = this.createValues(fileList);
+      this.$emit('change', list);
+    },
     successHandle(res, file, fileList): void {
       if (res.code === 200) {
-        this.fileList = [...this.fileList, { name: file.name, url: res.data || '' }];
         this.$emit('success', res.data);
       } else {
-        this.clearFiles();
+        this.removeFile(file);
         QmMessage.error(res.msg);
-      }
-      if (this.isOnlyButton) {
-        this.clearFiles();
       }
       this.stopLoading();
     },
@@ -150,8 +159,10 @@ export default defineComponent({
     const { fileTypes, fileList, fileSize, loading, type = 'primary', round, circle, icon = <DownloadIcon />, disabled, $props } = this;
     const { $size } = useSize(this.$props);
     const { t } = useLocale();
+    const prefixCls = getPrefixCls('upload-file');
     const wrapProps = {
       ref: 'upload',
+      class: prefixCls,
       action: $props.actionUrl,
       headers: $props.headers,
       data: $props.params,
@@ -159,11 +170,12 @@ export default defineComponent({
       limit: $props.limit,
       showFileList: !$props.isOnlyButton,
       multiple: false,
-      withCredentials: true,
+      withCredentials: false,
       disabled: $props.disabled,
       onPreview: this.previewFileHandle,
       beforeUpload: this.beforeUploadHandle,
-      onRemove: this.removeFileHandle,
+      onChange: this.changeHandleDebouncer,
+      onRemove: this.removeHandle,
       onSuccess: this.successHandle,
       onError: this.errorHandle,
     };
