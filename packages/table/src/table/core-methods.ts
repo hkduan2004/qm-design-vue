@@ -9,8 +9,8 @@ import { get } from 'lodash-es';
 import { difference, hasOwn, debounce, mapTableColumns, deepFindColumn, filterAttrs, getCellValue, setCellValue } from '../utils';
 import { deepToRaw, isObject, isFunction } from '../../../_utils/util';
 import { warn } from '../../../_utils/error';
-import type { IRecord, ISuperFilter, IDerivedRowKey, IColumn, IPagination, IFetchParams, ICellSpan, IRowKey } from './types';
 import config from '../config';
+import type { IRecord, ISuperFilter, IDerivedRowKey, IColumn, IPagination, IFetchParams, ICellSpan, IRowKey } from './types';
 
 export default {
   // 表格初始化

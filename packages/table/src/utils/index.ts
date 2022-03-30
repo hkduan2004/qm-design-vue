@@ -126,7 +126,7 @@ export const deepFindRowKey = (rowKeys: IDerivedRowKey[], mark: string): Nullabl
 export const createFlatRowKeys = (deriveRowKeys: IDerivedRowKey[]): IRowKey[] => {
   const result: IRowKey[] = [];
   deriveRowKeys.forEach((x) => {
-    if (x.children) {
+    if (x.children?.length) {
       result.push(...createFlatRowKeys(x.children));
     } else {
       result.push(x.rowKey);

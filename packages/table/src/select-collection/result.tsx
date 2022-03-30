@@ -22,23 +22,15 @@ export default defineComponent({
     return {
       vColumns: this.createColumns(),
       list: this.createTableList(),
-      selection: {
-        type: 'checkbox',
-        selectedRowKeys: [...this.selectionKeys],
-        onChange: (val) => {
-          this.setSelectionKeys(val);
-        },
-      },
     };
   },
   methods: {
     createTableList(): IRecord[] {
-      return cloneDeep(
-        this.selectionRows.map((row) => {
-          delete row.children;
-          return row;
-        })
-      );
+      const _list = cloneDeep(this.selectionRows);
+      return _list.map((row) => {
+        delete row.children;
+        return row;
+      });
     },
     setSelectionKeys(keys: string[]): void {
       this.$$table.selectionKeys = keys;
@@ -48,7 +40,7 @@ export default defineComponent({
         const item: IColumn = {
           dataIndex: column.dataIndex,
           title: column.title,
-          width: column.width || 100,
+          ...((column.width as number) > 0 ? { width: column.width } : null),
           ...((column.precision as number) >= 0 ? { precision: column.precision } : null),
           dictItems: column.dictItems ?? [],
           ...(column.render ? { render: column.render } : null),
@@ -71,7 +63,7 @@ export default defineComponent({
     },
   },
   render(): JSXNode {
-    const { vColumns, list, selection } = this;
+    const { vColumns, list, selectionKeys } = this;
     const { t } = useLocale();
     const { rowKey } = this.$$table;
     return (
@@ -80,11 +72,18 @@ export default defineComponent({
           dataSource={list}
           columns={vColumns}
           rowKey={rowKey}
-          rowSelection={selection}
+          rowSelection={{
+            type: 'checkbox',
+            selectedRowKeys: selectionKeys,
+            onChange: (val) => {
+              this.setSelectionKeys(val);
+            },
+          }}
           minHeight={300}
           webPagination={true}
           showFullScreen={false}
           showFastSearch={false}
+          showSelectCollection={false}
           showColumnDefine={false}
           columnsChange={(columns) => (this.vColumns = columns)}
         />
