@@ -9,7 +9,7 @@ import { get } from 'lodash-es';
 import { difference, hasOwn, debounce, mapTableColumns, deepFindColumn, filterAttrs, getCellValue, setCellValue } from '../utils';
 import { deepToRaw, isObject, isFunction } from '../../../_utils/util';
 import { warn } from '../../../_utils/error';
-import type { IRecord, ISuperFilter, IDerivedRowKey, IColumn, IPagination, IFetchParams, ICellSpan } from './types';
+import type { IRecord, ISuperFilter, IDerivedRowKey, IColumn, IPagination, IFetchParams, ICellSpan, IRowKey } from './types';
 import config from '../config';
 
 export default {
@@ -42,12 +42,12 @@ export default {
     this.createTableOriginData(results);
     // 行选中 & 自动获得焦点
     this.$nextTick(() => {
-      // 设置 rowKey map 缓存
-      this.setRowKeysMap();
       // 设置选择列
       this.selectionKeys = this.createSelectionKeys();
       // 设置展开行
       this.rowExpandedKeys = this.createRowExpandedKeys();
+      // 设置 rowKey map 缓存
+      this.setRowKeysMap();
       // 滚动加载 & currentPage > 1
       if (this.isScrollPagination && this.pagination.currentPage > 1) return;
       this.selectFirstRow();
@@ -70,9 +70,16 @@ export default {
     this.tableOriginData = [...list];
   },
   // rowKey map 缓存
-  setRowKeysMap() {
+  setRowKeysMap(): void {
     this.allRowKeysMap.clear();
-    this.allTableData.forEach((x, i) => this.allRowKeysMap.set(this.getRowKey(x, i), i));
+    this.allRowKeys.forEach((x, i) => this.allRowKeysMap.set(x, i));
+  },
+  // treeExpand 缓存
+  setTreeExpand(): void {
+    const list = this.deepMapRowkey(this.deriveRowKeys);
+    this.treeExpandList = list;
+    this.treeExpandMap.clear();
+    list.forEach((x, i) => this.treeExpandMap.set(x.rowKey, i));
   },
   // 服务端合计
   createSummation(data: Record<string, any>): void {
@@ -169,23 +176,19 @@ export default {
   // 加载表格数据
   loadTableData(): void {
     const { height, maxHeight, ellipsis } = this;
-    // 是否开启虚拟滚动
-    this.scrollYLoad = this.createScrollYLoad();
-    if (this.scrollYLoad) {
-      if (!(height || maxHeight)) {
-        warn('Table', '必须设置组件参数 `height` 或 `maxHeight`');
-      }
-      if (!ellipsis) {
-        warn('Table', '必须设置组件参数 `ellipsis`');
-      }
-    }
     this.updateScrollYData();
     // 重绘
-    this.$nextTick(() => this.doLayout());
-  },
-  // 设置是否开启虚拟滚动
-  createScrollYLoad(): boolean {
-    return this.createTableList().length > config.virtualScrollY;
+    this.$nextTick(() => {
+      if (this.scrollYLoad) {
+        if (!(height || maxHeight)) {
+          warn('Table', '必须设置组件参数 `height` 或 `maxHeight`');
+        }
+        if (!ellipsis) {
+          warn('Table', '必须设置组件参数 `ellipsis`');
+        }
+      }
+      this.doLayout();
+    });
   },
   // 设置数据总数
   setRecordsTotal(total: number): void {
@@ -200,17 +203,34 @@ export default {
     const { currentPage, pageSize } = this.pagination;
     return this.tableFullData.slice((currentPage - 1) * pageSize, currentPage * pageSize);
   },
+  // 创建虚拟滚动树列表数据
+  createVirtualTree(dataList?: IRecord[]): IRecord[] {
+    const { allTableData, allRowKeys, treeExpandList, treeExpandMap } = this;
+    const result: IRecord[] = [];
+    for (let i = 0, len = allRowKeys.length; i < len; i++) {
+      const rowKey = allRowKeys[i];
+      if (!treeExpandMap.has(rowKey)) continue;
+      allTableData[i]._level = treeExpandList[treeExpandMap.get(rowKey)].level;
+      result.push(allTableData[i]);
+    }
+    return result;
+  },
   // 处理渲染数据
-  handleTableData(): void {
-    const { scrollYLoad, scrollYStore } = this;
-    const dataList = this.createTableList();
+  handleTableData(): IRecord[] {
+    const { scrollYStore, isTreeTable } = this;
+    let dataList = this.createTableList();
+    if (isTreeTable && this.treeConfig?.virtual) {
+      dataList = this.createVirtualTree();
+    }
+    this.scrollYLoad = dataList.length > config.virtualScrollY;
     // 处理显示数据
-    this.tableData = scrollYLoad ? dataList.slice(scrollYStore.startIndex, scrollYStore.endIndex) : dataList;
+    this.tableData = this.scrollYLoad ? dataList.slice(scrollYStore.startIndex, scrollYStore.endIndex) : dataList;
+    return dataList;
   },
   // 更新 Y 方向数据
   updateScrollYData(): void {
-    this.handleTableData();
-    this.updateScrollYSpace();
+    const dataList = this.handleTableData();
+    this.updateScrollYSpace(dataList);
   },
   // 纵向 Y 可视渲染处理 - 用于虚拟滚动
   loadScrollYData(scrollTop = 0): void {
@@ -228,10 +248,9 @@ export default {
     }
   },
   // 更新纵向 Y 可视渲染上下剩余空间大小
-  updateScrollYSpace(): void {
+  updateScrollYSpace(dataList: IRecord[]): void {
     const { scrollYLoad, scrollYStore, elementStore } = this;
     const { startIndex, rowHeight } = scrollYStore;
-    const dataList = this.createTableList();
     let marginTop = '';
     let ySpaceHeight = '';
     if (scrollYLoad) {
@@ -303,6 +322,24 @@ export default {
       result[result.length - 1].logic = '';
     }
     return deepToRaw(result);
+  },
+  // 深度遍历 deriveRowKeys
+  deepMapRowkey(deriveRowKeys: IDerivedRowKey[]) {
+    const result: Array<{ rowKey: IRowKey; level: number }> = [];
+    deriveRowKeys.forEach((x) => {
+      if (x.children) {
+        result.push(...this.deepMapRowkey(x.children));
+      }
+      if (typeof x.parentRowKey === 'undefined') {
+        result.push({ rowKey: x.rowKey, level: x.level });
+      } else if (this.rowExpandedKeys.includes(x.parentRowKey)) {
+        const _prks = x.rowKeyPath.split('-').slice(0, -1);
+        if (_prks.every((key) => this.rowExpandedKeys.findIndex((k) => k == key) > -1)) {
+          result.push({ rowKey: x.rowKey, level: x.level });
+        }
+      }
+    });
+    return result;
   },
   // 创建派生的 rowKeys for treeTable
   createDeriveRowKeys(tableData: IRecord[], key: string, path: string, depth = 0): IDerivedRowKey[] {

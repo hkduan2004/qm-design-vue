@@ -70,6 +70,9 @@ export default defineComponent({
         width: 0,
         height: 0,
       },
+      // 树表格缓存数据
+      treeExpandList: [],
+      treeExpandMap: new Map(),
       // 缓存数据
       allRowKeysMap: new Map(),
       // 是否是 IE11
@@ -333,6 +336,10 @@ export default defineComponent({
       this.rowExpandedKeys = this.createRowExpandedKeys();
     },
     rowExpandedKeys(next: string[], prev: string[]): void {
+      if (this.isTreeTable && this.treeConfig?.virtual) {
+        this.setTreeExpand();
+        this.updateScrollYData();
+      }
       if (!this.expandable || isEqual(next, prev)) return;
       const { onChange = noop } = this.expandable;
       onChange(
