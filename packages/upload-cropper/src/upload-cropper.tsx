@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-02-09 09:03:59
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-03-12 22:38:33
+ * @Last Modified time: 2022-03-31 10:00:57
  */
 import { defineComponent, PropType } from 'vue';
 import axios from 'axios';
@@ -30,7 +30,7 @@ export default defineComponent({
   name: 'QmUploadCropper',
   componentName: 'QmUploadCropper',
   inheritAttrs: false,
-  mixins: [localeMixin],
+  mixins: [localeMixin] as any,
   emits: ['change', 'success', 'error'],
   props: {
     size: {
@@ -84,13 +84,6 @@ export default defineComponent({
     initialValue(val: Array<IFile>): void {
       this.fileList = val;
     },
-    fileList(val: Array<IFile>): void {
-      this.$emit('change', val);
-      if (val.length === this.limit) {
-        // 待测试
-        this.$parent.clearValidate && this.$parent.clearValidate();
-      }
-    },
   },
   mounted() {
     this.setUploadWrapHeight();
@@ -113,9 +106,10 @@ export default defineComponent({
       } else {
         this.fileList.splice(index, 1);
       }
+      this.$emit('change', this.fileList);
     },
     changeHandler(file, files): void {
-      if (this.uid === file.uid) return;
+      if (!files || this.uid === file.uid) return;
       this.uid = file.uid;
       this.file = file;
       if (!this.fileSize) {
@@ -172,6 +166,7 @@ export default defineComponent({
         const { data: res } = await axios.post(this.actionUrl, formData, { headers });
         if (res.code === 200) {
           this.fileList.push({ name: this.file.name, url: res.data || '' });
+          this.$emit('change', this.fileList);
           this.$emit('success', res.data);
         } else {
           this.clearFiles();
@@ -214,11 +209,16 @@ export default defineComponent({
       download(blob, fileName);
     },
     renderPictureCard(): JSXNode {
-      const { disabled, calcHeight, fileList, titles } = this;
+      const { disabled, width, calcHeight, fileList, titles } = this;
       return (
         <ul class="el-upload-list el-upload-list--picture-card">
           {fileList.map((item, index) => (
-            <li key={index} class="el-upload-list__item" style={{ height: `${calcHeight}px` }} onClick={(ev: MouseEvent): void => stop(ev)}>
+            <li
+              key={index}
+              class="el-upload-list__item"
+              style={{ width: `${width}px`, height: `${calcHeight}px` }}
+              onClick={(ev: MouseEvent): void => stop(ev)}
+            >
               <div>
                 <img class="el-upload-list__item-thumbnail" src={item.url} alt="" />
                 {titles[index] && <h5 class="el-upload-list__item-title">{titles[index]}</h5>}
@@ -249,7 +249,7 @@ export default defineComponent({
     },
   },
   render(): JSXNode {
-    const { limit, disabled, file, fixedSize, fileList, fileTypes, dialogImageUrl } = this;
+    const { limit, width, disabled, file, fixedSize, fileList, fileTypes, dialogImageUrl } = this;
     const { $size } = useSize(this.$props);
     const { t } = useLocale();
     const prefixCls = getPrefixCls('upload-cropper');
@@ -267,7 +267,6 @@ export default defineComponent({
       drag: true,
       multiple: false,
       autoUpload: false,
-      showFileList: true,
       disabled,
       style: { display: fileList.length !== limit ? 'block' : 'none' },
       httpRequest: this.upload,
@@ -319,7 +318,11 @@ export default defineComponent({
                 </div>
               </>
             ),
-            tip: (): JSXNode => <div class="el-upload__tip">{t('qm.uploadCropper.tooltip', { type: fileTypes.join(',') })}</div>,
+            tip: (): JSXNode => (
+              <div class="el-upload__tip" style={{ width: `${width}px` }}>
+                {t('qm.uploadCropper.tooltip', { type: fileTypes.join(',') })}
+              </div>
+            ),
           }}
         />
         <Dialog {...previewDialogProps}>
