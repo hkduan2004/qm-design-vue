@@ -788,12 +788,12 @@ export default defineComponent({
       this.$refs.qweqwe.SET_FIELDS_VALUE({
         a: ['9', '10'],
         f: '320000,320101,320502,3',
-        ccc: [
-          {
-            name: 'food.jpeg',
-            url: 'http://127.0.0.1:3000/upload_bf5e0713b201eb1e959426a469cca2ad.jpg',
-          },
-        ],
+        // c: [
+        //   {
+        //     name: 'food.jpeg',
+        //     url: 'http://127.0.0.1:3000/upload_fcaad5de618942dfc9456f50e7bdf6c1.jpg',
+        //   },
+        // ],
       });
     }, 2000);
   },
