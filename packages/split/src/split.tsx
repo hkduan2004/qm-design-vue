@@ -24,7 +24,7 @@ export default defineComponent({
       $$split: this,
     };
   },
-  emits: ['change'],
+  emits: ['drag', 'dragStart', 'dragEnd'],
   props: {
     direction: {
       type: String as PropType<'horizontal' | 'vertical'>,
@@ -57,9 +57,13 @@ export default defineComponent({
   },
   watch: {
     dragging(next: boolean): void {
-      if (next) return;
-      localStorage.setItem(this.spliterKey, this.offset);
-      this.saveSplitConfig(this.spliterKey, this.offset);
+      if (next) {
+        this.$emit('dragStart', this.offset);
+      } else {
+        this.$emit('dragEnd', this.offset);
+        localStorage.setItem(this.spliterKey, this.offset);
+        this.saveSplitConfig(this.spliterKey, this.offset);
+      }
     },
   },
   created() {
@@ -68,7 +72,7 @@ export default defineComponent({
   methods: {
     dragHandle(val: number): void {
       this.offset = val;
-      this.$emit('change');
+      this.$emit('drag', val);
     },
     createMinValue(C: JSXNode): number {
       const val = Number.parseInt(C.props?.min || 0);
