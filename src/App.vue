@@ -938,7 +938,24 @@ export default defineComponent({
           </div>
           <div style="position: absolute; left: 0; bottom: 0; right: 0;">footer</div>
         </qm-drawer>
-        {/* <qm-split direction="horizontal" style="height: 300px" initialValue="30%" uniqueKey="asdasd">
+        {/*
+        <div style="height: 100vh; display: flex; flex-direction: column;">
+          <div style="height: 100px">header</div>
+          <div style="flex: 1; overflow-y: auto">
+            <div style="height: 100px;">filter</div>
+            <div>
+              <qm-split direction="vertical">
+                <qm-split-pane>
+                  <div style="height: 600px">内容1</div>
+                </qm-split-pane>
+                <qm-split-pane>
+                  <div style="height: 400px">内容2</div>
+                </qm-split-pane>
+              </qm-split>
+            </div>
+          </div>
+        </div>
+        <qm-split direction="horizontal" style="height: 300px" initialValue="30%" uniqueKey="asdasd">
           <qm-split-pane min={200}>asdasd</qm-split-pane>
           <qm-split-pane min={150}>zxczxc</qm-split-pane>
         </qm-split>
