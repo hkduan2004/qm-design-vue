@@ -167,8 +167,8 @@ export const getPosition = (el: HTMLElement): Record<'x' | 'y', number> => {
   let yPosition = 0;
 
   while (el) {
-    xPosition += el.offsetLeft - el.scrollLeft + el.clientLeft;
-    yPosition += el.offsetTop - el.scrollTop + el.clientTop;
+    xPosition += el.offsetLeft - el.scrollLeft;
+    yPosition += el.offsetTop - el.scrollTop;
     el = el.offsetParent as HTMLElement;
   }
 

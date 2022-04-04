@@ -10,6 +10,26 @@ import { getPrefixCls } from '../../_utils/prefix';
 import { useLocale } from '../../hooks';
 import type { JSXNode } from '../../_utils/types';
 
+const getScrollTop = (el: HTMLElement) => {
+  let offset = 0;
+  let parent = el;
+  while (parent) {
+    offset += parent.scrollTop || 0;
+    parent = parent.parentNode as HTMLElement;
+  }
+  return offset;
+};
+
+const getScrollLeft = (el: HTMLElement) => {
+  let offset = 0;
+  let parent = el;
+  while (parent) {
+    offset += parent.scrollLeft || 0;
+    parent = parent.parentNode as HTMLElement;
+  }
+  return offset;
+};
+
 export default defineComponent({
   name: 'ResizeBar',
   inject: ['$$split'],
@@ -26,15 +46,15 @@ export default defineComponent({
       document.removeEventListener('mousemove', this.moving);
       this.$emit('update:dragging', false);
     },
-    mouseOffset({ pageX, pageY }): number {
+    mouseOffset({ clientX, clientY }): number {
       const container: HTMLElement = this.$$split.$refs[`split`];
       const containerOffset = getPosition(container);
       const range = [this.minValues[0], (this.direction === 'vertical' ? container.offsetHeight : container.offsetWidth) - this.minValues[1]];
       let offset: number;
       if (this.direction === 'vertical') {
-        offset = pageY - containerOffset.y;
+        offset = clientY + getScrollTop(container) - containerOffset.y;
       } else {
-        offset = pageX - containerOffset.x;
+        offset = clientX + getScrollLeft(container) - containerOffset.x;
       }
       offset = offset < range[0] ? range[0] : offset;
       offset = offset > range[1] ? range[1] : offset;
