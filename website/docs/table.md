@@ -316,6 +316,7 @@
 | -------------------- | ------------------------------ | ------------------------------------ | ------ |
 | defaultExpandAllRows | 默认展开所有行                 | boolean                              | -      |
 | expandedRowKeys      | 展开行的 rowKey 数组           | string[]                             | -      |
+| hideExpandAll        | 是否隐藏展开所有               | boolean                              | -      |
 | rowExpandable        | 是否允许行展开                 | function(row): boolean               | -      |
 | expandedRowClassName | 展开行的 className             | string                               | -      |
 | expandedRowRender    | 额外的展开行渲染方法，必要参数 | function(row, index): JSX Node       | -      |
