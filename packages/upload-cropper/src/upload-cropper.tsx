@@ -109,7 +109,7 @@ export default defineComponent({
       this.$emit('change', this.fileList);
     },
     changeHandler(file, files): void {
-      if (!files || this.uid === file.uid) return;
+      if (this.uid === file.uid) return;
       this.uid = file.uid;
       this.file = file;
       if (!this.fileSize) {

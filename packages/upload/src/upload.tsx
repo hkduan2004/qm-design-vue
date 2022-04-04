@@ -11,7 +11,6 @@ import { QmMessage } from '../../index';
 import { useSize, useLocale } from '../../hooks';
 import { localeMixin } from '../../mixins';
 import { getPrefixCls } from '../../_utils/prefix';
-import { debounce } from '../../_utils/util';
 import { download } from '../../_utils/download';
 import { isValidComponentSize } from '../../_utils/validators';
 import type { JSXNode, ComponentSize, Nullable } from '../../_utils/types';
@@ -67,9 +66,6 @@ export default defineComponent({
       this.fileList = this.createValues(val);
     },
   },
-  created() {
-    this.changeHandleDebouncer = debounce(this.changeHandle, 0);
-  },
   methods: {
     createValues(list: any[]): Array<IFile> {
       return list.map((x) => ({ name: x.name, url: x.url }));
@@ -96,7 +92,7 @@ export default defineComponent({
       this.$refs[`upload`].clearFiles();
     },
     changeHandle(file, fileList): void {
-      if (!fileList) return;
+      if (fileList.every((x) => !x.response)) return;
       const list = fileList.map((x) => ({
         name: x.name,
         url: x.url || x.response.data || '',
@@ -174,7 +170,7 @@ export default defineComponent({
       disabled: $props.disabled,
       onPreview: this.previewFileHandle,
       beforeUpload: this.beforeUploadHandle,
-      onChange: this.changeHandleDebouncer,
+      onChange: this.changeHandle,
       onRemove: this.removeHandle,
       onSuccess: this.successHandle,
       onError: this.errorHandle,
