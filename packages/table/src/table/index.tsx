@@ -162,6 +162,12 @@ export default defineComponent({
     flattenRowKeys(): IRowKey[] {
       return createFlatRowKeys(this.deriveRowKeys);
     },
+    firstDataIndex(): string {
+      const _columns = this.flattenColumns.filter(
+        (x) => ![config.expandableColumn, config.selectionColumn, config.operationColumn].includes(x.dataIndex)
+      );
+      return _columns.length ? _columns[0].dataIndex : '';
+    },
     tableChange() {
       return [this.pagination, this.filters, this.sorter, { currentDataSource: [...this.tableFullData], allDataSource: [...this.tableOriginData] }];
     },

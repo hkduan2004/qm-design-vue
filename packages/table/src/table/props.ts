@@ -228,6 +228,7 @@ export default {
   expandable: PropTypes.shape({
     defaultExpandAllRows: PropTypes.bool, // 默认展开所有行
     expandedRowKeys: PropTypes.array, // 展开行的 key 数组，支持动态赋值
+    hideExpandAll: PropTypes.bool, // 隐藏展开所有
     rowExpandable: PropTypes.func, // 是否允许行展开，参数：row，返回值 bool
     expandedRowClassName: PropTypes.string, // 展开行的 className
     expandedRowRender: PropTypes.func, // 额外的展开行渲染方法

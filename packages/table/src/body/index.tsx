@@ -76,12 +76,6 @@ export default defineComponent({
     editableColumns(): IColumn[] {
       return this.flattenColumns.filter((x) => isFunction(x.editRender));
     },
-    firstDataIndex(): string {
-      const effectColumns = this.flattenColumns.filter(
-        (x) => ![config.expandableColumn, config.selectionColumn, config.operationColumn].includes(x.dataIndex)
-      );
-      return effectColumns.length ? effectColumns[0].dataIndex : '';
-    },
   },
   watch: {
     clicked(next: string[]): void {
@@ -267,7 +261,7 @@ export default defineComponent({
       );
     },
     renderCell(column: IColumn, row: IRecord, rowIndex: number, columnIndex: number, rowKey: string, depth: number): Nullable<JSXNode> | JSXNode[] {
-      const { expandable, treeConfig, selectionKeys, isTreeTable } = this.$$table;
+      const { expandable, treeConfig, selectionKeys, firstDataIndex, isTreeTable } = this.$$table;
       const { dataIndex, editRender, render } = column;
       const text = getCellValue(row, dataIndex);
       if (dataIndex === config.expandableColumn) {
@@ -286,7 +280,7 @@ export default defineComponent({
       // Content Node
       const vNodeText = render ? render(text, row, column, rowIndex, columnIndex) : this.renderText(text, column, row);
       // Tree Expandable + vNodeText
-      if (isTreeTable && dataIndex === this.firstDataIndex) {
+      if (isTreeTable && dataIndex === firstDataIndex) {
         return [
           this.renderIndent(!treeConfig?.virtual ? depth : row._level),
           <Expandable record={row} rowKey={rowKey} style={this.isTreeNode(row) ? null : { visibility: 'hidden' }} />,

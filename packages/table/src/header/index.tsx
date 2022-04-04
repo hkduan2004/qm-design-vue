@@ -20,6 +20,7 @@ import config from '../config';
 import { CaretDownIcon, CaretUpIcon, InfoCircleIcon } from '../../../icons';
 import Resizable from './resizable';
 import AllSelection from '../selection/all';
+import AllExpandable from '../expandable/all';
 import THeadFilter from '../filter';
 
 export default defineComponent({
@@ -45,6 +46,9 @@ export default defineComponent({
     },
     isClientFilter(): boolean {
       return !this.$$table.isFetch;
+    },
+    showExpandAll(): boolean {
+      return !this.$$table.expandable?.hideExpandAll;
     },
     showSelectAll(): boolean {
       const { isFetch, rowSelection } = this.$$table;
@@ -164,7 +168,7 @@ export default defineComponent({
     },
     renderCell(column: IColumn): Nullable<JSXNode> | JSXNode[] {
       const { dataIndex, type, sorter, title, description } = column as IDerivedColumn;
-      const { selectionKeys } = this.$$table;
+      const { selectionKeys, firstDataIndex, isTreeTable } = this.$$table;
       const { t } = useLocale();
       if (dataIndex === config.selectionColumn && type === 'checkbox') {
         if (type === 'checkbox') {
@@ -177,7 +181,8 @@ export default defineComponent({
       const vNodes: JSXNode[] = [];
       vNodes.push(
         <div key={0} class="cell" title={title}>
-          {title}
+          {isTreeTable && dataIndex === firstDataIndex && this.showExpandAll ? <AllExpandable /> : null}
+          {dataIndex === config.expandableColumn && this.showExpandAll ? <AllExpandable /> : title}
         </div>
       );
       if (description) {
