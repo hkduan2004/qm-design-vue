@@ -24,6 +24,7 @@ export default defineComponent({
     precision: PropTypes.number,
     controls: PropTypes.bool.def(false),
     placeholder: PropTypes.string,
+    readonly: PropTypes.bool,
     disabled: PropTypes.bool,
     onChange: PropTypes.func,
     onKeydown: PropTypes.func,
@@ -87,7 +88,7 @@ export default defineComponent({
     },
   },
   render(): JSXNode {
-    const { currentValue, min, max, maxlength, precision, controls, placeholder, disabled, minDisabled, maxDisabled } = this;
+    const { currentValue, min, max, maxlength, precision, controls, placeholder, readonly, disabled, minDisabled, maxDisabled } = this;
     const { $size } = useSize(this.$props);
     const regExp = /^-?(0|[1-9][0-9]*)(\.[0-9]*)?$/;
     const cls = [
@@ -140,6 +141,7 @@ export default defineComponent({
           size={$size}
           placeholder={placeholder}
           disabled={disabled}
+          readonly={readonly}
           onChange={(val) => {
             // 处理 val 值得特殊情况
             if (val.charAt(val.length - 1) === '.' || val === '-') {

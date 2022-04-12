@@ -63,7 +63,6 @@ export default defineComponent({
     const wrapProps = {
       modelValue: currentValue,
       'onUpdate:modelValue': (val) => {
-        if (readonly) return;
         this.currentValue = val;
         this.$emit('input', val);
       },
@@ -75,6 +74,7 @@ export default defineComponent({
         size={$size}
         maxlength={maxlength}
         placeholder={placeholder}
+        readonly={readonly}
         disabled={disabled}
         clearable={clearable}
         onChange={(val) => {

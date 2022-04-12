@@ -124,6 +124,7 @@ export default defineComponent({
               setTimeout(() => onEnter({ [this.dataKey]: ev.target.value }, row));
             }
           }}
+          readonly={extra.readonly}
           disabled={extra.disabled}
         />
       );
@@ -160,6 +161,7 @@ export default defineComponent({
               setTimeout(() => onEnter({ [this.dataKey]: ev.target.value }, row));
             }
           }}
+          readonly={extra.readonly}
           disabled={extra.disabled}
         />
       );
