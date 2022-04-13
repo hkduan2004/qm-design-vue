@@ -31,6 +31,7 @@ import SplitPane from './split-pane';
 import Countup from './countup';
 import Table from './table';
 import SearchHelper from './search-helper';
+import TreeTableHelper from './tree-table-helper';
 import Cropper from './cropper';
 import ConfigProvider from './config-provider';
 
@@ -77,6 +78,7 @@ const components = [
   Countup,
   Table,
   SearchHelper,
+  TreeTableHelper,
   Cropper,
   ConfigProvider,
 ];
@@ -124,6 +126,7 @@ export {
   Countup as QmCountup,
   Table as QmTable,
   SearchHelper as QmSearchHelper,
+  TreeTableHelper as QmTreeTableHelper,
   Cropper as QmCropper,
   ConfigProvider as QmConfigProvider,
   MessageBox as QmMessageBox,
