@@ -14,7 +14,7 @@
 
 QmDesign 目前还处于快速开发迭代中：
 
-[![QmDesign version badge](https://img.shields.io/npm/v/@jiaozhiye/qm-design.svg?style=flat-square)](https://www.npmjs.org/package/@jiaozhiye/qm-design)
+[![QmDesign version badge](https://img.shields.io/npm/v/@jiaozhiye/qm-design-vue.svg?style=flat-square)](https://www.npmjs.org/package/@jiaozhiye/qm-design-vue)
 
 ### npm 安装
 
@@ -23,7 +23,7 @@ QmDesign 目前还处于快速开发迭代中：
 :::
 
 ```bash
-$ npm install @jiaozhiye/qm-design --save
+$ npm install @jiaozhiye/qm-design-vue --save
 # 或者
-$ yarn add @jiaozhiye/qm-design --save
+$ yarn add @jiaozhiye/qm-design-vue --save
 ```

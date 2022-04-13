@@ -19,14 +19,14 @@ primaryColor: '#409eff'
 /* 改变主题色变量 */
 $primary-color: #409eff;
 
-@import '@jiaozhiye/qm-design/lib/style/src/index';
+@import '@jiaozhiye/qm-design-vue/lib/style/src/index';
 ```
 
 之后，在项目的入口文件中，直接引入以上样式文件即可：
 
 ```javascript
 import Vue from 'vue';
-import QmDesign from '@jiaozhiye/qm-design';
+import QmDesign from '@jiaozhiye/qm-design-vue';
 import App from './App.vue';
 
 // 引入自定义样式表

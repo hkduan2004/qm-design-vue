@@ -1,7 +1,7 @@
 ## 快速上手
 
 :::tip
-推荐使用 qm-vue-cli 脚手架，架构中已经集成了 qm-design 组件库。
+推荐使用 qm-vue-cli 脚手架，架构中已经集成了 qm-design-vue 组件库。
 :::
 
 ### 引入 QmDesign
@@ -10,8 +10,8 @@
 
 ```javascript
 import { createApp } from 'vue';
-import QmDesign from '@jiaozhiye/qm-design';
-import '@jiaozhiye/qm-design/lib/style/index.css';
+import QmDesign from '@jiaozhiye/qm-design-vue';
+import '@jiaozhiye/qm-design-vue/lib/style/index.css';
 import App from './App.vue';
 
 const app = createApp(App);
@@ -28,8 +28,8 @@ app.mount('#app');
 
 ```javascript
 import { createApp } from 'vue';
-import QmDesign from '@jiaozhiye/qm-design';
-import '@jiaozhiye/qm-design/lib/style/index.css';
+import QmDesign from '@jiaozhiye/qm-design-vue';
+import '@jiaozhiye/qm-design-vue/lib/style/index.css';
 
 import App from './App.vue';
 
