@@ -142,38 +142,39 @@
 
 ### formItemType
 
-| 表单类型             | 说明                   |
-| -------------------- | ---------------------- |
-| BREAK_SPACE          | 分隔符                 |
-| INPUT                | 输入框                 |
-| RANGE_INPUT          | 输入框区间             |
-| INPUT_NUMBER         | 数值类型输入框         |
-| RANGE_INPUT_NUMBER   | 数值类型输入框区间     |
-| TREE_SELECT          | 树选择器               |
-| MULTIPLE_TREE_SELECT | 树选择器，多选         |
-| CASCADER             | 级联选择器             |
-| MULTIPLE_CASCADER    | 级联选择器多选         |
-| SELECT               | 下拉选择器             |
-| MULTIPLE_SELECT      | 下拉选择器，多选       |
-| REGION_SELECT        | 地区选择器，支持街道   |
-| CITY_SELECT          | 城市选择器             |
-| SWITCH               | 开关类型               |
-| RADIO                | 单选按钮               |
-| CHECKBOX             | 复选框                 |
-| MULTIPLE_CHECKBOX    | 复选框，多选           |
-| TEXT_AREA            | 文本域                 |
-| SEARCH_HELPER        | 搜索帮助               |
-| IMMEDIATE            | 及时反馈               |
-| DATE                 | 日期类型               |
-| RANGE_DATE           | 日期区间类型，单独选择 |
-| RANGE_DATE_EL        | 日期区间类型，拖拽选择 |
-| TIME                 | 时间类型               |
-| RANGE_TIME           | 时间区间类型           |
-| TIME_SELECT          | 时间选择               |
-| RANGE_TIME_SELECT    | 时间区间选择           |
-| UPLOAD_IMG           | 图片上传               |
-| UPLOAD_FILE          | 附件上传               |
-| TINYMCE              | 富文本编辑器           |
+| 表单类型               | 说明                   |
+| ---------------------- | ---------------------- |
+| BREAK_SPACE            | 分隔符                 |
+| INPUT                  | 输入框                 |
+| RANGE_INPUT            | 输入框区间             |
+| INPUT_NUMBER           | 数值类型输入框         |
+| RANGE_INPUT_NUMBER     | 数值类型输入框区间     |
+| TREE_SELECT            | 树选择器               |
+| MULTIPLE_TREE_SELECT   | 树选择器，多选         |
+| CASCADER               | 级联选择器             |
+| MULTIPLE_CASCADER      | 级联选择器多选         |
+| SELECT                 | 下拉选择器             |
+| MULTIPLE_SELECT        | 下拉选择器，多选       |
+| REGION_SELECT          | 地区选择器，支持街道   |
+| CITY_SELECT            | 城市选择器             |
+| SWITCH                 | 开关类型               |
+| RADIO                  | 单选按钮               |
+| CHECKBOX               | 复选框                 |
+| MULTIPLE_CHECKBOX      | 复选框，多选           |
+| TEXT_AREA              | 文本域                 |
+| SEARCH_HELPER          | 搜索帮助               |
+| MULTIPLE_SEARCH_HELPER | 搜索帮助，多选         |
+| IMMEDIATE              | 及时反馈               |
+| DATE                   | 日期类型               |
+| RANGE_DATE             | 日期区间类型，单独选择 |
+| RANGE_DATE_EL          | 日期区间类型，拖拽选择 |
+| TIME                   | 时间类型               |
+| RANGE_TIME             | 时间区间类型           |
+| TIME_SELECT            | 时间选择               |
+| RANGE_TIME_SELECT      | 时间区间选择           |
+| UPLOAD_IMG             | 图片上传               |
+| UPLOAD_FILE            | 附件上传               |
+| TINYMCE                | 富文本编辑器           |
 
 ### formItem
 
