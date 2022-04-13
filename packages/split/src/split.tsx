@@ -2,10 +2,10 @@
  * @Author: 焦质晔
  * @Date: 2021-02-09 09:03:59
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2021-11-06 18:48:07
+ * @Last Modified time: 2022-04-13 22:38:26
  */
 import { defineComponent, PropType } from 'vue';
-import { isNumber } from '../../_utils/util';
+import { debounce, isNumber } from '../../_utils/util';
 import { isValidWidthUnit } from '../../_utils/validators';
 import { getPrefixCls } from '../../_utils/prefix';
 import { getValidSlot } from '../../_utils/instance-children';
@@ -67,12 +67,13 @@ export default defineComponent({
     },
   },
   created() {
+    this.dragDebouncer = debounce((val) => this.$emit('drag', val), 10);
     this.getLocalValue();
   },
   methods: {
     dragHandle(val: number): void {
       this.offset = val;
-      this.$emit('drag', val);
+      this.dragDebouncer(val);
     },
     createMinValue(C: JSXNode): number {
       const val = Number.parseInt(C.props?.min || 0);

@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-02-24 13:02:36
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-03-13 10:07:01
+ * @Last Modified time: 2022-04-13 21:46:03
  */
 import { CSSProperties, PropType, Component } from 'vue';
 import PropTypes from '../../_utils/vue-types';
@@ -166,6 +166,10 @@ export type IFormItem = {
       columns?: Array<unknown>;
       rowKey?: string | AnyFunction<string | number>;
       webPagination?: boolean;
+    };
+    tree?: {
+      fetch?: AnyObject<unknown>;
+      tableParamsMap?: (() => Record<string, string>) | Record<string, string>;
     };
     closeServerMatch?: boolean;
     filterAliasMap?: AnyFunction<string[]>;

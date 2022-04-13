@@ -200,6 +200,75 @@ export default defineComponent({
           },
         },
         {
+          type: 'TREE_TABLE_HELPER',
+          label: '条件222',
+          fieldName: 'zc',
+          searchHelper: {
+            filters: [
+              {
+                type: 'INPUT',
+                label: '条件1',
+                fieldName: 'a1',
+              },
+              {
+                type: 'INPUT',
+                label: '条件2',
+                fieldName: 'a2',
+              },
+              {
+                type: 'INPUT',
+                label: '条件3',
+                fieldName: 'a3',
+              },
+              {
+                type: 'INPUT',
+                label: '条件4',
+                fieldName: 'a4',
+              },
+            ],
+            table: {
+              columns: [
+                {
+                  title: '创建时间',
+                  dataIndex: 'date',
+                },
+                {
+                  title: '姓名',
+                  dataIndex: 'person.name',
+                },
+              ],
+              rowKey: (record) => record.id,
+              fetch: {
+                api: getTableData,
+                params: {},
+                dataKey: 'records',
+              },
+            },
+            tree: {
+              tableParamsMap: () => {
+                return { a1: 'text', a2: 'value' };
+              },
+              fetch: {
+                api: getTreeData,
+                params: {},
+                dataKey: 'records',
+                valueKey: 'value',
+                textKey: 'text',
+              },
+            },
+            fieldAliasMap: () => {
+              return { zc: 'date', code: 'id', z__desc: 'date', d: 'date', d__desc: 'date' };
+            },
+          },
+          style: { width: `calc(100% - 80px)` },
+          descOptions: {
+            style: { width: '70px' },
+          },
+          onChange: (val) => {
+            console.log(1234, val);
+          },
+        },
+        {
           type: 'MULTIPLE_TREE_SELECT',
           label: '条件6',
           fieldName: 'a',
