@@ -117,7 +117,6 @@ export default defineComponent({
                   dataIndex: 'person.name',
                 },
               ],
-              rowKey: (record) => record.id,
               fetch: {
                 api: getTableData,
                 params: {},
@@ -237,7 +236,6 @@ export default defineComponent({
                   dataIndex: 'person.name',
                 },
               ],
-              rowKey: (record) => record.id,
               fetch: {
                 api: getTableData,
                 params: {},
@@ -257,7 +255,7 @@ export default defineComponent({
               },
             },
             fieldAliasMap: () => {
-              return { zc: 'date', code: 'id', z__desc: 'date', d: 'date', d__desc: 'date' };
+              return { zc: 'date', code: 'id', zc__desc: 'date', d: 'date', d__desc: 'date' };
             },
           },
           style: { width: `calc(100% - 80px)` },

@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-02-09 09:03:59
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-04-14 11:29:24
+ * @Last Modified time: 2022-04-14 12:20:17
  */
 import { defineComponent, PropType } from 'vue';
 import PropTypes from '../../_utils/vue-types';
@@ -70,8 +70,9 @@ export default defineComponent({
     table: PropTypes.shape({
       fetch: PropTypes.object.isRequired,
       columns: PropTypes.array.def([]),
+      rowKey: PropTypes.oneOfType([PropTypes.string, PropTypes.func]).def('id'),
       webPagination: PropTypes.bool.def(false),
-    }),
+    }).loose,
     tree: PropTypes.shape({
       fetch: PropTypes.object.isRequired,
       tableParamsMap: PropTypes.func,

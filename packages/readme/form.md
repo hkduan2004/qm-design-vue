@@ -56,39 +56,41 @@
 
 ### formItemType
 
-| 表单类型               | 说明                   |
-| ---------------------- | ---------------------- |
-| BREAK_SPACE            | 分隔符                 |
-| INPUT                  | 输入框                 |
-| RANGE_INPUT            | 输入框区间             |
-| INPUT_NUMBER           | 数值类型输入框         |
-| RANGE_INPUT_NUMBER     | 数值类型输入框区间     |
-| TREE_SELECT            | 树选择器               |
-| MULTIPLE_TREE_SELECT   | 树选择器，多选         |
-| CASCADER               | 级联选择器             |
-| MULTIPLE_CASCADER      | 级联选择器多选         |
-| SELECT                 | 下拉选择器             |
-| MULTIPLE_SELECT        | 下拉选择器，多选       |
-| REGION_SELECT          | 地区选择器，支持街道   |
-| CITY_SELECT            | 城市选择器             |
-| SWITCH                 | 开关类型               |
-| RADIO                  | 单选按钮               |
-| CHECKBOX               | 复选框                 |
-| MULTIPLE_CHECKBOX      | 复选框，多选           |
-| TEXT_AREA              | 文本域                 |
-| SEARCH_HELPER          | 搜索帮助               |
-| MULTIPLE_SEARCH_HELPER | 搜索帮助，多选         |
-| IMMEDIATE              | 及时反馈               |
-| DATE                   | 日期类型               |
-| RANGE_DATE             | 日期区间类型，单独选择 |
-| RANGE_DATE_EL          | 日期区间类型，拖拽选择 |
-| TIME                   | 时间类型               |
-| RANGE_TIME             | 时间区间类型           |
-| TIME_SELECT            | 时间选择               |
-| RANGE_TIME_SELECT      | 时间区间选择           |
-| UPLOAD_IMG             | 图片上传               |
-| UPLOAD_FILE            | 附件上传               |
-| TINYMCE                | 富文本编辑器           |
+| 表单类型                   | 说明                   |
+| -------------------------- | ---------------------- |
+| BREAK_SPACE                | 分隔符                 |
+| INPUT                      | 输入框                 |
+| RANGE_INPUT                | 输入框区间             |
+| INPUT_NUMBER               | 数值类型输入框         |
+| RANGE_INPUT_NUMBER         | 数值类型输入框区间     |
+| TREE_SELECT                | 树选择器               |
+| MULTIPLE_TREE_SELECT       | 树选择器，多选         |
+| CASCADER                   | 级联选择器             |
+| MULTIPLE_CASCADER          | 级联选择器多选         |
+| SELECT                     | 下拉选择器             |
+| MULTIPLE_SELECT            | 下拉选择器，多选       |
+| REGION_SELECT              | 地区选择器，支持街道   |
+| CITY_SELECT                | 城市选择器             |
+| SWITCH                     | 开关类型               |
+| RADIO                      | 单选按钮               |
+| CHECKBOX                   | 复选框                 |
+| MULTIPLE_CHECKBOX          | 复选框，多选           |
+| TEXT_AREA                  | 文本域                 |
+| SEARCH_HELPER              | 搜索帮助               |
+| MULTIPLE_SEARCH_HELPER     | 搜索帮助，多选         |
+| TREE_TABLE_HELPER          | 左树右表搜索帮助       |
+| MULTIPLE_TREE_TABLE_HELPER | 左树右表搜索帮助，多选 |
+| IMMEDIATE                  | 及时反馈               |
+| DATE                       | 日期类型               |
+| RANGE_DATE                 | 日期区间类型，单独选择 |
+| RANGE_DATE_EL              | 日期区间类型，拖拽选择 |
+| TIME                       | 时间类型               |
+| RANGE_TIME                 | 时间区间类型           |
+| TIME_SELECT                | 时间选择               |
+| RANGE_TIME_SELECT          | 时间区间选择           |
+| UPLOAD_IMG                 | 图片上传               |
+| UPLOAD_FILE                | 附件上传               |
+| TINYMCE                    | 富文本编辑器           |
 
 ### formItem
 
@@ -238,7 +240,8 @@
 | uniqueKey          | 用于筛选器配置项的本地缓存，不能重复                                      | string                 | -      |
 | initialValue       | 表单初始值                                                                | object                 | -      |
 | showFilterCollapse | 是否显示筛选器 展开/收起 按钮                                             | boolean                | true   |
-| table              | 表格组件配置，支持 fetch, columns, rowKey, webPagination                  | object                 | -      |
+| table              | 表格组件配置，支持 fetch, columns, webPagination                          | object                 | -      |
+| tree               | 左侧树组件配置，[配置项](#helperTree)                                     | object                 | -      |
 | closeServerMatch   | 是否关闭服务端联想并回显值                                                | boolean                | -      |
 | filterAliasMap     | 输入框与筛选器条件的映射，返回 筛选器 fieldName 列表                      | function(): string[]   | -      |
 | fieldAliasMap      | 输入框与回传数据字段的映射，返回值 [配置项](#aliasMap)                    | function(): object     | -      |
@@ -259,6 +262,13 @@
 | ----- | ---------------------------- | ------ | ------ |
 | key   | 表单字段名                   | string | -      |
 | value | 搜索帮助接口数据对应的字段名 | string | -      |
+
+### helperTree
+
+| 参数           | 说明                                                            | 类型                         | 默认值 |
+| -------------- | --------------------------------------------------------------- | ---------------------------- | ------ |
+| tableParamsMap | 查询字段与回传数据字段的映射，[配置项](#field_alias)， 必要参数 | function(): object \| object | -      |
+| fetch          | 同 Table，[配置项](#fetch)                                      | object                       | -      |
 
 ### labelOptions
 
