@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-02-09 09:03:59
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-04-14 11:15:37
+ * @Last Modified time: 2022-04-14 11:29:24
  */
 import { defineComponent, PropType } from 'vue';
 import PropTypes from '../../_utils/vue-types';
@@ -70,7 +70,6 @@ export default defineComponent({
     table: PropTypes.shape({
       fetch: PropTypes.object.isRequired,
       columns: PropTypes.array.def([]),
-      rowKey: PropTypes.oneOfType([PropTypes.string, PropTypes.func]).def('uid'),
       webPagination: PropTypes.bool.def(false),
     }),
     tree: PropTypes.shape({
@@ -352,7 +351,7 @@ export default defineComponent({
                 size={size}
                 height={height}
                 columns={columns}
-                rowKey={this.table.rowKey}
+                rowKey={'pageIndex'}
                 rowSelection={selection}
                 columnsChange={(columns) => (this.columns = columns)}
                 onRowEnter={this.rowEnterHandle}

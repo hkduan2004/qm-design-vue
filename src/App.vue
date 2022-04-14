@@ -269,6 +269,57 @@ export default defineComponent({
           },
         },
         {
+          type: 'MULTIPLE_TREE_TABLE_HELPER',
+          label: '条件zxc1',
+          fieldName: 'zx',
+          searchHelper: {
+            filters: [
+              {
+                type: 'INPUT',
+                label: '条件1',
+                fieldName: 'a1',
+              },
+              {
+                type: 'INPUT',
+                label: '条件2',
+                fieldName: 'a2',
+              },
+            ],
+            table: {
+              columns: [
+                {
+                  title: '创建时间',
+                  dataIndex: 'date',
+                },
+                {
+                  title: '姓名',
+                  dataIndex: 'person.name',
+                },
+              ],
+              fetch: {
+                api: getTableData,
+                params: {},
+                dataKey: 'records',
+              },
+            },
+            tree: {
+              tableParamsMap: () => {
+                return { a1: 'text', a2: 'value' };
+              },
+              fetch: {
+                api: getTreeData,
+                params: {},
+                dataKey: 'records',
+                valueKey: 'value',
+                textKey: 'text',
+              },
+            },
+            fieldAliasMap: () => {
+              return { valueKey: 'date', textKey: 'date' };
+            },
+          },
+        },
+        {
           type: 'MULTIPLE_TREE_SELECT',
           label: '条件6',
           fieldName: 'a',
