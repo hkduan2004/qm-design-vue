@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-02-09 09:03:59
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-01-13 13:58:39
+ * @Last Modified time: 2022-04-14 14:12:19
  */
 import { defineComponent, PropType, CSSProperties } from 'vue';
 import addEventListener from 'add-dom-event-listener';
@@ -59,6 +59,7 @@ export default defineComponent({
         return isValidWidthUnit(val);
       },
     },
+    useHeight: PropTypes.bool,
     loading: PropTypes.bool,
     showClose: PropTypes.bool.def(true),
     showHeader: PropTypes.bool.def(true),
@@ -144,9 +145,9 @@ export default defineComponent({
         const $dialogHeader = this.$dialog.querySelector('.el-dialog__header');
         const $dialogBody = this.$dialog.querySelector('.el-dialog__body');
         const $dialogContainer = this.$dialog.querySelector('.dialog-container');
-        const maxHeight = this.height !== 'auto' || this.fullscreen ? 'none' : `calc(100vh - ${this.disTop} * 2 - ${$dialogHeader.offsetHeight}px)`;
+        const maxHeight = this.height !== 'auto' || this.fullscreen ? '' : `calc(100vh - ${this.disTop} * 2 - ${$dialogHeader.offsetHeight}px)`;
         setStyle($dialogBody, { maxHeight });
-        setStyle($dialogContainer, { maxHeight });
+        setStyle($dialogContainer, { [this.useHeight ? 'height' : 'maxHeight']: maxHeight });
       });
     },
     resetDialogPosition(): void {

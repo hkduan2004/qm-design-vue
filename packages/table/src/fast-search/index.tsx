@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2020-05-19 15:58:23
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-03-17 16:06:46
+ * @Last Modified time: 2022-04-14 14:28:20
  */
 import { defineComponent } from 'vue';
 import { getPrefixCls } from '../../../_utils/prefix';
@@ -40,6 +40,7 @@ export default defineComponent({
       title: t('qm.table.fastSearch.settingTitle'),
       width: '600px',
       loading: false,
+      useHeight: true,
       showFullScreen: false,
       destroyOnClose: true,
       containerStyle: { paddingBottom: `${SizeHeight[tableSize] + 20}px` },

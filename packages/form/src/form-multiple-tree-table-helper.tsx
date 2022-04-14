@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2022-03-12 11:36:01
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-04-14 11:24:15
+ * @Last Modified time: 2022-04-14 14:23:25
  */
 import { defineComponent } from 'vue';
 import { merge, isEqual } from 'lodash-es';
@@ -113,6 +113,7 @@ export default defineComponent({
       width: searchHelper.width ?? '60%',
       height: searchHelper.height,
       loading: false,
+      useHeight: true,
       destroyOnClose: true,
       containerStyle: { paddingBottom: `${SizeHeight[$size || 'default'] + 20}px` },
       'onUpdate:visible': (val: boolean): void => {
