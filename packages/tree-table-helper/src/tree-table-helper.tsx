@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-02-09 09:03:59
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-04-13 22:56:09
+ * @Last Modified time: 2022-04-14 11:15:37
  */
 import { defineComponent, PropType } from 'vue';
 import PropTypes from '../../_utils/vue-types';
@@ -36,6 +36,22 @@ const trueNoop = (): boolean => !0;
 // tds
 const DEFINE: string[] = ['valueName', 'displayName', 'descriptionName'];
 
+const deepFind = (arr: any[], fn: (node) => boolean) => {
+  let res = null;
+  for (let i = 0; i < arr.length; i++) {
+    if (Array.isArray(arr[i].children)) {
+      res = deepFind(arr[i].children, fn);
+    }
+    if (res) {
+      return res;
+    }
+    if (fn(arr[i])) {
+      return arr[i];
+    }
+  }
+  return res;
+};
+
 export default defineComponent({
   name: 'QmTreeTableHelper',
   componentName: 'QmTreeTableHelpers',
@@ -65,6 +81,7 @@ export default defineComponent({
   },
   data() {
     const { fetch, webPagination = !1 } = this.table;
+    Object.assign(this, { responseList: [] });
     return {
       result: null,
       loading: false,
@@ -86,6 +103,7 @@ export default defineComponent({
         dataKey: fetch.dataKey,
       },
       webPagination,
+      filterText: '',
       treeData: [],
     };
   },
@@ -178,6 +196,18 @@ export default defineComponent({
       // 内存分页，获取数据
       this.getTableData();
     },
+    doTableFetch(row) {
+      if (!this.tree?.tableParamsMap) {
+        return warn('TreeTableHelper', '需要配置 `tree.tableParamsMap` 选项');
+      }
+      const alias = typeof this.tree.tableParamsMap === 'function' ? this.tree.tableParamsMap() : this.tree.tableParamsMap;
+      // 请求参数
+      const params: Record<string, any> = {};
+      for (const key in alias) {
+        params[key] = get(row, alias[key]);
+      }
+      this.filterChangeHandle(params);
+    },
     async getTreeData() {
       if (!this.tree?.fetch) return;
       const { api: fetchApi, params, dataKey, valueKey = 'value', textKey = 'text' } = this.tree.fetch;
@@ -187,6 +217,7 @@ export default defineComponent({
           const dataList = !dataKey ? res.data : get(res.data, dataKey, []);
           const results = deepMapList(dataList, valueKey, textKey);
           this.treeData = results;
+          this.responseList = dataList;
         }
       } catch (err) {
         // ...
@@ -270,7 +301,34 @@ export default defineComponent({
         <Spin spinning={loading} tip="Loading...">
           <Split initialValue={200} style={{ height: '100%' }}>
             <SplitPane min={100} style={{ overflowY: 'auto' }}>
-              <div>asdasd</div>
+              <el-input
+                v-model={this.filterText}
+                placeholder={t('qm.form.treePlaceholder')}
+                onInput={(val: string): void => {
+                  this.$refs[`tree`].filter(val);
+                }}
+              />
+              <el-tree
+                ref="tree"
+                data={this.treeData}
+                nodeKey={'value'}
+                props={{ children: 'children', label: 'text' }}
+                style={{ marginTop: '5px' }}
+                checkStrictly={true}
+                defaultExpandAll={true}
+                expandOnClickNode={false}
+                filterNodeMethod={(val, data): boolean => {
+                  if (!val) return true;
+                  return data.text.indexOf(val) !== -1;
+                }}
+                onNodeClick={(item): void => {
+                  if (!this.tree?.fetch) return;
+                  const { valueKey = 'value' } = this.tree.fetch;
+                  const row = deepFind(this.responseList, (node) => get(node, valueKey) === item.value);
+                  if (!row) return;
+                  this.doTableFetch(row);
+                }}
+              />
             </SplitPane>
             <SplitPane style={{ width: 0 }}>
               <Form
