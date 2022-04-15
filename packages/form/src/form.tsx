@@ -601,8 +601,8 @@ export default defineComponent({
       const fieldCols: number[] = [];
       // 栅格所占的总列数
       const total = colsArr.reduce((prev, cur) => {
-        const { selfCols = 1 } = cur;
-        const sum: number = prev + selfCols;
+        const { selfCol = 1 } = cur;
+        const sum: number = prev + selfCol;
         fieldCols.push(sum); // 当前栅格及之前所跨的列数
         return sum;
       }, 0);
@@ -612,9 +612,9 @@ export default defineComponent({
 
       const tmpArr: number[] = []; // 用于获取最后一个展示栅格的 cols
       const colFormItems = colsArr.map((x, i) => {
-        let { fieldName, selfCols = 1, type } = x;
-        // 调整 selfCols 的大小
-        selfCols = selfCols >= 24 || type === 'BREAK_SPACE' || type === 'TINYMCE' ? cols : selfCols;
+        let { fieldName, selfCol = 1, type } = x;
+        // 调整 selfCol 的大小
+        selfCol = selfCol >= 24 || type === 'BREAK_SPACE' || type === 'TINYMCE' ? cols : selfCol;
         // 判断改栅格是否显示
         const isBlock: boolean = collapse || !showFilterCollapse ? true : fieldCols[i] < defaultPlayRows * cols;
         const isDisplay: boolean = isDividerCollapse ? this.getElementDisplay(x) : !0;
@@ -626,7 +626,7 @@ export default defineComponent({
             key={i}
             type={UNFIX_TYPE.includes(type as IFormItemType) ? 'UN_FIXED' : 'FIXED'}
             id={fieldName}
-            span={selfCols * colSpan}
+            span={selfCol * colSpan}
             style={isFilterType ? { display: !showFilterCollapse || isBlock ? 'block' : 'none' } : { display: isDisplay ? 'block' : 'none' }}
           >
             {type ? this.createFormItem(x) : null}

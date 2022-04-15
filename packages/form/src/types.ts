@@ -107,7 +107,7 @@ export type IFormItem = {
   invisible?: boolean;
   disabled?: boolean;
   rules?: Record<string, any>[];
-  selfCols?: number;
+  selfCol?: number;
   offsetLeft?: number;
   offsetRight?: number;
   style?: CSSProperties;

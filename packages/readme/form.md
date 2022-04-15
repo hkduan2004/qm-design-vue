@@ -105,7 +105,7 @@
 | invisible    | 是否可见，占页面空间                                          | boolean                          | -      |
 | disabled     | 是否禁用                                                      | boolean                          | -      |
 | rules        | 校验规则，[配置项](#rules)                                    | array                            | -      |
-| selfCols     | 自身占据的列数，数值 24 表示占据整行                          | number                           | 1      |
+| selfCol      | 自身占据的列数，数值 24 表示占据整行                          | number                           | 1      |
 | offsetLeft   | 左侧的偏移列数                                                | number                           | -      |
 | offsetRight  | 右侧的偏移列数                                                | number                           | -      |
 | style        | 设置 css 样式                                                 | styleObject                      | -      |
