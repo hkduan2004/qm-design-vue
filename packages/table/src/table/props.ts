@@ -317,6 +317,7 @@ export default {
   onDataLoaded: PropTypes.func,
   onRowClick: PropTypes.func,
   onRowDblclick: PropTypes.func,
+  onRowContextmenu: PropTypes.func,
   onRowEnter: PropTypes.func,
 };
 
@@ -327,6 +328,7 @@ export default {
  * dataLoaded: 表格数据加载之后触发，参数 tableData
  * rowClick: 行单击事件，参数 row, column, event
  * rowDblclick: 行双击事件，参数 row, column, event
+ * rowContextmenu: 行右键单击事件，row, column, event
  * rowEnter: 行选中(单选) 或 行高亮 回车时触发，参数 row, event
  * scrollEnd: 滚动条滚动至底部时触发，参数 event
  */

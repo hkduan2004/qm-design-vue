@@ -72,15 +72,16 @@
 
 ### 事件
 
-| 事件名称    | 说明                           | 回调参数                                                                                             |
-| ----------- | ------------------------------ | ---------------------------------------------------------------------------------------------------- |
-| change      | 分页、排序、筛选变化时触发     | function(pagination, filters, sorter, { currentDataSource: tableData, allDataSource: allTableData }) |
-| dataChange  | 表格数据变化时触发             | function(tableData)                                                                                  |
-| dataLoaded  | 表格数据加载之后触发           | function(tableData)                                                                                  |
-| rowClick    | 行单击事件                     | function(row, column, event)                                                                         |
-| rowDblclick | 行双击事件                     | function(row, column, event)                                                                         |
-| rowEnter    | 行选中(单选)或行高亮的回车事件 | function(row, event)                                                                                 |
-| scrollEnd   | 滚动条滚动至底部时触发         | function(event)                                                                                      |
+| 事件名称       | 说明                           | 回调参数                                                                                             |
+| -------------- | ------------------------------ | ---------------------------------------------------------------------------------------------------- |
+| change         | 分页、排序、筛选变化时触发     | function(pagination, filters, sorter, { currentDataSource: tableData, allDataSource: allTableData }) |
+| dataChange     | 表格数据变化时触发             | function(tableData)                                                                                  |
+| dataLoaded     | 表格数据加载之后触发           | function(tableData)                                                                                  |
+| rowClick       | 行单击事件                     | function(row, column, event)                                                                         |
+| rowDblclick    | 行双击事件                     | function(row, column, event)                                                                         |
+| rowContextmenu | 行右键单击事件                 | function(row, column, event)                                                                         |
+| rowEnter       | 行选中(单选)或行高亮的回车事件 | function(row, event)                                                                                 |
+| scrollEnd      | 滚动条滚动至底部时触发         | function(event)                                                                                      |
 
 ### 方法
 

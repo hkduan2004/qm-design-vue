@@ -255,6 +255,7 @@ export default defineComponent({
           style={{ ...stys, ...groupStys, ...trExtraStys, ...tdExtraStys }}
           onClick={(ev) => this.cellClickHandle(ev, row, column)}
           onDblclick={(ev) => this.cellDbclickHandle(ev, row, column)}
+          onContextmenu={(ev) => this.cellContextmenuHandle(ev, row, column)}
         >
           <div class="cell">{this.renderCell(column, row, rowIndex, columnIndex, rowKey, depth)}</div>
         </td>
@@ -418,6 +419,11 @@ export default defineComponent({
       const { dataIndex } = column;
       if ([config.expandableColumn, config.selectionColumn, config.operationColumn].includes(dataIndex)) return;
       this.$$table.$emit('rowDblclick', row, column, ev);
+    },
+    cellContextmenuHandle(ev: MouseEvent, row: IRecord, column: IColumn): void {
+      const { dataIndex } = column;
+      if ([config.expandableColumn, config.selectionColumn, config.operationColumn].includes(dataIndex)) return;
+      this.$$table.$emit('rowContextmenu', row, column, ev);
     },
     setClickedValues(arr: string[]): void {
       if (isEqual(arr, this.clicked)) return;
