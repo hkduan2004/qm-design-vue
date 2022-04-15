@@ -146,21 +146,21 @@ export default defineComponent({
       }
     },
     async getItemList(): Promise<void> {
-      const { fetchApi, params = {}, dataKey = '', valueKey = 'value', textKey = 'text' } = this.option.request;
+      const { fetchApi, params = {}, dataKey, valueKey = 'value', textKey = 'text' } = this.option.request;
       try {
         const res = await fetchApi(params);
         if (res.code === 200) {
-          const dataList = !dataKey ? res.data : get(res.data, dataKey, []);
+          const dataList = Array.isArray(res.data) ? res.data : get(res.data, dataKey!) ?? [];
           this.itemList = deepMapList<IDictDeep>(dataList, valueKey, textKey);
         }
       } catch (err) {}
     },
     async getStreetList(code: string): Promise<void> {
-      const { fetchStreetApi, dataKey = '', valueKey = 'value', textKey = 'text' } = this.option.request;
+      const { fetchStreetApi, dataKey, valueKey = 'value', textKey = 'text' } = this.option.request;
       try {
         const res = await fetchStreetApi({ code });
         if (res.code === 200) {
-          const dataList = !dataKey ? res.data : get(res.data, dataKey, []);
+          const dataList = Array.isArray(res.data) ? res.data : get(res.data, dataKey!) ?? [];
           this.tabs.push(dataList.map((x) => ({ text: x[textKey], value: x[valueKey] })) as IDict[]);
         }
       } catch (err) {}

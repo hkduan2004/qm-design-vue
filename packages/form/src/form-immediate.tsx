@@ -39,14 +39,14 @@ export default defineComponent({
     },
     // 获取搜索帮助数据
     async querySearchAsync(request, fieldName: string, columns: Array<IColumn>, queryString = '', cb): Promise<void> {
-      const { fetchApi, params = {}, dataKey = '' } = request;
+      const { fetchApi, params = {}, dataKey } = request;
       if (!fetchApi) {
         return warn('Form', '[IMMEDIATE] 类型的 `fetchApi` 参数不正确');
       }
       try {
         const res = await fetchApi({ ...{ [fieldName]: queryString }, ...params });
         if (res.code === 200) {
-          const dataList = !dataKey ? res.data : get(res.data, dataKey, []);
+          const dataList = Array.isArray(res.data) ? res.data : get(res.data, dataKey!) ?? [];
           cb(this.createSerachHelperList(dataList, columns));
         }
       } catch (err) {}

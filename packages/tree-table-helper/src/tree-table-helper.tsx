@@ -214,7 +214,7 @@ export default defineComponent({
       try {
         const res = await fetchApi(params);
         if (res.code === 200) {
-          const dataList = !dataKey ? res.data : get(res.data, dataKey, []);
+          const dataList = Array.isArray(res.data) ? res.data : get(res.data, dataKey!) ?? [];
           const results = deepMapList(dataList, valueKey, textKey);
           this.treeData = results;
           this.responseList = dataList;

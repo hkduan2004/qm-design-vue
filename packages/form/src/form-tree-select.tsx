@@ -82,11 +82,11 @@ export default defineComponent({
       this.$nextTick(() => (this._is_lock = false));
     },
     async getItemList(): Promise<void> {
-      const { fetchApi, params = {}, dataKey = '', valueKey = 'value', textKey = 'text' } = this.option.request;
+      const { fetchApi, params = {}, dataKey, valueKey = 'value', textKey = 'text' } = this.option.request;
       try {
         const res = await fetchApi(params);
         if (res.code === 200) {
-          const dataList = !dataKey ? res.data : get(res.data, dataKey, []);
+          const dataList = Array.isArray(res.data) ? res.data : get(res.data, dataKey!) ?? [];
           this.itemList = deepMapList<IDictDeep>(dataList, valueKey, textKey);
         }
       } catch (err) {}
