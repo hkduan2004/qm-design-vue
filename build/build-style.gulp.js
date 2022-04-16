@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-02-11 15:05:17
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-04-15 21:25:25
+ * @Last Modified time: 2022-04-16 11:43:04
  */
 'use strict';
 
@@ -11,7 +11,7 @@ const { series, src, dest } = require('gulp');
 const gulpSass = require('gulp-sass');
 const dartSass = require('sass');
 const autoprefixer = require('gulp-autoprefixer');
-const cssmin = require('gulp-cssmin');
+const cleanCSS = require('gulp-clean-css');
 const rename = require('gulp-rename');
 const utils = require('./utils');
 
@@ -22,15 +22,13 @@ function compile() {
     .pipe(autoprefixer({ cascade: false }))
     .pipe(rename('index.css'))
     .pipe(dest(utils.resolve('lib/style')))
-    .pipe(cssmin({ keepSpecialComments: false }))
+    .pipe(cleanCSS({ level: { 1: { specialComments: '*' } }, format: { semicolonAfterLastProperty: true } }))
     .pipe(rename('index.min.css'))
     .pipe(dest(utils.resolve('lib/style')));
 }
 
 function copyfont() {
-  return src(utils.resolve('packages/style/src/fonts/**'))
-    .pipe(cssmin())
-    .pipe(dest(utils.resolve('lib/style/fonts')));
+  return src(utils.resolve('packages/style/src/fonts/**')).pipe(dest(utils.resolve('lib/style/fonts')));
 }
 
 function copyscss() {
