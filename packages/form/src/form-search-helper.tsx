@@ -175,7 +175,7 @@ export default defineComponent({
 
     // 搜索帮助 change 事件
     const searchHelperChangeHandle = (val: string): void => {
-      if (searchHelper.closeServerMatch && this.visible) return;
+      if (searchHelper.closeRemoteMatch && this.visible) return;
       const others: Record<string, ValueOf<IFormData>> = {};
       this.extraKeys.forEach((key) => (others[key] = form[key]));
       this._is_change = !1;
@@ -266,7 +266,8 @@ export default defineComponent({
       onClose: (): void => {
         this.deriveValue = {};
         if (this._is_change) {
-          !searchHelper.closeServerMatch ? clearSearchHelperValue() : searchHelperChangeHandle(form[fieldName]);
+          const { closeRemoteMatch, onlySelect = true } = searchHelper;
+          !closeRemoteMatch && onlySelect ? clearSearchHelperValue() : searchHelperChangeHandle(form[fieldName]);
         }
         this._is_change = !1;
       },
@@ -327,7 +328,7 @@ export default defineComponent({
             if (!val) {
               clearSearchHelperValue();
             } else {
-              if (searchHelper.closeServerMatch) {
+              if (searchHelper.closeRemoteMatch) {
                 searchHelperChangeHandle(val);
               } else if (searchHelper.table.fetch?.api && !this.visible) {
                 this.getSearchHelperTableData(val)
