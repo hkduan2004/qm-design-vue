@@ -153,6 +153,9 @@ export default defineComponent({
     allTableData(): IRecord[] {
       return !this.isTreeTable ? this.tableFullData : getAllTableData(this.tableFullData);
     },
+    currentDataSource(): IRecord[] {
+      return this.createTableList();
+    },
     allRowKeys(): IRowKey[] {
       return this.allTableData.map((row) => this.getRowKey(row, row.index));
     },
@@ -167,9 +170,6 @@ export default defineComponent({
         (x) => ![config.expandableColumn, config.selectionColumn, config.operationColumn].includes(x.dataIndex)
       );
       return _columns.length ? _columns[0].dataIndex : '';
-    },
-    tableChange() {
-      return [this.pagination, this.filters, this.sorter, { currentDataSource: [...this.tableFullData], allDataSource: [...this.tableOriginData] }];
     },
     leftFixedColumns(): IColumn[] {
       return this.flattenColumns.filter((column) => column.fixed === 'left');
@@ -295,14 +295,14 @@ export default defineComponent({
       this.$nextTick(() => this.doLayout());
     },
     filters(): void {
-      this.$emit('change', ...this.tableChange);
+      this.$emit('change', this.pagination, this.filters, this.sorter, { currentDataSource: this.currentDataSource });
     },
     sorter(): void {
-      this.$emit('change', ...this.tableChange);
+      this.$emit('change', this.pagination, this.filters, this.sorter, { currentDataSource: this.currentDataSource });
     },
     pagination: {
       handler(): void {
-        this.$emit('change', ...this.tableChange);
+        this.$emit('change', this.pagination, this.filters, this.sorter, { currentDataSource: this.currentDataSource });
       },
       deep: true,
     },

@@ -81,7 +81,7 @@ export default defineComponent({
   },
   data() {
     const { fetch, webPagination = !1 } = this.table;
-    Object.assign(this, { responseList: [] });
+    Object.assign(this, { responseList: [], currentPage: 1 });
     return {
       result: null,
       loading: false,
@@ -294,7 +294,19 @@ export default defineComponent({
     } = this;
     const { t } = useLocale();
     const { $size } = useSize(this.$props);
-    const tableProps = !webPagination ? { fetch } : { dataSource: tableList, webPagination: !0 };
+    const tableProps = !webPagination
+      ? { fetch }
+      : {
+          dataSource: tableList,
+          webPagination: !0,
+          onChange: (pagination, _, __, { currentDataSource }) => {
+            if (this.multiple) return;
+            if (pagination.currentPage !== this.currentPage) {
+              this.currentPage = pagination.currentPage;
+              currentDataSource.length && this.$refs[`table`].SELECT_FIRST_RECORD();
+            }
+          },
+        };
     this.$size = $size || 'default';
     return (
       <div ref="search-helper" style={{ height: '100%' }}>

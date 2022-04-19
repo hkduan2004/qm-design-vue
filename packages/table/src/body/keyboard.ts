@@ -36,9 +36,9 @@ const keyboardMixin = {
       // 上  下
       if (keyCode === 38 || keyCode === 40) {
         prevent(ev);
-        const { layout, scrollYStore, scrollX, createTableList } = this.$$table;
+        const { layout, scrollYStore, scrollX, currentDataSource } = this.$$table;
         const { viewportHeight, gutterWidth } = layout;
-        const pageTableData = getAllTableData(createTableList());
+        const pageTableData = getAllTableData(currentDataSource);
         const total = pageTableData.length;
         let index = pageTableData.findIndex((row) => getRowKey(row, row.index) === this.clicked[0]);
         const xIndex = keyCode === 38 ? (--index + total) % total : ++index % total;

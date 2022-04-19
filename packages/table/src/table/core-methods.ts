@@ -418,11 +418,11 @@ export default {
   },
   // 默认选中首行数据
   selectFirstRow(bool?: boolean): void {
-    const { rowSelection, tableFullData } = this;
+    const { rowSelection, currentDataSource } = this;
     const { type, defaultSelectFirstRow } = rowSelection || {};
     const isSelectFirstRow: boolean = defaultSelectFirstRow || bool || false;
-    if (type !== 'radio' || !isSelectFirstRow || !tableFullData.length) return;
-    const rowKey = this.getRowKey(tableFullData[0], tableFullData[0].index);
+    if (type !== 'radio' || !isSelectFirstRow || !currentDataSource.length) return;
+    const rowKey = this.getRowKey(currentDataSource[0], currentDataSource[0].index);
     this.tableBodyRef.setClickedValues([rowKey, config.selectionColumn]);
     this.selectionKeys = [rowKey];
   },

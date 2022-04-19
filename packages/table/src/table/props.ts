@@ -323,7 +323,7 @@ export default {
 
 /**
  * 事件：
- * change: 分页、排序、筛选变化时触发，参数：pagination, filters, sorter, { currentDataSource: tableData, allDataSource: allTableData }
+ * change: 分页、排序、筛选变化时触发，参数：pagination, filters, sorter, { currentDataSource: tableData }
  * dataChange: 表格数据变化时触发，参数 tableData
  * dataLoaded: 表格数据加载之后触发，参数 tableData
  * rowClick: 行单击事件，参数 row, column, event
