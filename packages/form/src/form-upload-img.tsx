@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-02-23 21:56:33
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2021-10-18 09:25:18
+ * @Last Modified time: 2022-04-27 20:15:21
  */
 import { defineComponent } from 'vue';
 import { noop } from './utils';
@@ -34,6 +34,7 @@ export default defineComponent({
       >
         <UploadCropper
           actionUrl={upload.actionUrl}
+          dataKey={upload.dataKey}
           headers={upload.headers}
           initialValue={form[fieldName]}
           style={{ ...style }}
