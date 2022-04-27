@@ -2,10 +2,11 @@
  * @Author: 焦质晔
  * @Date: 2021-02-09 09:03:59
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-03-31 10:00:57
+ * @Last Modified time: 2022-04-27 20:09:17
  */
 import { defineComponent, PropType } from 'vue';
 import axios from 'axios';
+import { get } from 'lodash-es';
 import PropTypes from '../../_utils/vue-types';
 import { QmMessage, QmMessageBox } from '../../index';
 import { useSize, useLocale } from '../../hooks';
@@ -55,6 +56,7 @@ export default defineComponent({
     limit: PropTypes.number.def(1),
     fileSize: PropTypes.number,
     fileTypes: PropTypes.array.def(['jpg', 'png', 'bmp']),
+    dataKey: PropTypes.string,
     headers: PropTypes.object.def({}),
     params: PropTypes.object.def({}),
     disabled: PropTypes.bool,
@@ -149,7 +151,7 @@ export default defineComponent({
       return isLt5M;
     },
     async upload(options): Promise<void> {
-      const { params, headers } = this.$props;
+      const { params, headers, dataKey } = this.$props;
       const formData = new FormData();
       // Blob
       const blob: Blob = this.fileData ? this.fileData : this.file.raw;
@@ -165,7 +167,10 @@ export default defineComponent({
       try {
         const { data: res } = await axios.post(this.actionUrl, formData, { headers });
         if (res.code === 200) {
-          this.fileList.push({ name: this.file.name, url: res.data || '' });
+          this.fileList.push({
+            name: this.file.name,
+            url: (!dataKey ? res.data : get(res.data, dataKey)) || '',
+          });
           this.$emit('change', this.fileList);
           this.$emit('success', res.data);
         } else {

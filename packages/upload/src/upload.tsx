@@ -2,10 +2,11 @@
  * @Author: 焦质晔
  * @Date: 2021-02-09 09:03:59
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-03-30 20:24:08
+ * @Last Modified time: 2022-04-27 20:10:47
  */
 import { defineComponent, PropType, Component } from 'vue';
 import axios from 'axios';
+import { get } from 'lodash-es';
 import PropTypes from '../../_utils/vue-types';
 import { QmMessage } from '../../index';
 import { useSize, useLocale } from '../../hooks';
@@ -45,6 +46,7 @@ export default defineComponent({
     isOnlyButton: PropTypes.bool,
     limit: PropTypes.number.def(1),
     fileSize: PropTypes.number.def(5),
+    dataKey: PropTypes.string,
     headers: PropTypes.object.def({}),
     params: PropTypes.object.def({}),
     type: PropTypes.string,
@@ -95,7 +97,7 @@ export default defineComponent({
       if (fileList.every((x) => !x.response)) return;
       const list = fileList.map((x) => ({
         name: x.name,
-        url: x.url || x.response.data || '',
+        url: x.url || (!this.dataKey ? x.response.data : get(x.response.data, this.dataKey)) || '',
       }));
       this.$emit('change', list);
     },
