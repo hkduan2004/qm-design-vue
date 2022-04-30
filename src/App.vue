@@ -1033,8 +1033,8 @@ export default defineComponent({
             scrollPagination={true}
             footRender={this.footRender}
             showTableImport
+            rowDraggable
             webPagination
-            spanMethod={this.spanMethod}
             rowSelection={this.selection}
             authConfig={this.authConfig}
             summation={this.summation}

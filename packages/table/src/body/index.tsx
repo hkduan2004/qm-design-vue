@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2020-02-28 23:01:43
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-03-12 19:32:19
+ * @Last Modified time: 2022-04-30 17:28:05
  */
 import { defineComponent, CSSProperties } from 'vue';
 import addEventListener from 'add-dom-event-listener';
@@ -480,11 +480,7 @@ export default defineComponent({
       modelValue: tableData,
       itemKey: (row: IRecord) => getRowKey(row, row.index),
       animation: 200,
-      tag: 'transition-group',
-      componentData: {
-        tag: 'tbody',
-        type: 'transition-group',
-      },
+      tag: 'tbody',
       'onUpdate:modelValue': (list: IRecord[]): void => {
         const records: IRecord[] = [];
         tableFullData.forEach((row: IRecord): void => {

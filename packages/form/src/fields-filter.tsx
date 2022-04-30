@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-02-26 14:53:54
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-03-11 20:12:07
+ * @Last Modified time: 2022-04-30 17:31:03
  */
 import { defineComponent, PropType } from 'vue';
 import classNames from 'classnames';
@@ -61,11 +61,7 @@ export default defineComponent({
         itemKey: 'fieldName',
         animation: 200,
         handle: '.handle',
-        tag: 'transition-group',
-        componentData: {
-          tag: 'ul',
-          type: 'transition-group',
-        },
+        tag: 'ul',
         'onUpdate:modelValue': (val: IFormItem[]): void => {
           this.changeHandle(val);
           // 自动展开

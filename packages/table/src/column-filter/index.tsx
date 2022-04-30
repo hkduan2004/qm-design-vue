@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2020-03-17 10:29:47
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-02-16 10:20:44
+ * @Last Modified time: 2022-04-30 17:30:22
  */
 import { defineComponent } from 'vue';
 import classnames from 'classnames';
@@ -168,11 +168,7 @@ export default defineComponent({
         itemKey: 'dataIndex',
         animation: 200,
         handle: '.left-handle',
-        tag: 'transition-group',
-        componentData: {
-          tag: 'ul',
-          type: 'transition-group',
-        },
+        tag: 'ul',
         'onUpdate:modelValue': (val) => {
           this.leftFixedColumns = val;
         },
@@ -184,11 +180,7 @@ export default defineComponent({
         itemKey: 'dataIndex',
         animation: 200,
         handle: '.main-handle',
-        tag: 'transition-group',
-        componentData: {
-          tag: 'ul',
-          type: 'transition-group',
-        },
+        tag: 'ul',
         'onUpdate:modelValue': (val) => {
           this.mainColumns = val;
         },
@@ -200,11 +192,7 @@ export default defineComponent({
         itemKey: 'dataIndex',
         animation: 200,
         handle: '.right-handle',
-        tag: 'transition-group',
-        componentData: {
-          tag: 'ul',
-          type: 'transition-group',
-        },
+        tag: 'ul',
         'onUpdate:modelValue': (val) => {
           this.rightFixedColumns = val;
         },
