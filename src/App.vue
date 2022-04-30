@@ -1008,6 +1008,7 @@ export default defineComponent({
         <div style="margin: 10px;">
           <qm-form
             ref="qweqwe"
+            // layout="vertical"
             uniqueKey="jzy_filter"
             formType={this.formType}
             list={this.formList}

@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-02-24 13:02:36
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-04-13 21:46:03
+ * @Last Modified time: 2022-04-30 16:47:14
  */
 import { CSSProperties, PropType, Component } from 'vue';
 import PropTypes from '../../_utils/vue-types';
@@ -17,6 +17,8 @@ export const DEFAULT_TRUE_VALUE = '1';
 export const DEFAULT_FALSE_VALUE = '0';
 
 export type IFormType = 'default' | 'search' | 'onlyShow';
+
+export type IFormLayout = 'horizontal' | 'vertical';
 
 export type ISecretType = 'finance' | 'name' | 'phone' | 'IDnumber' | 'bankNumber';
 
@@ -250,6 +252,13 @@ export const props = {
   size: {
     type: String as PropType<ComponentSize>,
     validator: isValidComponentSize,
+  },
+  layout: {
+    type: String as PropType<IFormLayout>,
+    default: 'horizontal',
+    validator: (val: string): boolean => {
+      return ['horizontal', 'vertical'].includes(val);
+    },
   },
   uniqueKey: {
     type: String,

@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-02-09 09:03:59
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-04-14 11:25:45
+ * @Last Modified time: 2022-04-30 16:58:07
  */
 import { ComponentPublicInstance, defineComponent } from 'vue';
 import scrollIntoView from 'scroll-into-view-if-needed';
@@ -685,7 +685,7 @@ export default defineComponent({
       }
       const colSpan = 24 / cols;
       return isSubmitBtn && formType === 'default' ? (
-        <el-row gutter={4}>
+        <el-row gutter={0}>
           <el-col key="-" class="col-button" span={colSpan}>
             <el-form-item label={''}>
               <Space>
@@ -714,14 +714,16 @@ export default defineComponent({
     },
   },
   render(): JSXNode {
-    const { form, rules, labelWidth, formType, customClass } = this;
+    const { form, rules, layout, labelWidth, formType, customClass } = this;
     const prefixCls = getPrefixCls('form');
     const { global } = useGlobalConfig();
     const { $size } = useSize(this.$props);
+    const isVertical = layout === 'vertical';
     const wrapProps = {
       size: $size,
       model: form,
       rules,
+      labelPosition: !isVertical ? 'right' : 'top',
       labelWidth: getParserWidth(labelWidth),
       onSubmit: (ev: Event): void => ev.preventDefault(),
     };
@@ -730,6 +732,7 @@ export default defineComponent({
       [`${prefixCls}--large`]: $size === 'large',
       [`${prefixCls}--default`]: $size === 'default',
       [`${prefixCls}--small`]: $size === 'small',
+      [`${prefixCls}__vertical`]: isVertical,
       [`${prefixCls}__only-show`]: formType === 'onlyShow',
       [`${prefixCls}__label-error-color`]: global?.form?.showLabelErrorColor ?? false,
       [customClass]: !!customClass,
@@ -738,7 +741,7 @@ export default defineComponent({
     return (
       <div class={cls}>
         <el-form ref="form" {...wrapProps}>
-          <el-row gutter={4}>{this.createFormLayout()}</el-row>
+          <el-row gutter={isVertical ? 20 : 0}>{this.createFormLayout()}</el-row>
           {this.createFormButtonLayout()}
         </el-form>
       </div>
