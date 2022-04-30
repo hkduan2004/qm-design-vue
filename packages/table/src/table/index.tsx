@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-02-09 09:03:59
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-03-16 19:23:55
+ * @Last Modified time: 2022-04-30 12:36:24
  */
 import { defineComponent, CSSProperties } from 'vue';
 import { isEqual } from 'lodash-es';
@@ -212,6 +212,9 @@ export default defineComponent({
     },
     isSuperSearch(): boolean {
       return this.showSuperSearch && this.isHeadFilter;
+    },
+    isTableImport(): boolean {
+      return !this.isFetch && !!this.showTableImport;
     },
     isFastSearch(): boolean {
       return !this.isFetch && this.showFastSearch && this.isHeadFilter;

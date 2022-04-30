@@ -1029,6 +1029,7 @@ export default defineComponent({
             rowKey={(row) => row.id}
             scrollPagination={true}
             footRender={this.footRender}
+            showTableImport
             webPagination
             spanMethod={this.spanMethod}
             rowSelection={this.selection}

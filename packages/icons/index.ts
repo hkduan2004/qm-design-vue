@@ -46,3 +46,4 @@ export { default as CheckCircleIcon } from './check-circle';
 export { default as LineHeightIcon } from './line-height';
 export { default as PictureIcon } from './picture';
 export { default as MonitorIcon } from './monitor';
+export { default as ImportIcon } from './import';

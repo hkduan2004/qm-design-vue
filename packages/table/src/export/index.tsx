@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2020-02-02 15:58:17
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2021-11-15 15:11:15
+ * @Last Modified time: 2022-04-30 12:37:40
  */
 import { defineComponent } from 'vue';
 import dayjs from 'dayjs';
@@ -36,7 +36,7 @@ export type IOptions = {
 };
 
 export default defineComponent({
-  name: 'Export',
+  name: 'TableExport',
   props: ['tableColumns', 'flattenColumns'],
   inject: ['$$table'],
   mixins: [localeMixin, exportMixin],

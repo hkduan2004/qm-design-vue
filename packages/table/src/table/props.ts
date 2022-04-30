@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2020-02-28 23:04:58
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-03-17 15:56:12
+ * @Last Modified time: 2022-04-30 12:34:43
  */
 import { PropType } from 'vue';
 import PropTypes from '../../../_utils/vue-types';
@@ -299,6 +299,8 @@ export default {
   showFullScreen: PropTypes.bool.def(true),
   // 是否显示刷新按钮
   showRefresh: PropTypes.bool.def(true),
+  // 是否显示导入按钮
+  showTableImport: PropTypes.bool.def(false),
   // 是否显示行选合集
   showSelectCollection: PropTypes.bool.def(true),
   // 是否显示高级检索

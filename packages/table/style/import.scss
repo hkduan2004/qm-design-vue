@@ -1,0 +1,22 @@
+/*
+ * @Author: 焦质晔
+ * @Date: 2020-03-26 11:26:46
+ * @Last Modified by: 焦质晔
+ * @Last Modified time: 2022-03-11 19:56:02
+ */
+$prefix: '#{$qm-prefix}-table';
+
+.#{$prefix}-import {
+  display: inline-block;
+  padding: 5px 3px;
+  line-height: 1;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  .icon {
+    font-size: 1.05em;
+  }
+}
+
+.#{$prefix}--file-form {
+  display: none;
+}
