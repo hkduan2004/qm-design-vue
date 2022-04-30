@@ -353,6 +353,7 @@ export default defineComponent({
             isCalcHeight: true,
             limit: 2,
             params: {},
+            dataKey: 'url',
           },
         },
         {
@@ -364,6 +365,7 @@ export default defineComponent({
             actionUrl: 'http://127.0.0.1:3000/api/design/upload',
             limit: 2,
             params: {},
+            dataKey: 'url',
           },
         },
         {
