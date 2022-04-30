@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-06-19 08:46:00
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-03-17 15:55:51
+ * @Last Modified time: 2022-04-30 14:04:05
  */
 export default {
   name: 'en',
@@ -55,6 +55,7 @@ export default {
     },
     upload: {
       tooltip: 'Can only upload {type} format',
+      notType: 'Unsupported file types {type}',
       sizeLimit: 'Size cannot exceed {size}M',
       uploadError: 'Failed to upload files!',
       downError: 'File download failed!',

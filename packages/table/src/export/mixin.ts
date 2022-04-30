@@ -2,11 +2,13 @@
  * @Author: 焦质晔
  * @Date: 2021-04-06 13:37:24
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2021-11-11 16:10:56
+ * @Last Modified time: 2022-04-30 12:50:37
  */
 import ExcelJS from 'exceljs';
-import { getCellValue, convertToRows, getVNodeText, columnsFlatMap, deepFindColumn } from '../utils';
+import { getCellValue, setCellValue, convertToRows, getVNodeText, columnsFlatMap, deepFindColumn } from '../utils';
 import { isVNode, isFunction } from '../../../_utils/util';
+import { QmMessage } from '../../../index';
+
 import type { IAlign, IColumn, IRecord } from '../table/types';
 import type { AnyObject, Nullable } from '../../../_utils/types';
 import type { IOptions } from './index';
@@ -367,6 +369,60 @@ const exportMixin = {
       const blob = b64toBlob(b64, 'application/csv');
 
       return blob;
+    },
+    importXLSX(options: { columns: IColumn[]; file: Blob }, callback?: (records: IRecord[]) => void) {
+      const { columns, file } = options;
+      const checkImportData = (tableFields: string[], fields: string[]) => {
+        return fields.some((field) => tableFields.indexOf(field) > -1);
+      };
+      const flatColumns = columnsFlatMap(columns);
+      const fileReader = new FileReader();
+      fileReader.onerror = () => {
+        QmMessage.error(this.$t('qm.table.import.error'));
+      };
+      fileReader.onload = (ev) => {
+        const tableFields: string[] = flatColumns.map((column) => column.title);
+        const workbook = new ExcelJS.Workbook();
+        const readerTarget = ev.target;
+        if (readerTarget) {
+          workbook.xlsx.load(readerTarget.result as ArrayBuffer).then((wb) => {
+            const firstSheet = wb.worksheets[0];
+            if (firstSheet) {
+              const sheetValues = firstSheet.getSheetValues() as string[][];
+              const fieldIndex = sheetValues.findIndex((list) => list && list.length > 0);
+              const fields = sheetValues[fieldIndex] as string[];
+              const status = checkImportData(tableFields, fields);
+              if (status) {
+                const records = sheetValues.slice(fieldIndex + 1).map((list) => {
+                  const item: Record<string, unknown> = {};
+                  list.forEach((cellValue, cIndex) => {
+                    item[fields[cIndex]] = cellValue;
+                  });
+                  const record: IRecord = {};
+                  tableFields.forEach((field, index) => {
+                    const { dataIndex, dictItems } = flatColumns[index];
+                    if (Array.isArray(dictItems)) {
+                      item[field] = dictItems.find((x) => x.text == item[field])?.value ?? item[field];
+                    }
+                    setCellValue(record, dataIndex, item[field]);
+                  });
+                  return record;
+                });
+                // 执行回调
+                callback?.(records);
+                QmMessage.success(this.$t('qm.table.import.success', { total: records.length }));
+              } else {
+                QmMessage.error(this.$t('qm.table.import.error'));
+              }
+            } else {
+              QmMessage.error(this.$t('qm.table.import.error'));
+            }
+          });
+        } else {
+          QmMessage.error(this.$t('qm.table.import.error'));
+        }
+      };
+      fileReader.readAsArrayBuffer(file);
     },
   },
 };

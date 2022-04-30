@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2020-05-19 15:58:23
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-04-30 12:42:24
+ * @Last Modified time: 2022-04-30 14:01:39
  */
 import { defineComponent } from 'vue';
 import { getPrefixCls } from '../../../_utils/prefix';
@@ -12,6 +12,7 @@ import type { JSXNode } from '../../../_utils/types';
 
 import { ImportIcon } from '../../../icons';
 import Dialog from '../../../dialog';
+import ImportSettig from './setting';
 
 export default defineComponent({
   name: 'TableImport',
@@ -39,6 +40,7 @@ export default defineComponent({
       visible,
       title: t('qm.table.import.settingTitle'),
       width: '600px',
+      height: 'none',
       loading: false,
       useHeight: true,
       showFullScreen: false,
@@ -55,7 +57,14 @@ export default defineComponent({
             <ImportIcon />
           </i>
         </span>
-        <Dialog {...wrapProps}>asd</Dialog>
+        <Dialog {...wrapProps}>
+          <ImportSettig
+            columns={this.columns}
+            onClose={() => {
+              this.visible = !1;
+            }}
+          />
+        </Dialog>
       </>
     );
   },
