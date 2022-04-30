@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-02-09 09:03:59
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-04-14 14:12:19
+ * @Last Modified time: 2022-04-30 17:09:46
  */
 import { defineComponent, PropType, CSSProperties } from 'vue';
 import addEventListener from 'add-dom-event-listener';
@@ -49,7 +49,7 @@ export default defineComponent({
       type: [Number, String] as PropType<number | string>,
       default: 'auto',
       validator: (val: string | number): boolean => {
-        return isNumber(val) || isValidWidthUnit(val) || val === 'auto' || val === 'none';
+        return isNumber(val) || isValidWidthUnit(val) || val === 'auto';
       },
     },
     top: {
@@ -84,7 +84,7 @@ export default defineComponent({
   },
   computed: {
     disTop(): string {
-      const val: string = this.height === 'auto' || this.height === 'none' ? this.top : `calc((100vh - ${getParserWidth(this.height)}) / 2)`;
+      const val: string = this.height === 'auto' ? this.top : `calc((100vh - ${getParserWidth(this.height)}) / 2)`;
       return !this.fullscreen ? val : '0';
     },
   },
@@ -136,7 +136,7 @@ export default defineComponent({
       this.$dialog = null;
     },
     setDialogStyle(): void {
-      if (this.height === 'auto' || this.height === 'none') return;
+      if (this.height === 'auto') return;
       setStyle(this.$dialog, { height: this.fullscreen ? 'auto' : getParserWidth(this.height) });
     },
     setDialogBodyStyle(): void {
@@ -217,7 +217,6 @@ export default defineComponent({
 
     const cls = {
       [prefixCls]: true,
-      [`${prefixCls}__flex`]: height !== 'none',
       [`${prefixCls}--large`]: $size === 'large',
       [`${prefixCls}--default`]: $size === 'default',
       [`${prefixCls}--small`]: $size === 'small',
