@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-04-07 08:23:32
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-04-30 14:15:14
+ * @Last Modified time: 2022-04-30 17:58:21
  */
 import { defineComponent } from 'vue';
 import { getPrefixCls } from '../../../_utils/prefix';
@@ -11,17 +11,18 @@ import { useLocale } from '../../../hooks';
 import { localeMixin } from '../../../mixins';
 import exportMixin from '../export/mixin';
 import config from '../config';
+
 import type { JSXNode } from '../../../_utils/types';
+import { IColumn, IRecord } from '../table/types';
 
 import Form from '../../../form';
 import Button from '../../../button';
 import SelectFile from './SelectFile';
-import { IColumn, IRecord } from '../table/types';
 
 export default defineComponent({
   name: 'ImportSetting',
-  emits: ['close'],
   props: ['columns', 'onClose'],
+  emits: ['close'],
   inject: ['$$table'],
   mixins: [localeMixin, exportMixin] as any,
   data() {
@@ -145,6 +146,7 @@ export default defineComponent({
     return (
       <div class={`${prefixCls}-import__setting`}>
         <Form ref="form" initialValue={initialValue} list={formList} cols={1} labelWidth={110} />
+        <div style="height: 20px"></div>
         <div
           style={{
             position: 'absolute',
@@ -167,4 +169,3 @@ export default defineComponent({
     );
   },
 });
-1;

@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-02-09 09:27:46
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-04-30 17:03:18
+ * @Last Modified time: 2022-04-30 18:07:35
  */
 @import '../../style/src/common';
 @import './fields-filter';
@@ -159,13 +159,6 @@ $prefix: '#{$qm-prefix}-form';
     .el-form-item {
       * {
         pointer-events: none !important;
-      }
-      .el-input__inner,
-      .el-textarea__inner {
-        color: $text-color-base;
-        outline: 1px dashed #c6c6c6;
-        box-shadow: none;
-        background-color: $body-background;
       }
       .el-input-group__append {
         background-color: transparent;

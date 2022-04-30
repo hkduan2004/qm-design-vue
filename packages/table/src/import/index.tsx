@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2020-05-19 15:58:23
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-04-30 17:15:54
+ * @Last Modified time: 2022-04-30 17:57:06
  */
 import { defineComponent } from 'vue';
 import { getPrefixCls } from '../../../_utils/prefix';
@@ -42,7 +42,6 @@ export default defineComponent({
       width: '600px',
       height: 'auto',
       loading: false,
-      useHeight: true,
       showFullScreen: false,
       destroyOnClose: true,
       containerStyle: { paddingBottom: `${SizeHeight[tableSize] + 20}px` },
