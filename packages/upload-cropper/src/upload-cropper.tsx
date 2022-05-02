@@ -311,6 +311,7 @@ export default defineComponent({
         {this.renderPictureCard()}
         <el-upload
           ref="upload"
+          class="el-upload"
           {...uploadProps}
           v-slots={{
             default: (): JSXNode => (
