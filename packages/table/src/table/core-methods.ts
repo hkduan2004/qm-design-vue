@@ -380,6 +380,20 @@ export default {
     }
     return results;
   },
+  deepMapRemove(tableList: IRecord[], rowKeys: IRowKey[], callback?: (row: IRecord, rowKey: IRowKey) => void): void {
+    for (let i = 0; i < tableList.length; i++) {
+      const row = tableList[i];
+      const rowKey = this.getRowKey(row, row.index);
+      if (Array.isArray(row.children)) {
+        this.deepMapRemove(row.children, rowKeys, callback);
+      }
+      if (rowKeys.includes(rowKey)) {
+        callback?.(row, rowKey);
+        tableList.splice(i, 1);
+        i = i - 1;
+      }
+    }
+  },
   // 数据加载事件
   dataLoadedHandle(): void {
     this.$emit('dataLoaded', [...this.tableFullData]);

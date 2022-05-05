@@ -141,41 +141,33 @@ export default {
     const rowKeys = rows.map((x) => (isObject(x) ? this.getRowKey(x, (x as IRecord).index) : x));
     const editableColumns = this.flattenColumns.filter((column) => isFunction(column.editRender));
     let isRemoved = false;
-    for (let i = 0; i < this.tableFullData.length; i++) {
-      const row = this.tableFullData[i];
-      const rowKey = this.getRowKey(row, row.index);
-      if (rowKeys.includes(rowKey)) {
-        this.store.addToRemoved(row);
-        // 移除表单校验记录
-        editableColumns.forEach((column) => {
-          const { dataIndex, editRender } = column;
-          const options = editRender(row);
-          if (!options) return;
-          const { rules = [], disabled } = options;
-          if (!disabled && rules.length) {
-            this.store.removeFromRequired({ x: rowKey, y: dataIndex });
-            this.store.removeFromValidate({ x: rowKey, y: dataIndex });
-          }
-        });
-        // 移除选择列数据
-        if (this.selectionKeys.includes(rowKey)) {
-          this.removeSelectionKey(rowKey);
+    this.deepMapRemove(this.tableFullData, rowKeys, (row, rowKey) => {
+      this.store.addToRemoved(row);
+      // 移除表单校验记录
+      editableColumns.forEach((column) => {
+        const { dataIndex, editRender } = column;
+        const options = editRender(row);
+        if (!options) return;
+        const { rules = [], disabled } = options;
+        if (!disabled && rules.length) {
+          this.store.removeFromRequired({ x: rowKey, y: dataIndex });
+          this.store.removeFromValidate({ x: rowKey, y: dataIndex });
         }
-        // 移除高亮行数据
-        if (rowKey === this.highlightKey) {
-          this.clearRowHighlight();
-        }
-        // 移除展开行数据
-        if (this.rowExpandedKeys.includes(rowKey)) {
-          this.removeExpandableKey(rowKey);
-        }
-        // 移除数据
-        this.tableFullData.splice(i, 1);
-        // 移动下标
-        i = i - 1;
-        isRemoved = true;
+      });
+      // 移除选择列数据
+      if (this.selectionKeys.includes(rowKey)) {
+        this.removeSelectionKey(rowKey);
       }
-    }
+      // 移除高亮行数据
+      if (rowKey === this.highlightKey) {
+        this.clearRowHighlight();
+      }
+      // 移除展开行数据
+      if (this.rowExpandedKeys.includes(rowKey)) {
+        this.removeExpandableKey(rowKey);
+      }
+      isRemoved = true;
+    });
     if (isRemoved) {
       // 触发数据数据响应式
       this.setTableFullData(this.tableFullData.slice(0));

@@ -5,11 +5,12 @@
  * @Last Modified time: 2022-03-17 15:59:11
  */
 import { defineComponent } from 'vue';
-import { cloneDeep } from 'lodash-es';
 import { useLocale } from '../../../hooks';
+import { localeMixin } from '../../../mixins';
+import config from '../config';
+
 import type { IColumn, IRecord } from '../table/types';
 import type { JSXNode } from '../../../_utils/types';
-import config from '../config';
 
 import VTable from '../table';
 import Button from '../../../button';
@@ -18,6 +19,7 @@ export default defineComponent({
   name: 'SelectCollectionResult',
   props: ['columns', 'selectionKeys', 'selectionRows', 'onClose'],
   inject: ['$$table'],
+  mixins: [localeMixin] as any,
   data() {
     return {
       vColumns: this.createColumns(),
@@ -26,10 +28,12 @@ export default defineComponent({
   },
   methods: {
     createTableList(): IRecord[] {
-      const _list = cloneDeep(this.selectionRows);
-      return _list.map((row) => {
-        delete row.children;
-        return row;
+      return this.selectionRows.map((row) => {
+        const item = {
+          ...row,
+          children: undefined,
+        };
+        return item;
       });
     },
     setSelectionKeys(keys: string[]): void {
@@ -52,11 +56,21 @@ export default defineComponent({
       });
     },
     createColumns(): IColumn[] {
-      return this.filterColumns(
-        this.columns.filter(
-          (column) => ![config.expandableColumn, config.selectionColumn, 'index', 'pageIndex', config.operationColumn].includes(column.dataIndex)
-        )
-      );
+      return [
+        {
+          title: this.$t('qm.table.groupSummary.index'),
+          dataIndex: 'pageIndex',
+          width: 80,
+          render: (text: number) => {
+            return text + 1;
+          },
+        },
+        ...this.filterColumns(
+          this.columns.filter(
+            (column) => ![config.expandableColumn, config.selectionColumn, 'index', 'pageIndex', config.operationColumn].includes(column.dataIndex)
+          )
+        ),
+      ];
     },
     cancelHandle(): void {
       this.$emit('close', false);
