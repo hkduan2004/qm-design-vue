@@ -341,8 +341,8 @@ export default defineComponent({
         this.rowExpandedKeys = this.createRowExpandedKeys();
       }
     },
-    [`expandable.expandedRowKeys`](): void {
-      this.rowExpandedKeys = this.createRowExpandedKeys();
+    [`expandable.expandedRowKeys`](next: string[]): void {
+      this.rowExpandedKeys = this.createRowExpandedKeys(next);
     },
     rowExpandedKeys(next: string[], prev: string[]): void {
       if (this.isTreeTable && this.treeConfig?.virtual) {

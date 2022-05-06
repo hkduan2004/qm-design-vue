@@ -27,28 +27,29 @@ const expandableMixin = {
       };
     },
     // 展开行，已展开的 keys
-    createRowExpandedKeys(): string[] {
-      const { expandable, selectionKeys, allRowKeys, highlightKey, isTreeTable } = this;
+    createRowExpandedKeys(keys?: string[]): string[] {
+      const { expandable, selectionKeys, rowExpandedKeys, allRowKeys, highlightKey, isTreeTable } = this;
       if (isTreeTable && expandable?.expandedRowRender) {
         warn('Table', '树结构表格不能再设置展开行的 `expandedRowRender` 参数');
       }
-      const { defaultExpandAllRows, expandedRowKeys = [] } = expandable || {};
+      const { defaultExpandAllRows } = expandable || {};
       // 树结构
       if (isTreeTable) {
-        const mergedRowKeys = [...selectionKeys, ...expandedRowKeys];
+        const mergedRowKeys = [...selectionKeys, ...(keys || [])];
         if (highlightKey) {
           mergedRowKeys.unshift(highlightKey);
         }
         let result: string[] = [];
         mergedRowKeys.forEach((key) => {
-          result.push(...(deepGetRowkey(this.deriveRowKeys, key)?.slice(0, -1).reverse() || []));
+          const _rowKeys = deepGetRowkey(this.deriveRowKeys, key) || [];
+          result.push(...(_rowKeys.length > 1 ? _rowKeys.slice(0, -1).reverse() : _rowKeys));
         });
-        result = defaultExpandAllRows && !expandedRowKeys.length ? allRowKeys : [...new Set([...expandedRowKeys, ...result])];
+        result = defaultExpandAllRows ? allRowKeys : [...new Set([...rowExpandedKeys, ...result])];
         return result.filter((key) => !this.flattenRowKeys.includes(key));
       }
       // 展开行
       if (expandable) {
-        return defaultExpandAllRows && !expandedRowKeys.length ? allRowKeys.slice(0) : [...expandedRowKeys];
+        return defaultExpandAllRows ? allRowKeys.slice(0) : [...rowExpandedKeys];
       }
       return [];
     },
