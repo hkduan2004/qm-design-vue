@@ -36,7 +36,7 @@ export default defineComponent({
     },
   },
   render(): JSXNode {
-    const { total, rowSelection, selectionKeys } = this.$$table;
+    const { total, rowSelection, selectionKeys, allTableData, isTreeTable } = this.$$table;
     const { t } = useLocale();
     const prefixCls = getPrefixCls('table');
     const cls = {
@@ -48,7 +48,7 @@ export default defineComponent({
           <InfoCircleFilledIcon />
         </i>
         <span>
-          {t('qm.table.alert.total', { total })}
+          {t('qm.table.alert.total', { total: !isTreeTable ? total : allTableData.length })}
           {!!rowSelection ? `，${t('qm.table.alert.selected', { total: selectionKeys.length })}` : ''}
         </span>
         {this.showClear && <em onClick={this.clearHandle}>{t('qm.table.alert.clear')}</em>}
