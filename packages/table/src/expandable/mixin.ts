@@ -33,9 +33,10 @@ const expandableMixin = {
         warn('Table', '树结构表格不能再设置展开行的 `expandedRowRender` 参数');
       }
       const { defaultExpandAllRows } = expandable || {};
+      const expandedKeys: string[] = Array.isArray(keys) ? keys : rowExpandedKeys;
       // 树结构
       if (isTreeTable) {
-        const mergedRowKeys = [...selectionKeys, ...(keys || [])];
+        const mergedRowKeys: string[] = [...selectionKeys];
         if (highlightKey) {
           mergedRowKeys.unshift(highlightKey);
         }
@@ -44,12 +45,12 @@ const expandableMixin = {
           const _rowKeys = deepGetRowkey(this.deriveRowKeys, key) || [];
           result.push(...(_rowKeys.length > 1 ? _rowKeys.slice(0, -1).reverse() : _rowKeys));
         });
-        result = defaultExpandAllRows ? allRowKeys : [...new Set([...rowExpandedKeys, ...result])];
+        result = defaultExpandAllRows ? allRowKeys : [...new Set([...expandedKeys, ...result])];
         return result.filter((key) => !this.flattenRowKeys.includes(key));
       }
       // 展开行
       if (expandable) {
-        return defaultExpandAllRows ? allRowKeys.slice(0) : [...rowExpandedKeys];
+        return defaultExpandAllRows ? allRowKeys.slice(0) : [...expandedKeys];
       }
       return [];
     },
