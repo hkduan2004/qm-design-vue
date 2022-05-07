@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2020-03-01 15:20:02
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2021-12-21 14:15:04
+ * @Last Modified time: 2022-05-07 09:57:46
  */
 import { ComponentInternalInstance } from 'vue';
 import { get } from 'lodash-es';
@@ -31,8 +31,10 @@ export default {
         }
         // 数据索引
         record.index = index;
-        // 分页索引
-        record.pageIndex = this.createPageIndex(index);
+        if (!this.ignorePageIndex) {
+          // 分页索引
+          record.pageIndex = this.createPageIndex(index);
+        }
         return record;
       });
     };

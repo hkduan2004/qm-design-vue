@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2020-02-28 23:04:58
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-04-30 12:34:43
+ * @Last Modified time: 2022-05-07 09:56:43
  */
 import { PropType } from 'vue';
 import PropTypes from '../../../_utils/vue-types';
@@ -254,6 +254,8 @@ export default {
   }),
   // 底部自定义渲染
   footRender: PropTypes.func,
+  // 忽略行数据 pageIndex 的创建
+  ignorePageIndex: PropTypes.bool.def(false),
   // 多列排序
   multipleSort: PropTypes.bool.def(true),
   // 是否为滚动分页

@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2020-05-20 09:36:38
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-03-17 15:59:11
+ * @Last Modified time: 2022-05-07 10:00:07
  */
 import { defineComponent } from 'vue';
 import { useLocale } from '../../../hooks';
@@ -95,6 +95,7 @@ export default defineComponent({
           }}
           minHeight={300}
           webPagination={true}
+          ignorePageIndex={true}
           showFullScreen={false}
           showFastSearch={false}
           showSelectCollection={false}

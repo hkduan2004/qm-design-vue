@@ -1029,7 +1029,7 @@ export default defineComponent({
             stripe={true}
             columns={this.columns}
             dataSource={this.list}
-            rowKey={(row) => row.id}
+            rowKey={(row) => row.pageIndex}
             scrollPagination={true}
             footRender={this.footRender}
             showTableImport

@@ -321,7 +321,7 @@ export default defineComponent({
               showFullScreen={false}
               showFastSearch={false}
               showColumnDefine={false}
-              rowKey={(record) => record.index}
+              rowKey={'index'}
               columnsChange={(columns) => (this.groupColumns = columns)}
               onDataChange={(tableData) => {
                 this.groupTableData = tableData;
@@ -344,7 +344,7 @@ export default defineComponent({
               showFullScreen={false}
               showFastSearch={false}
               showColumnDefine={false}
-              rowKey={(record) => record.index}
+              rowKey={'index'}
               columnsChange={(columns) => (this.summaryColumns = columns)}
               onDataChange={(tableData) => {
                 this.summaryTableData = tableData;

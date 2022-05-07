@@ -375,7 +375,7 @@ export default defineComponent({
               showFullScreen={false}
               showFastSearch={false}
               showColumnDefine={false}
-              rowKey={(record) => record.index}
+              rowKey={'index'}
               columnsChange={(columns) => (this.searchColumns = columns)}
               onRowClick={this.toggleBracket}
               onDataChange={(tableData) => {
