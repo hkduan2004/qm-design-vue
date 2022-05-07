@@ -294,6 +294,7 @@ export default {
       params: PropTypes.object, // 接口参数
       columnDataKey: PropTypes.string, // 列权限的数据路径
       exportDataKey: PropTypes.string, // 导出权限的数据路径
+      importDataKey: PropTypes.string, // 导入权限的数据路径
       printDataKey: PropTypes.string, // 打印权限的数据路径
     }),
   }),

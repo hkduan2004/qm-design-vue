@@ -106,6 +106,7 @@ export default defineComponent({
       // 权限
       permission: {
         export: true,
+        import: true,
         print: true,
       },
       // 表格布局相关参数

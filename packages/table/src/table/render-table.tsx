@@ -159,7 +159,7 @@ export default {
             {/* 打印 */}
             {permission.print && tablePrint && <PrintTable {...printProps} />}
             {/* 导入 */}
-            {isTableImport && <TableImport columns={tableColumns} />}
+            {permission.import && isTableImport && <TableImport columns={tableColumns} />}
             {/* 导出 */}
             {permission.export && exportExcel && <TableExport {...exportProps} />}
             {/* 多选集合 */}

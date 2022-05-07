@@ -97,7 +97,7 @@ export default {
   // ajax 获取权限
   async getTableAuth(): Promise<void> {
     if (!this.authConfig?.fetch) return;
-    const { api, params, columnDataKey, exportDataKey, printDataKey } = this.authConfig.fetch;
+    const { api, params, columnDataKey, exportDataKey, importDataKey, printDataKey } = this.authConfig.fetch;
     try {
       const res = await api(params);
       if (res.code === 200) {
@@ -118,6 +118,9 @@ export default {
         }
         if (exportDataKey) {
           this.permission.export = !!get(res.data, exportDataKey);
+        }
+        if (importDataKey) {
+          this.permission.import = !!get(res.data, importDataKey);
         }
         if (printDataKey) {
           this.permission.print = !!get(res.data, printDataKey);
