@@ -108,7 +108,7 @@ export default defineComponent({
         );
       });
       this.columns.forEach((column: IColumn, index: number) => {
-        if (column.noAuth) {
+        if (column.noAuth && resultColumns.findIndex((x) => x.dataIndex === column.dataIndex) < 0) {
           resultColumns.splice(index, 0, column);
         }
       });
