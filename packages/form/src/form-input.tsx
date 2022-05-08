@@ -6,7 +6,7 @@
  */
 import { defineComponent } from 'vue';
 import { useLocale } from '../../hooks';
-import { noop } from './utils';
+import { secretFormat, noop } from './utils';
 import { getParserWidth } from '../../_utils/util';
 
 import type { JSXNode, Nullable } from '../../_utils/types';
@@ -38,6 +38,7 @@ export default defineComponent({
       minlength = 0,
       maxlength,
       showLimit,
+      secretType,
       prefixIcon,
       suffixIcon,
       appendRender,
@@ -52,6 +53,8 @@ export default defineComponent({
       onDblClick = noop,
     } = options;
 
+    const showSecretType = secretType && (readonly || disabled);
+
     const createSuffix = (): Nullable<{ append: () => JSXNode }> => {
       if (appendRender) {
         return {
@@ -62,7 +65,7 @@ export default defineComponent({
     };
 
     const wrapProps = {
-      modelValue: form[fieldName],
+      modelValue: showSecretType ? secretFormat(form[fieldName], secretType) : form[fieldName],
       'onUpdate:modelValue': (val: string): void => {
         // 搜索帮助，不允许输入
         if (noInput) return;

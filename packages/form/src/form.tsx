@@ -11,7 +11,7 @@ import { getParserWidth, isObject, isFunction } from '../../_utils/util';
 import { getPrefixCls } from '../../_utils/prefix';
 import { useSize, useLocale, useGlobalConfig } from '../../hooks';
 import { warn } from '../../_utils/error';
-import { noop, difference, secretFormat, isEmptyValue } from './utils';
+import { noop, difference, isEmptyValue } from './utils';
 import { FormColsMixin } from './form-cols-mixin';
 import { PublicMethodsMixin } from './public-methods-mixin';
 import { AuthMixin } from './auth-mixin';
@@ -234,12 +234,6 @@ export default defineComponent({
       val = val ?? undefined;
       if (ARRAY_TYPE.includes(type)) {
         val = val ?? [];
-      }
-      if (type === 'INPUT' && (readonly || item.disabled)) {
-        const { secretType } = options;
-        if (secretType) {
-          val = secretFormat(val, secretType as ISecretType);
-        }
       }
       if (type === 'CHECKBOX' || type === 'SWITCH') {
         val = val ?? options.falseValue ?? DEFAULT_FALSE_VALUE;
