@@ -252,7 +252,11 @@ export default defineComponent({
     clientSorter(type: string): void {
       const validSorter = pickBy(this.sorter, (val) => val !== null);
       for (let key in validSorter) {
-        let column = this.flattenColumns.find((column) => column.dataIndex === key);
+        const column = this.flattenColumns.find((column) => column.dataIndex === key);
+        if (!column) {
+          delete validSorter[key];
+          continue;
+        }
         this.doSortHandle(column, validSorter[key]);
       }
       if (type === 'filter') return;
