@@ -15,8 +15,8 @@ import { noop, difference, isEmptyValue } from './utils';
 import { FormColsMixin } from './form-cols-mixin';
 import { PublicMethodsMixin } from './public-methods-mixin';
 import { AuthMixin } from './auth-mixin';
-import { props, ARRAY_TYPE, FORMAT_TYPE, UNFIX_TYPE, DEFAULT_TRUE_VALUE, DEFAULT_FALSE_VALUE } from './types';
-import type { IFormData, IFormItem, IFormDesc, IFormItemType, ISecretType } from './types';
+import { props, ARRAY_TYPE, UNFIX_TYPE, DEFAULT_TRUE_VALUE, DEFAULT_FALSE_VALUE } from './types';
+import type { IFormData, IFormItem, IFormDesc, IFormItemType } from './types';
 import type { AnyObject, JSXNode, Nullable, ValueOf } from '../../_utils/types';
 
 import { InfoCircleIcon, UpIcon, DownIcon, SearchIcon, ReloadIcon } from '../../icons';
