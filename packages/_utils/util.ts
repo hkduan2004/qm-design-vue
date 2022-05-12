@@ -124,6 +124,36 @@ export const deepToRaw = <T>(target: T): T => {
   return clone;
 };
 
+function forEach(array, iteratee) {
+  let index = -1;
+  const length = array.length;
+  while (++index < length) {
+    iteratee(array[index], index);
+  }
+  return array;
+}
+
+export const deepClone = (target: object, map = new WeakMap()) => {
+  if (typeof target === 'object') {
+    const isArray = Array.isArray(target);
+    const cloneTarget = isArray ? [] : {};
+    if (map.get(target)) {
+      return target;
+    }
+    map.set(target, cloneTarget);
+    const keys = isArray ? undefined : Object.keys(target);
+    forEach(keys || target, (value, key) => {
+      if (keys) {
+        key = value;
+      }
+      cloneTarget[key] = deepClone(target[key], map);
+    });
+    return cloneTarget;
+  } else {
+    return target;
+  }
+};
+
 /**
  * @description 延迟方法，异步函数
  * @param {number} delay 延迟的时间，单位 毫秒
