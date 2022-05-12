@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-02-08 16:39:21
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2021-12-21 14:59:36
+ * @Last Modified time: 2022-05-12 13:25:48
  */
 import type { App } from 'vue';
 import pinyin from './_utils/pinyin';
@@ -32,6 +32,7 @@ import Countup from './countup';
 import Table from './table';
 import SearchHelper from './search-helper';
 import TreeTableHelper from './tree-table-helper';
+import TreeHelper from './tree-helper';
 import Cropper from './cropper';
 import ConfigProvider from './config-provider';
 
@@ -79,6 +80,7 @@ const components = [
   Table,
   SearchHelper,
   TreeTableHelper,
+  TreeHelper,
   Cropper,
   ConfigProvider,
 ];
@@ -127,6 +129,7 @@ export {
   Table as QmTable,
   SearchHelper as QmSearchHelper,
   TreeTableHelper as QmTreeTableHelper,
+  TreeHelper as QmTreeHelper,
   Cropper as QmCropper,
   ConfigProvider as QmConfigProvider,
   MessageBox as QmMessageBox,

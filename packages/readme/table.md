@@ -164,6 +164,7 @@
 | checkbox        | 复选框        |
 | switch          | 开关          |
 | search-helper   | 搜索帮助      |
+| tree-helper     | 树搜索帮助    |
 | date            | 日期类型      |
 | datetime        | 日期-时间类型 |
 | time            | 时间类型      |
@@ -218,12 +219,27 @@
 
 | 参数          | 说明                                                                          | 类型                                         | 默认值 |
 | ------------- | ----------------------------------------------------------------------------- | -------------------------------------------- | ------ |
-| filters       | 顶部筛选条件配置，参考 TopFilter 组件，必要参数                               | array                                        | -      |
-| table         | 列表组件配置，[配置项](#table)，必要参数                                      | array                                        | -      |
+| filters       | 顶部筛选条件配置，参考 QmForm 组件，必要参数                                  | array                                        | -      |
+| table         | 列表组件配置，[配置项](#helper_table)，必要参数                               | array                                        | -      |
+| tree          | 树组件配置，[配置项](#helper_tree)，必要参数                                  | object                                       | -      |
 | fieldAliasMap | 表单字段与回传数据字段的映射，[配置项](#alias)， 必要参数                     | func                                         | -      |
 | beforeOpen    | 打开搜索帮助的前置钩子，若返回 false 或者返回 Promise 且被 reject，则阻止打开 | function(cell, row, column)                  | -      |
 | beforeClose   | 关闭搜索帮助的前置钩子，若返回 false 或者返回 Promise 且被 reject，则阻止关闭 | function(searchHelperRow, cell, row, column) | -      |
 | closed        | 关闭搜索帮助的后置钩子                                                        | function(row)                                | -      |
+
+### helper_table
+
+| 参数    | 说明                        | 类型   | 默认值 |
+| ------- | --------------------------- | ------ | ------ |
+| columns | 同 Table，[配置项](#column) | array  | -      |
+| fetch   | 同 Table，[配置项](#fetch)  | object | -      |
+
+### helper_tree
+
+| 参数      | 说明                       | 类型    | 默认值 |
+| --------- | -------------------------- | ------- | ------ |
+| fetch     | 同 Table，[配置项](#fetch) | object  | -      |
+| asyncLoad | 是否异步加载数据           | boolean | -      |
 
 ### rule
 
@@ -333,6 +349,7 @@
 | params        | 接口参数                                              | object | -      |
 | columnDataKey | 列权限的数据路径，值为不可见列 `dataIndex` 组成的数组 | string | -      |
 | exportDataKey | 导出权限的数据路径，值为数字 1 或 0                   | string | -      |
+| importDataKey | 导入权限的数据路径，值为数字 1 或 0                   | string | -      |
 | printDataKey  | 打印权限的数据路径，为数字 1 或 0                     | string | -      |
 
 ### exportExcel

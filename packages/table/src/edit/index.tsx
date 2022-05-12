@@ -2,13 +2,13 @@
  * @Author: 焦质晔
  * @Date: 2020-03-22 14:34:21
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-03-14 19:33:52
+ * @Last Modified time: 2022-05-12 15:27:00
  */
 import { defineComponent } from 'vue';
 import dayjs from 'dayjs';
 import { get, merge, isEqual } from 'lodash-es';
 import { getCellValue, setCellValue, deepFindColumn, toDate, dateFormat } from '../utils';
-import { noop, isFunction, isObject } from '../../../_utils/util';
+import { noop, isObject } from '../../../_utils/util';
 import { useLocale } from '../../../hooks';
 import { warn } from '../../../_utils/error';
 import { SizeHeight } from '../../../_utils/types';
@@ -21,6 +21,7 @@ import Checkbox from '../checkbox';
 import InputText from './InputText';
 import InputNumber from './InputNumber';
 import SearchHelper from '../../../search-helper';
+import TreeHelper from '../../../tree-helper';
 import Button from '../../../button';
 import Dialog from '../../../dialog';
 
@@ -327,12 +328,17 @@ export default defineComponent({
       const { t } = useLocale();
       const { dataIndex, precision } = column;
       const { extra = {}, helper, rules = [], onClick = noop, onChange = noop } = this.options;
+      const prevValue = getCellValue(row, dataIndex);
       const createFieldAliasMap = () => {
-        if (!isFunction(helper.fieldAliasMap)) {
-          warn('Table', '单元格的搜索帮助 `fieldAliasMap` 配置不正确');
+        const fieldAliasMap = helper.fieldAliasMap;
+        if (!fieldAliasMap) {
+          warn('Table', 'helper 需要配置 `fieldAliasMap` 选项');
         }
-        const { fieldAliasMap = noop } = helper;
-        return Object.assign({}, fieldAliasMap());
+        const alias = typeof fieldAliasMap === 'function' ? fieldAliasMap() : fieldAliasMap || {};
+        if (!Object.keys(alias).includes(dataIndex)) {
+          warn('Table', 'fieldAliasMap 选项必须包含自身 `dataIndex` 值');
+        }
+        return alias;
       };
       const setHelperValues = (val = '', others?: any) => {
         // 对其他单元格赋值 & 校验
@@ -443,7 +449,6 @@ export default defineComponent({
         this.shVisible = false;
       };
       const dialogProps = {
-        ref: `sh-dialog-${this.dataKey}`,
         visible: this.shVisible,
         title: t('qm.searchHelper.text'),
         width: helper?.width ?? '60%',
@@ -465,10 +470,10 @@ export default defineComponent({
       };
       const shProps = {
         ...helper,
+        size: this.$$table.tableSize,
         initialValue: merge({}, helper?.initialValue, this.shDeriveValue),
         onClose: closeHelperHandle,
       };
-      const prevValue = getCellValue(row, dataIndex);
       const remoteMatch = helper && (helper.remoteMatch ?? !0);
       const inputProps = {
         modelValue: prevValue,
@@ -522,6 +527,161 @@ export default defineComponent({
               <SearchHelper {...shProps} />
             </Dialog>
           )}
+        </div>
+      );
+    },
+    [`tree-helperHandle`](row: IRecord, column: IColumn): JSXNode {
+      const { t } = useLocale();
+      const { dataIndex, precision } = column;
+      const { extra = {}, helper = {}, rules = [], onClick = noop, onEnter = noop, onChange = noop } = this.options;
+      const prevValue = getCellValue(row, dataIndex);
+
+      const fieldAliasMap = helper.fieldAliasMap;
+      if (!fieldAliasMap) {
+        warn('Table', 'helper 需要配置 `fieldAliasMap` 选项');
+      }
+
+      const alias = typeof fieldAliasMap === 'function' ? fieldAliasMap() : fieldAliasMap || {};
+      if (!Object.keys(alias).includes(dataIndex)) {
+        warn('Table', 'fieldAliasMap 选项必须包含自身 `dataIndex` 值');
+      }
+
+      const setHelperValues = (val = '', others?: any) => {
+        // 对其他单元格赋值 & 校验
+        if (isObject(others) && Object.keys(others).length) {
+          for (let otherDataIndex in others) {
+            const otherValue = others[otherDataIndex];
+            const otherColumn = deepFindColumn(this.$$table.columns, otherDataIndex);
+            setCellValue(row, otherDataIndex, otherValue, otherColumn?.precision);
+            const otherOptions = otherColumn?.editRender?.(row, otherColumn);
+            if (!Array.isArray(otherOptions?.rules)) continue;
+            this.$$table.createFieldValidate(otherOptions?.rules, otherValue, this.rowKey, otherDataIndex);
+          }
+        }
+        // 修改当前单元格的值
+        setCellValue(row, dataIndex, val, precision);
+        this.createFieldValidate(rules, val);
+        this.store.addToUpdated(row);
+        onChange({ [this.dataKey]: val }, row);
+        this.$$table.dataChangeHandle();
+      };
+
+      const openSearchHelper = () => {
+        // 打开的前置钩子
+        const beforeOpen = helper.beforeOpen ?? helper.open ?? trueNoop;
+        const before = beforeOpen({ [this.dataKey]: prevValue }, row, column);
+        if (before?.then) {
+          before
+            .then(() => {
+              this.shVisible = true;
+            })
+            .catch(() => {});
+        } else if (before !== false) {
+          this.shVisible = true;
+        }
+      };
+
+      const closeSearchHelper = (data: Record<string, any>) => {
+        // 其他字段的集合
+        const others = {};
+        for (let key in alias) {
+          const dataKey = alias[key];
+          if (key === dataIndex) continue;
+          others[key] = data[dataKey];
+        }
+        const current = alias[dataIndex] ? data[alias[dataIndex]] : '';
+        // 关闭的前置钩子
+        const beforeClose = helper.beforeClose ?? helper.close ?? trueNoop;
+        const before = beforeClose(data, { [this.dataKey]: prevValue }, row, column);
+        if (before?.then) {
+          before
+            .then(() => {
+              doClose();
+              setHelperValues(current, others);
+            })
+            .catch(() => {});
+        } else if (before !== false) {
+          doClose();
+          setHelperValues(current, others);
+        }
+      };
+
+      const closeButNotSelect = () => {
+        doClose();
+      };
+
+      const doClose = () => {
+        this.shVisible = false;
+      };
+
+      const dialogProps = {
+        visible: this.shVisible,
+        title: t('qm.searchHelper.text'),
+        width: helper?.width ?? '30%',
+        height: helper?.height,
+        loading: false,
+        destroyOnClose: true,
+        containerStyle: { paddingBottom: `${SizeHeight[this.$$table.tableSize] + 20}px` },
+        'onUpdate:visible': (val) => {
+          this.shVisible = val;
+        },
+        onClose: () => {
+          const { closed = noop } = helper;
+          closed(row);
+        },
+      };
+
+      const shProps = {
+        ...helper,
+        size: this.$$table.tableSize,
+        onClose: (data) => {
+          if (data) {
+            closeSearchHelper(data);
+          } else {
+            closeButNotSelect();
+          }
+        },
+      };
+
+      return (
+        <div class="search-helper">
+          <el-input
+            ref={`tree-helper-${this.dataKey}`}
+            size={this.size}
+            modelValue={prevValue}
+            readonly={extra.readonly}
+            clearable={extra.clearable ?? !0}
+            disabled={extra.disabled}
+            onChange={(val) => {
+              if (val) return;
+              setHelperValues(val);
+            }}
+            onDblclick={() => {
+              if (extra.disabled) return;
+              openSearchHelper();
+            }}
+            onKeydown={(ev) => {
+              if (ev.keyCode === 13) {
+                this.$refs[`tree-helper-${this.dataKey}`].blur();
+                setTimeout(() => onEnter({ [this.dataKey]: ev.target.value }, row));
+              }
+            }}
+            v-slots={{
+              append: (): JSXNode => (
+                <Button
+                  tabindex={-1}
+                  size={this.size}
+                  icon={<SearchIcon />}
+                  click={() => {
+                    openSearchHelper();
+                  }}
+                />
+              ),
+            }}
+          />
+          <Dialog {...dialogProps}>
+            <TreeHelper {...shProps} />
+          </Dialog>
         </div>
       );
     },

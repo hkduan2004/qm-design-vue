@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2020-02-28 23:04:58
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-05-07 09:56:43
+ * @Last Modified time: 2022-05-12 15:17:36
  */
 import { PropType } from 'vue';
 import PropTypes from '../../../_utils/vue-types';
@@ -78,7 +78,7 @@ const columnItem = {
 /**
  * editRender: 返回值
  * {
- *   type: PropTypes.oneOf(['text', 'number', 'select', 'select-multiple', 'checkbox', 'switch', 'search-helper', 'date', 'datetime', 'time']).isRequired,
+ *   type: PropTypes.oneOf(['text', 'number', 'select', 'select-multiple', 'checkbox', 'switch', 'search-helper', 'tree-helper', 'date', 'datetime', 'time']).isRequired,
  *   items: PropTypes.arrayOf(PropTypes.shape({
  *     text: PropTypes.string,
  *     value: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
@@ -100,6 +100,7 @@ const columnItem = {
  *   helper: PropTypes.shape({
  *     filters: PropTypes.object,
  *     table: PropTypes.object,
+ *     tree: PropTypes.object,
  *     remoteMatch: PropTypes.bool,
  *     fieldAliasMap: PropTypes.func,
  *     beforeOpen: PropTypes.func,

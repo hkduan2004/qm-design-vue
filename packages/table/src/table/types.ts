@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-03-06 15:11:01
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2021-11-11 16:39:13
+ * @Last Modified time: 2022-05-12 15:19:00
  */
 import type { AnyFunction, AnyObject, ComponentSize, JSXNode, Nullable } from '../../../_utils/types';
 
@@ -18,7 +18,18 @@ export type IAlign = 'left' | 'center' | 'right';
 
 export type IFilterType = 'text' | 'textarea' | 'checkbox' | 'radio' | 'number' | 'date';
 
-export type IEditerType = 'text' | 'number' | 'select' | 'select-multiple' | 'checkbox' | 'switch' | 'search-helper' | 'date' | 'datetime' | 'time';
+export type IEditerType =
+  | 'text'
+  | 'number'
+  | 'select'
+  | 'select-multiple'
+  | 'checkbox'
+  | 'switch'
+  | 'search-helper'
+  | 'tree-helper'
+  | 'date'
+  | 'datetime'
+  | 'time';
 
 export type ISelectionType = 'checkbox' | 'radio';
 
@@ -107,6 +118,7 @@ export type IEditerReturn = {
   helper?: {
     filters?: AnyObject<any>;
     table?: AnyObject<any>;
+    tree?: AnyObject<any>;
     remoteMatch?: boolean;
     fieldAliasMap?: AnyFunction<Record<string, string>>;
     beforeOpen?: AnyFunction<void | Promise<void> | boolean>;

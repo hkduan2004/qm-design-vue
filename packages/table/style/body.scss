@@ -2,12 +2,12 @@
  * @Author: 焦质晔
  * @Date: 2020-02-28 22:13:54
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-03-11 20:01:18
+ * @Last Modified time: 2022-05-12 15:53:54
  */
 .body--column {
   .cell--edit {
-    .el-input-group {
-      display: table;
+    .search-helper {
+      width: 100%;
       .el-input__suffix {
         transition: none;
       }

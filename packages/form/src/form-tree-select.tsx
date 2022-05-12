@@ -258,7 +258,7 @@ export default defineComponent({
                       this.setSoftFocus();
                       onChange(form[fieldName], this.createTextValue(form[fieldName]));
                     }}
-                    onCheck={(data, item): void => {
+                    onCheck={(_, item): void => {
                       if (!multiple) return;
                       form[fieldName] = item.checkedKeys;
                       onChange(form[fieldName], this.createTextValue(form[fieldName]));
