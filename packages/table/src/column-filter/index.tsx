@@ -67,13 +67,8 @@ export default defineComponent({
           }
         });
     },
-    fixedChangeHandle(column: IColumn, dir: IFixed): void {
-      column.fixed = dir;
-      this.createColumns();
-      this.changeHandle();
-    },
-    cancelFixedHandle(column: IColumn): void {
-      delete column.fixed;
+    fixedChangeHandle(column: IColumn, dir?: IFixed): void {
+      dir ? (column.fixed = dir) : delete column.fixed;
       this.createColumns();
       this.changeHandle();
     },
@@ -151,7 +146,7 @@ export default defineComponent({
             </span>
           ) : (
             <span class="fixed">
-              <i class="svgicon" title={t('qm.table.columnFilter.cancelFixed')} onClick={() => this.cancelFixedHandle(column)}>
+              <i class="svgicon" title={t('qm.table.columnFilter.cancelFixed')} onClick={() => this.fixedChangeHandle(column)}>
                 <CloseCircleIcon />
               </i>
             </span>
