@@ -544,11 +544,7 @@ export default defineComponent({
           filter: {
             type: 'date',
           },
-          editRender: (row) => {
-            return {
-              type: 'datetime',
-            };
-          },
+          canCopy: true,
         },
         {
           title: '个人信息',
@@ -1005,13 +1001,7 @@ export default defineComponent({
           客户端打印
         </qm-print>
         <qm-copy-to-clipboard text="asd">
-          <qm-button
-            onClick={() => {
-              console.log(222);
-            }}
-          >
-            复制
-          </qm-button>
+          <qm-button>复制</qm-button>
         </qm-copy-to-clipboard>
 
         <div style="margin: 10px;">

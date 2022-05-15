@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-02-09 09:03:59
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-05-15 11:11:47
+ * @Last Modified time: 2022-05-15 11:40:31
  */
 import { defineComponent, cloneVNode } from 'vue';
 import PropTypes from '../../_utils/vue-types';
@@ -47,6 +47,6 @@ export default defineComponent({
   render(): JSXNode {
     const vSlots = this.$slots.default?.() || [];
     const vNode = ensureOnlyChild(vSlots);
-    return cloneVNode(vNode, { click: this.clickHandle });
+    return cloneVNode(vNode, { onClick: this.clickHandle });
   },
 });

@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2020-03-01 23:27:04
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2021-10-28 12:25:43
+ * @Last Modified time: 2022-05-15 11:37:37
  */
 @use 'sass:math';
 @import './common.scss';
@@ -175,6 +175,21 @@ $prefix: '#{$qm-prefix}-table';
         float: left;
         height: 1px;
         visibility: hidden;
+      }
+      .cell--copy {
+        display: flex;
+        flex-shrink: 0;
+        align-items: center;
+        justify-content: space-between;
+        .text {
+          flex: 1;
+          @include text-overflow-cut;
+        }
+        .icon {
+          margin-right: -2px;
+          color: $v-font-secondary-color;
+          cursor: pointer;
+        }
       }
     }
   }

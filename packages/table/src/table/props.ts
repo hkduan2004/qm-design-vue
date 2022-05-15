@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2020-02-28 23:04:58
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-05-12 15:17:36
+ * @Last Modified time: 2022-05-15 11:21:04
  */
 import { PropType } from 'vue';
 import PropTypes from '../../../_utils/vue-types';
@@ -22,6 +22,7 @@ const columnItem = {
   hidden: PropTypes.bool, // 是否隐藏列
   noAuth: PropTypes.bool, // 权限控制
   ellipsis: PropTypes.bool, // 超过宽度将自动省略
+  canCopy: PropTypes.bool, // 可以复制
   className: PropTypes.string, // 列样式类名
   children: PropTypes.array, // 内嵌 children，以渲染分组表头
   sorter: PropTypes.oneOfType([PropTypes.bool, PropTypes.func]), // 列排序

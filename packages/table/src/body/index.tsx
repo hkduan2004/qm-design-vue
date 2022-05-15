@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2020-02-28 23:01:43
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-04-30 17:28:05
+ * @Last Modified time: 2022-05-15 11:41:14
  */
 import { defineComponent, CSSProperties } from 'vue';
 import addEventListener from 'add-dom-event-listener';
@@ -12,6 +12,7 @@ import { parseHeight, throttle, getCellValue, getVNodeText, deepFindRowKey, isAr
 import { getPrefixCls } from '../../../_utils/prefix';
 import { noop, isVNode, isFunction, isObject } from '../../../_utils/util';
 import { getParentNode } from '../../../_utils/dom';
+import { useLocale } from '../../../hooks';
 import { warn } from '../../../_utils/error';
 import type { JSXNode, AnyObject, Nullable } from '../../../_utils/types';
 import type { IColumn, ICellSpan, IDict, IRecord } from '../table/types';
@@ -22,10 +23,12 @@ import keyboardMixin from './keyboard';
 import TableManager from '../manager';
 import ClickOutside from '../../../directives/click-outside';
 
+import { CopyIcon } from '../../../icons';
 import Draggable from 'vuedraggable';
 import Expandable from '../expandable';
 import Selection from '../selection';
 import CellEdit from '../edit';
+import CopyToClipboard from '../../../copy-to-clipboard';
 
 const trueNoop = (): boolean => !0;
 const EMPTY_MIN_HEIGHT = 150;
@@ -245,10 +248,11 @@ export default defineComponent({
       const trExtraStys = rowStyle ? (isFunction(rowStyle) ? rowStyle(row, rowIndex) : rowStyle) : null;
       const tdExtraStys = cellStyle ? (isFunction(cellStyle) ? cellStyle(row, column, rowIndex, columnIndex) : cellStyle) : null;
       const groupStys = isGroupSubtotal ? this.getGroupStyles(row._group) : null;
+      const cellText: string = this.renderCellTitle(column, row, rowIndex, columnIndex);
       return (
         <td
           key={dataIndex}
-          title={isEllipsis ? this.renderCellTitle(column, row, rowIndex, columnIndex) : undefined}
+          title={isEllipsis ? cellText : undefined}
           rowspan={rowspan}
           colspan={colspan}
           class={cls}
@@ -257,13 +261,22 @@ export default defineComponent({
           onDblclick={(ev) => this.cellDbclickHandle(ev, row, column)}
           onContextmenu={(ev) => this.cellContextmenuHandle(ev, row, column)}
         >
-          <div class="cell">{this.renderCell(column, row, rowIndex, columnIndex, rowKey, depth)}</div>
+          <div class="cell">{this.renderCell(column, row, rowIndex, columnIndex, cellText, rowKey, depth)}</div>
         </td>
       );
     },
-    renderCell(column: IColumn, row: IRecord, rowIndex: number, columnIndex: number, rowKey: string, depth: number): Nullable<JSXNode> | JSXNode[] {
+    renderCell(
+      column: IColumn,
+      row: IRecord,
+      rowIndex: number,
+      columnIndex: number,
+      cellText: string,
+      rowKey: string,
+      depth: number
+    ): Nullable<JSXNode> | JSXNode[] {
       const { expandable, treeConfig, selectionKeys, firstDataIndex, isTreeTable } = this.$$table;
-      const { dataIndex, editRender, render } = column;
+      const { dataIndex, canCopy, editRender, render } = column;
+      const { t } = useLocale();
       const text = getCellValue(row, dataIndex);
       if (dataIndex === config.expandableColumn) {
         const { rowExpandable = trueNoop } = expandable;
@@ -287,6 +300,18 @@ export default defineComponent({
           <Expandable record={row} rowKey={rowKey} style={this.isTreeNode(row) ? null : { visibility: 'hidden' }} />,
           vNodeText,
         ];
+      }
+      if (canCopy) {
+        return (
+          <div class={`cell--copy`}>
+            <span class={`text`}>{vNodeText}</span>
+            <CopyToClipboard text={cellText}>
+              <span class={`icon`} title={t('qm.table.config.copyText')} onClick={(ev) => ev.stopPropagation()}>
+                <CopyIcon class={`svgicon`} />
+              </span>
+            </CopyToClipboard>
+          </div>
+        );
       }
       return vNodeText;
     },

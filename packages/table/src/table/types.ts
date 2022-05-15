@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-03-06 15:11:01
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-05-12 15:19:00
+ * @Last Modified time: 2022-05-15 11:20:54
  */
 import type { AnyFunction, AnyObject, ComponentSize, JSXNode, Nullable } from '../../../_utils/types';
 
@@ -164,6 +164,7 @@ export type IColumn = {
   hidden?: boolean;
   noAuth?: boolean;
   ellipsis?: boolean;
+  canCopy?: boolean;
   className?: string;
   children?: Array<IColumn> | Nullable<undefined>;
   sorter?: boolean | AnyFunction<void>;

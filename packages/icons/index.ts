@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-11-01 13:54:59
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-03-17 16:02:23
+ * @Last Modified time: 2022-05-15 11:26:47
  */
 // 提供了 40 个 svg 图标组件
 export { default as FullscreenIcon } from './fullscreen';
@@ -47,3 +47,4 @@ export { default as LineHeightIcon } from './line-height';
 export { default as PictureIcon } from './picture';
 export { default as MonitorIcon } from './monitor';
 export { default as ImportIcon } from './import';
+export { default as CopyIcon } from './copy';
