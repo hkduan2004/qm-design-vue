@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-06-19 08:45:54
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-04-30 14:04:07
+ * @Last Modified time: 2022-05-15 11:03:33
  */
 export default {
   name: 'zh-cn',
@@ -48,6 +48,10 @@ export default {
       dateRangePickers: ['最近一周', '最近一个月', '最近三个月', '最近六个月'],
       citySelectType: ['按省份', '按城市'],
       regionSelectLabel: ['省', '市', '区', '街道'],
+    },
+    clipboard: {
+      success: '复制成功',
+      error: '复制失败',
     },
     download: {
       success: '文件下载成功',
@@ -124,6 +128,7 @@ export default {
       config: {
         selectionText: '选择',
         summaryText: '合计',
+        copyText: '复制',
         emptyText: '暂无数据...',
       },
       alert: {

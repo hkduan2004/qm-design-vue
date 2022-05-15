@@ -1004,7 +1004,16 @@ export default defineComponent({
         <qm-print uniqueKey="cprint_jzy" dataSource={this.printDataList} templateRender={this.templateRender} click={this.printHandle3}>
           客户端打印
         </qm-print>
-        <qm-button onClick={this.asdasd}>按钮</qm-button>
+        <qm-copy-to-clipboard text="asd">
+          <qm-button
+            onClick={() => {
+              console.log(222);
+            }}
+          >
+            复制
+          </qm-button>
+        </qm-copy-to-clipboard>
+
         <div style="margin: 10px;">
           <qm-form
             ref="qweqwe"

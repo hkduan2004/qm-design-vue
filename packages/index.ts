@@ -34,6 +34,7 @@ import SearchHelper from './search-helper';
 import TreeTableHelper from './tree-table-helper';
 import TreeHelper from './tree-helper';
 import Cropper from './cropper';
+import CopyToClipboard from './copy-to-clipboard';
 import ConfigProvider from './config-provider';
 
 import { setConfig } from './_utils/config';
@@ -82,6 +83,7 @@ const components = [
   TreeTableHelper,
   TreeHelper,
   Cropper,
+  CopyToClipboard,
   ConfigProvider,
 ];
 
@@ -131,6 +133,7 @@ export {
   TreeTableHelper as QmTreeTableHelper,
   TreeHelper as QmTreeHelper,
   Cropper as QmCropper,
+  CopyToClipboard as QmCopyToClipboard,
   ConfigProvider as QmConfigProvider,
   MessageBox as QmMessageBox,
   Notification as QmNotification,

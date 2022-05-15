@@ -2,9 +2,9 @@
  * @Author: 焦质晔
  * @Date: 2021-02-14 14:25:07
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2021-10-18 09:37:45
+ * @Last Modified time: 2022-05-15 10:20:22
  */
-import type { App, VNode, CSSProperties } from 'vue';
+import type { VNode, CSSProperties, Plugin } from 'vue';
 
 export type Nullable<T> = T | null;
 
@@ -22,7 +22,7 @@ export type AnyFunction<T> = (...args: any[]) => T;
 
 export type CustomHTMLElement<T> = HTMLElement & T;
 
-export type SFCWithInstall<T> = T & { install(app: App): void };
+export type SFCWithInstall<T> = T & Plugin;
 
 export type ComponentSize = 'large' | 'default' | 'small';
 

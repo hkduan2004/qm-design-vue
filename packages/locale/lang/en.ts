@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-06-19 08:46:00
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-04-30 14:04:05
+ * @Last Modified time: 2022-05-15 11:03:15
  */
 export default {
   name: 'en',
@@ -48,6 +48,10 @@ export default {
       dateRangePickers: ['Nearly A Week', 'Nearly A Month', 'Nearly Three Months', 'Nearly Six Months'],
       citySelectType: ['Province', 'City'],
       regionSelectLabel: ['Province', 'City', 'Region', 'Street'],
+    },
+    clipboard: {
+      success: 'Copy successful',
+      error: 'Copy failed',
     },
     download: {
       success: 'File downloaded successfully',
@@ -124,6 +128,7 @@ export default {
       config: {
         selectionText: '#',
         summaryText: 'Summation',
+        copyText: 'Copy',
         emptyText: 'No Data...',
       },
       alert: {

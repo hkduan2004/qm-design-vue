@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-03-17 13:17:30
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2021-11-08 16:27:41
+ * @Last Modified time: 2022-05-15 11:18:06
  */
 export default [
   {
@@ -65,6 +65,10 @@ export default [
       {
         path: '/split',
         title: 'Split 分割面板',
+      },
+      {
+        path: '/copy',
+        title: 'CopyToClipboard 复制',
       },
       {
         path: '/anchor',
