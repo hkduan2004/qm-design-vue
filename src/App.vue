@@ -1000,10 +1000,9 @@ export default defineComponent({
         <qm-print uniqueKey="cprint_jzy" dataSource={this.printDataList} templateRender={this.templateRender} click={this.printHandle3}>
           客户端打印
         </qm-print>
-        <qm-copy-to-clipboard text="asd">
+        <qm-copy-to-clipboard text="hello\nworld">
           <qm-button>复制</qm-button>
         </qm-copy-to-clipboard>
-
         <div style="margin: 10px;">
           <qm-form
             ref="qweqwe"

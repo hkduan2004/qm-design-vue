@@ -12,7 +12,9 @@
 
 ```html
 <template>
-  <div>暂无...</div>
+  <qm-copy-to-clipboard text="hello world">
+    <qm-button>复制</qm-button>
+  </qm-copy-to-clipboard>
 </template>
 
 <script>

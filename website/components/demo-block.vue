@@ -228,6 +228,7 @@ export default defineComponent({
   .demo-block-control {
     border-top: solid 1px #eaeefb;
     height: 44px;
+    line-height: 44px;
     box-sizing: border-box;
     background-color: #fff;
     border-bottom-left-radius: 4px;
@@ -245,7 +246,6 @@ export default defineComponent({
 
     i {
       font-size: 16px;
-      line-height: 46px;
       transition: 0.3s;
       &.hovering {
         transform: translateX(-40px);
