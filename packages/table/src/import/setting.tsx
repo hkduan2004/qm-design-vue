@@ -133,6 +133,10 @@ export default defineComponent({
           const results: IRecord[] = tableFullData.slice(0, v).concat(records).concat(tableFullData.slice(v));
           this.$$table.createTableData(results);
         }
+        // 添加表格操作记录
+        records.forEach((row) => {
+          this.$$table.store.addToInserted(row);
+        });
       });
       await sleep(500);
       this.loading = !1;

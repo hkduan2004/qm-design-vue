@@ -95,6 +95,7 @@ export default defineComponent({
       this.$$table.createFieldValidate(rules, val, rowKey, columnKey);
     },
     textHandle(row: IRecord, column: IColumn): JSXNode {
+      const { t } = useLocale();
       const { dataIndex } = column;
       const { type, extra = {}, rules = [], onInput = noop, onChange = noop, onEnter = noop } = this.options;
       const prevValue = getCellValue(row, dataIndex);
@@ -109,6 +110,7 @@ export default defineComponent({
           ref={`${type}-${this.dataKey}`}
           size={this.size}
           {...inputProps}
+          placeholder={t('qm.table.editable.inputPlaceholder')}
           maxlength={extra.maxlength}
           onInput={(val) => {
             onInput({ [this.dataKey]: val }, row);
@@ -131,6 +133,7 @@ export default defineComponent({
       );
     },
     numberHandle(row: IRecord, column: IColumn): JSXNode {
+      const { t } = useLocale();
       const { dataIndex, precision } = column;
       const { type, extra = {}, rules = [], onInput = noop, onChange = noop, onEnter = noop } = this.options;
       const prevValue = getCellValue(row, dataIndex);
@@ -149,6 +152,7 @@ export default defineComponent({
           min={extra.min}
           max={extra.max}
           maxlength={extra.maxlength}
+          placeholder={t('qm.table.editable.inputPlaceholder')}
           style={{ width: '100%' }}
           onChange={(val) => {
             this.createFieldValidate(rules, val);
@@ -488,6 +492,7 @@ export default defineComponent({
             ref={`search-helper-${this.dataKey}`}
             size={this.size}
             {...inputProps}
+            placeholder={t('qm.table.editable.selectPlaceholder')}
             maxlength={extra.maxlength}
             readonly={extra.readonly}
             clearable={extra.clearable ?? !0}
@@ -649,8 +654,9 @@ export default defineComponent({
             ref={`tree-helper-${this.dataKey}`}
             size={this.size}
             modelValue={prevValue}
-            readonly={extra.readonly}
+            placeholder={t('qm.table.editable.selectPlaceholder')}
             clearable={extra.clearable ?? !0}
+            readonly={extra.readonly}
             disabled={extra.disabled}
             onChange={(val) => {
               if (val) return;

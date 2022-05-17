@@ -305,11 +305,13 @@ export default defineComponent({
         return (
           <div class={`cell--copy`}>
             <span class={`text`}>{vNodeText}</span>
-            <CopyToClipboard text={cellText}>
-              <span class={`icon`} title={t('qm.table.config.copyText')} onClick={(ev) => ev.stopPropagation()}>
-                <CopyIcon class={`svgicon`} />
-              </span>
-            </CopyToClipboard>
+            {cellText && (
+              <CopyToClipboard text={cellText}>
+                <span class={`icon`} title={t('qm.table.config.copyText')} onClick={(ev) => ev.stopPropagation()}>
+                  <CopyIcon class={`svgicon`} />
+                </span>
+              </CopyToClipboard>
+            )}
           </div>
         );
       }

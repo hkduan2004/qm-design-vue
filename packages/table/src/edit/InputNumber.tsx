@@ -148,10 +148,10 @@ export default defineComponent({
               val = val.slice(0, -1);
             }
             // 判断最大值/最小值
-            if (Number(val) > max) {
+            if (val && Number(val) > max) {
               val = max;
             }
-            if (Number(val) < min) {
+            if (val && Number(val) < min) {
               val = min;
             }
             this.setValueHandle(val);
