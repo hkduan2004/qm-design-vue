@@ -350,10 +350,15 @@ export default defineComponent({
           for (let otherDataIndex in others) {
             const otherValue = others[otherDataIndex];
             const otherColumn = deepFindColumn(this.$$table.columns, otherDataIndex);
-            setCellValue(row, otherDataIndex, otherValue, otherColumn?.precision);
-            const otherOptions = otherColumn?.editRender?.(row, otherColumn);
-            if (!Array.isArray(otherOptions?.rules)) continue;
-            this.$$table.createFieldValidate(otherOptions?.rules, otherValue, this.rowKey, otherDataIndex);
+            if (otherColumn) {
+              setCellValue(row, otherDataIndex, otherValue, otherColumn.precision);
+              const otherOptions = otherColumn.editRender?.(row, otherColumn);
+              if (otherOptions && Array.isArray(otherOptions.rules)) {
+                this.$$table.createFieldValidate(otherOptions.rules, otherValue, this.rowKey, otherDataIndex);
+              }
+            } else {
+              setCellValue(row, otherDataIndex, otherValue);
+            }
           }
         }
         // 修改当前单元格的值
@@ -557,10 +562,15 @@ export default defineComponent({
           for (let otherDataIndex in others) {
             const otherValue = others[otherDataIndex];
             const otherColumn = deepFindColumn(this.$$table.columns, otherDataIndex);
-            setCellValue(row, otherDataIndex, otherValue, otherColumn?.precision);
-            const otherOptions = otherColumn?.editRender?.(row, otherColumn);
-            if (!Array.isArray(otherOptions?.rules)) continue;
-            this.$$table.createFieldValidate(otherOptions?.rules, otherValue, this.rowKey, otherDataIndex);
+            if (otherColumn) {
+              setCellValue(row, otherDataIndex, otherValue, otherColumn.precision);
+              const otherOptions = otherColumn.editRender?.(row, otherColumn);
+              if (otherOptions && Array.isArray(otherOptions.rules)) {
+                this.$$table.createFieldValidate(otherOptions.rules, otherValue, this.rowKey, otherDataIndex);
+              }
+            } else {
+              setCellValue(row, otherDataIndex, otherValue);
+            }
           }
         }
         // 修改当前单元格的值
