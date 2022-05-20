@@ -407,6 +407,20 @@ export default defineComponent({
       }
       return title;
     },
+    createSelectionKeys(rowKey: string): void {
+      const { rowSelection = {}, selectionKeys, isTreeTable } = this.$$table;
+      const { type, checkStrictly = !0 } = rowSelection;
+      if (type === 'radio') {
+        this.setSelectionKeys([rowKey]);
+      }
+      if (type === 'checkbox') {
+        if (isTreeTable && !checkStrictly) {
+          this.setTreeSelectionKeys(rowKey, selectionKeys);
+        } else {
+          this.setSelectionKeys(!selectionKeys.includes(rowKey) ? [...selectionKeys, rowKey] : selectionKeys.filter((x) => x !== rowKey));
+        }
+      }
+    },
     cellClickHandle(ev: MouseEvent, row: IRecord, column: IColumn): void {
       const { getRowKey, rowSelection = {}, selectionKeys, rowHighlight, isTreeTable } = this.$$table;
       const { dataIndex } = column;
@@ -420,17 +434,10 @@ export default defineComponent({
       // 正处于编辑状态的单元格
       // const isEditing = this.$refs[`${rowKey}-${dataIndex}`]?.isEditing;
       // 行选中
-      const { type, checkStrictly = !0, disabled = noop } = rowSelection;
+      const { type, selectByClickRow = !0, disabled = noop } = rowSelection;
       if (type && !disabled(row) && !isEditable) {
-        if (type === 'radio') {
-          this.setSelectionKeys([rowKey]);
-        }
-        if (type === 'checkbox') {
-          if (isTreeTable && !checkStrictly) {
-            this.setTreeSelectionKeys(rowKey, selectionKeys);
-          } else {
-            this.setSelectionKeys(!selectionKeys.includes(rowKey) ? [...selectionKeys, rowKey] : selectionKeys.filter((x) => x !== rowKey));
-          }
+        if (selectByClickRow || dataIndex === config.selectionColumn) {
+          this.createSelectionKeys(rowKey);
         }
       }
       // 单击 展开列、可选择列、操作列 不触发行单击事件
