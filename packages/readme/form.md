@@ -243,6 +243,7 @@
 | showFilterCollapse | 是否显示筛选器 展开/收起 按钮                                             | boolean                | true   |
 | table              | 表格组件配置，支持 fetch, columns, webPagination                          | object                 | -      |
 | tree               | 左侧树组件配置，[配置项](#helperTree)                                     | object                 | -      |
+| request            | 请求配置项，用于获取表单列表数据，[配置项](#request)                      | object                 | -      |
 | onlySelect         | 是否只能选择                                                              | boolean                | true   |
 | closeRemoteMatch   | 是否关闭服务端联想并回显值                                                | boolean                | -      |
 | filterAliasMap     | 输入框与筛选器条件的映射，返回 筛选器 fieldName 列表                      | function(): string[]   | -      |

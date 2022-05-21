@@ -173,6 +173,11 @@ export type IFormItem = {
       fetch?: AnyObject<unknown>;
       tableParamsMap?: (() => Record<string, string>) | Record<string, string>;
     };
+    request?: {
+      fetchApi?: AnyFunction<any>;
+      params?: Record<string, any>;
+      dataKey?: string;
+    };
     onlySelect?: boolean;
     closeRemoteMatch?: boolean;
     filterAliasMap?: AnyFunction<string[]>;

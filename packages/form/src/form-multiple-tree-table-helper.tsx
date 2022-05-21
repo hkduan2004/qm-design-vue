@@ -5,7 +5,7 @@
  * @Last Modified time: 2022-04-14 14:23:25
  */
 import { defineComponent } from 'vue';
-import { merge, isEqual } from 'lodash-es';
+import { merge, get, uniqBy } from 'lodash-es';
 import { useLocale, useSize } from '../../hooks';
 import { noop } from './utils';
 import { warn } from '../../_utils/error';
@@ -26,6 +26,7 @@ export default defineComponent({
   inject: ['$$form'],
   props: ['option'],
   data() {
+    Object.assign(this, { _records: [] });
     return {
       visible: false,
       itemList: [],
@@ -33,6 +34,9 @@ export default defineComponent({
   },
   created() {
     this.initialHandle();
+  },
+  mounted() {
+    this.getItemList();
   },
   methods: {
     initialHandle(): void {
@@ -45,6 +49,32 @@ export default defineComponent({
       if (!(Object.keys(this.alias).includes('valueKey') && Object.keys(this.alias).includes('textKey'))) {
         warn('QmForm', 'fieldAliasMap 选项必须包含自身 `valueKey` 和  `textKey`');
       }
+    },
+    async getItemList(): Promise<void> {
+      const { form } = this.$$form;
+      const { fieldName, searchHelper } = this.option;
+      const { textKey, valueKey } = this.alias;
+      const { fetchApi, params = {}, dataKey } = searchHelper?.request || {};
+      const value = form[fieldName];
+      if (!fetchApi || !value) return;
+      try {
+        const res = await fetchApi({ ...params, kyes: value });
+        if (res.code === 200) {
+          let dataList = Array.isArray(res.data) ? res.data : get(res.data, dataKey!) ?? [];
+          dataList = dataList.filter((x) => value.includes(x[valueKey]));
+          const results = dataList.map((x) => ({ value: x[valueKey], text: x[textKey] }));
+          this.setRecords(dataList);
+          this.setItemList(results);
+        }
+      } catch (err) {
+        // ...
+      }
+    },
+    setRecords(records): void {
+      this._records = records;
+    },
+    setItemList(list): void {
+      this.itemList = list;
     },
   },
   render(): JSXNode {
@@ -89,22 +119,20 @@ export default defineComponent({
     // 搜索帮助关闭，回显值事件
     const closeSearchHelper = (data: Record<string, any>[]): void => {
       const { textKey, valueKey } = this.alias;
-      const itemList = data.map((x) => ({ text: x[textKey], value: x[valueKey] }));
-      this.itemList = itemList;
-      setFormItemValue(itemList.map((x) => x.value));
+      this.setRecords(uniqBy([...this._records, ...data], valueKey));
+      const results = this._records.map((x) => ({ text: x[textKey], value: x[valueKey] }));
+      this.setItemList(results);
+      setFormItemValue(results.map((x) => x.value));
       const { closed } = searchHelper;
       this.visible = false;
-      closed?.(data);
+      closed?.(this._records);
     };
 
     const setFormItemValue = (value: string[]): void => {
+      const { valueKey } = this.alias;
+      this.setRecords(this._records.filter((x) => value.includes(x[valueKey])));
       form[fieldName] = value;
-      const { itemList } = this;
-      const values = itemList.map((x) => x.value);
-      if (!isEqual(value, values)) {
-        this.itemList = itemList.filter((x) => value.includes(x.value));
-      }
-      onChange(value, this.itemList);
+      onChange(value, this._records);
     };
 
     const dialogProps = {
@@ -128,6 +156,7 @@ export default defineComponent({
       ...searchHelper,
       multiple: true,
       initialValue: merge({}, searchHelper.initialValue),
+      defaultSelectedKeys: form[fieldName],
       onClose: (visible: boolean, data): void => {
         if (data) {
           closeSearchHelper(data);

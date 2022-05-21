@@ -66,11 +66,12 @@ export default defineComponent({
     multiple: PropTypes.bool,
     filters: PropTypes.array.def([]),
     initialValue: PropTypes.object.def({}),
+    defaultSelectedKeys: PropTypes.array.def([]),
     showFilterCollapse: PropTypes.bool.def(true),
     table: PropTypes.shape({
       fetch: PropTypes.object.isRequired,
       columns: PropTypes.array.def([]),
-      rowKey: PropTypes.oneOfType([PropTypes.string, PropTypes.func]).def('id'),
+      rowKey: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
       webPagination: PropTypes.bool.def(false),
     }).loose,
     tree: PropTypes.shape({
@@ -93,6 +94,7 @@ export default defineComponent({
         type: !this.multiple ? 'radio' : 'checkbox',
         defaultSelectFirstRow: !0,
         clearableAfterFetched: !this.multiple,
+        selectedRowKeys: this.defaultSelectedKeys,
         onChange: this.selectedRowChange,
       },
       fetch: {
@@ -364,7 +366,7 @@ export default defineComponent({
                 size={size}
                 height={height}
                 columns={columns}
-                rowKey={'pageIndex'}
+                rowKey={this.table?.rowKey || 'pageIndex'}
                 rowSelection={selection}
                 columnsChange={(columns) => (this.columns = columns)}
                 onRowEnter={this.rowEnterHandle}

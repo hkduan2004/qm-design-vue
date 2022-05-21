@@ -150,14 +150,15 @@ export default defineComponent({
         if (!Array.isArray(prev)) return;
         const diffs: string[] = xor(prev, next);
         if (!diffs.length) return;
-        diffs.forEach((x) => {
-          if (prev.includes(x)) {
-            delete this.form[x];
-          } else {
-            let item: IFormItem = this.flattenItems.find((k) => k.fieldName === x);
-            this.form[x] = this.getInitialValue(item, this.form[x] ?? this.initialValue[x]);
-          }
-        });
+        // 以下处理方式，好像没有必要，暂时先注释
+        // diffs.forEach((x) => {
+        //   if (prev.includes(x)) {
+        //     delete this.form[x];
+        //   } else {
+        //     let item: IFormItem = this.flattenItems.find((k) => k.fieldName === x);
+        //     this.form[x] = this.getInitialValue(item, this.form[x] ?? this.initialValue[x]);
+        //   }
+        // });
       },
       immediate: true,
     },
@@ -617,7 +618,7 @@ export default defineComponent({
         }
         return (
           <el-col
-            key={i}
+            key={fieldName ?? i}
             type={UNFIX_TYPE.includes(type as IFormItemType) ? 'UN_FIXED' : 'FIXED'}
             id={fieldName}
             span={selfCol * colSpan}
