@@ -46,6 +46,11 @@ export default defineComponent({
       ajaxing: false,
     };
   },
+  computed: {
+    isTextOrLink(): boolean {
+      return this.type === 'text' || this.type === 'link';
+    },
+  },
   methods: {
     async clickHandler(): Promise<void> {
       this.ajaxing = true;
@@ -59,7 +64,7 @@ export default defineComponent({
     },
   },
   render(): JSXNode {
-    const { confirm, type, round, circle, icon, disabled, $slots, $attrs } = this;
+    const { confirm, type, round, circle, icon, disabled, isTextOrLink, $slots, $attrs } = this;
     const { $size } = useSize(this.$props);
     const { $theme } = useTheme();
     const { global } = useGlobalConfig();
@@ -71,13 +76,15 @@ export default defineComponent({
       ref: 'btnRef',
       key: $theme,
       size: $size,
-      type,
+      type: !isTextOrLink ? type : '',
+      text: type === 'text',
+      link: type === 'link',
       round,
       circle,
       icon: isFunction(icon) ? <icon /> : icon,
       disabled,
       loading: this.ajaxing || this.loading || false,
-      autoInsertSpace: !!global?.autoInsertSpaceInButton && type !== 'text',
+      autoInsertSpace: !!global?.autoInsertSpaceInButton && !isTextOrLink,
       onKeydown: (ev: KeyboardEvent): void => {
         if (ev.keyCode !== 13) return;
         ev.preventDefault();
