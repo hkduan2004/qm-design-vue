@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-02-09 09:27:46
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-04-30 18:07:35
+ * @Last Modified time: 2022-05-22 13:16:33
  */
 @import '../../style/src/common';
 @import './fields-filter';
@@ -12,6 +12,11 @@ $prefix: '#{$qm-prefix}-form';
 .#{$prefix} {
   .el-col {
     margin-bottom: 12px;
+  }
+  .col-button {
+    .is-text {
+      color: $primary-color;
+    }
   }
   .el-form-item {
     margin-bottom: 0 !important;
