@@ -427,27 +427,27 @@ export default defineComponent({
             dataKey: 'records',
           },
           options: {
-            // columns: [
-            //   { dataIndex: 'id', title: '', hidden: true },
-            //   { dataIndex: 'date', title: '姓名' },
-            //   { dataIndex: 'price', title: '价格' },
-            // ],
-            itemRender: (item) => {
-              const wrapStyle = {
-                width: '400px',
-                padding: '5px 15px',
-                borderBottom: '1px dashed #e8e8e8',
-              };
-              return (
-                <div style={wrapStyle}>
-                  <div style="line-height: 1.75;">{item.address}</div>
-                  <div style="line-height: 1.75; display: flex; justify-content: space-between;">
-                    <span style="color: #f00">￥: 12.00</span>
-                    <span>库存: 100</span>
-                  </div>
-                </div>
-              );
-            },
+            columns: [
+              { dataIndex: 'id', title: '', hidden: true },
+              { dataIndex: 'date', title: '姓名' },
+              { dataIndex: 'price', title: '价格' },
+            ],
+            // itemRender: (item) => {
+            //   const wrapStyle = {
+            //     width: '400px',
+            //     padding: '5px 15px',
+            //     borderBottom: '1px dashed #e8e8e8',
+            //   };
+            //   return (
+            //     <div style={wrapStyle}>
+            //       <div style="line-height: 1.75;">{item.address}</div>
+            //       <div style="line-height: 1.75; display: flex; justify-content: space-between;">
+            //         <span style="color: #f00">￥: 12.00</span>
+            //         <span>库存: 100</span>
+            //       </div>
+            //     </div>
+            //   );
+            // },
             fieldAliasMap: () => {
               return { ff: 'date', fd: 'id' };
             },

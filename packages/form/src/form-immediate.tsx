@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-02-23 21:56:33
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-03-12 13:01:52
+ * @Last Modified time: 2022-05-22 19:42:48
  */
 import { defineComponent } from 'vue';
 import { get } from 'lodash-es';
@@ -179,7 +179,7 @@ export default defineComponent({
             }
           }}
           onDblclick={() => {
-            this.$refs[type].handleFocus();
+            this.$refs[type].focus();
           }}
           onKeyup={(ev) => {
             if (ev.keyCode !== 13) return;

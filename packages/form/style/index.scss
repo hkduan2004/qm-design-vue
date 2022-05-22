@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-02-09 09:27:46
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-05-22 13:16:33
+ * @Last Modified time: 2022-05-22 19:26:00
  */
 @import '../../style/src/common';
 @import './fields-filter';
@@ -301,6 +301,9 @@ $prefix: '#{$qm-prefix}-form';
 .qm-tree-select__popper {
   box-sizing: border-box;
   .tree-select__tree {
+    .el-checkbox {
+      margin-right: 8px;
+    }
     .el-tree-node[aria-disabled='true'] > .el-tree-node__content {
       color: $disabled-color;
       background: none;
