@@ -92,7 +92,7 @@ export default defineComponent({
       tableList: [],
       selection: {
         type: !this.multiple ? 'radio' : 'checkbox',
-        defaultSelectFirstRow: !0,
+        selectFirstRowOnChange: !0,
         clearableAfterFetched: !this.multiple,
         selectedRowKeys: this.defaultSelectedKeys,
         onChange: this.selectedRowChange,
@@ -301,13 +301,6 @@ export default defineComponent({
       : {
           dataSource: tableList,
           webPagination: !0,
-          onChange: (pagination, _, __, { currentDataSource }) => {
-            if (this.multiple) return;
-            if (pagination.currentPage !== this.currentPage) {
-              this.currentPage = pagination.currentPage;
-              currentDataSource.length && this.$refs[`table`].SELECT_FIRST_RECORD();
-            }
-          },
         };
     this.$size = $size || 'default';
     return (

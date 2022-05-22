@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2020-03-01 15:20:02
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-05-07 09:57:46
+ * @Last Modified time: 2022-05-22 13:00:36
  */
 import { ComponentInternalInstance } from 'vue';
 import { get } from 'lodash-es';
@@ -52,6 +52,7 @@ export default {
       this.setRowKeysMap();
       // 滚动加载 & currentPage > 1
       if (this.isScrollPagination && this.pagination.currentPage > 1) return;
+      // 首行选中
       this.selectFirstRow();
       // 解决热更新可能会报 `tableBodyRef` 空指针错误
       this.tableBodyRef?.createInputFocus();
@@ -437,13 +438,19 @@ export default {
   },
   // 默认选中首行数据
   selectFirstRow(bool?: boolean): void {
-    const { rowSelection, currentDataSource } = this;
-    const { type, defaultSelectFirstRow } = rowSelection || {};
-    const isSelectFirstRow: boolean = defaultSelectFirstRow || bool || false;
-    if (type !== 'radio' || !isSelectFirstRow || !currentDataSource.length) return;
-    const rowKey = this.getRowKey(currentDataSource[0], currentDataSource[0].index);
-    this.tableBodyRef.setClickedValues([rowKey, config.selectionColumn]);
-    this.selectionKeys = [rowKey];
+    const { type, selectFirstRowOnChange } = this.rowSelection || {};
+    const isSelectFirstRow: boolean = selectFirstRowOnChange || bool || false;
+    if (type === 'radio' && isSelectFirstRow) {
+      const tableList = this.createTableList();
+      if (tableList.length) {
+        const rowKey = this.getRowKey(tableList[0], tableList[0].index);
+        this.tableBodyRef.setClickedValues([rowKey, config.selectionColumn]);
+        this.selectionKeys = [rowKey];
+      } else {
+        this.tableBodyRef.setClickedValues([]);
+        this.selectionKeys = [];
+      }
+    }
   },
   // 获取组件实例
   getTableInstance(): ComponentInternalInstance {

@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2020-03-05 22:48:49
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2021-10-18 09:49:26
+ * @Last Modified time: 2022-05-22 12:57:01
  */
 import { defineComponent } from 'vue';
 import PropTypes from '../../../_utils/vue-types';
@@ -23,7 +23,7 @@ export default defineComponent({
   },
   data() {
     return {
-      currentValue: this.modelValue,
+      currentValue: this.modelValue === this.trueValue,
       focusInner: false,
     };
   },

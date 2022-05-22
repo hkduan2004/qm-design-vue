@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2020-02-28 23:04:58
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-05-15 11:21:04
+ * @Last Modified time: 2022-05-22 13:02:22
  */
 import { PropType } from 'vue';
 import PropTypes from '../../../_utils/vue-types';
@@ -198,7 +198,7 @@ export default {
     selectedRowKeys: PropTypes.array, // 选中项的 key 数组，支持动态赋值
     hideSelectAll: PropTypes.bool.def(false), // 隐藏表头全选勾选框
     checkStrictly: PropTypes.bool.def(true), // true -> 节点选择完全受控（父子数据选中状态不再关联）
-    defaultSelectFirstRow: PropTypes.bool.def(false), // 是否默认选中第一行（单选时生效）
+    selectFirstRowOnChange: PropTypes.bool.def(false), // 分页、排序、筛选变化后是否选中首行（单选时生效）
     filterable: PropTypes.bool.def(true), // 是否显示筛选箭头
     selectByClickRow: PropTypes.bool, // 通过单击行选中，默认开启
     clearableAfterFetched: PropTypes.bool.def(false), // 重新检索之后，是否清空已选择

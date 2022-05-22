@@ -299,13 +299,16 @@ export default defineComponent({
       this.$nextTick(() => this.doLayout());
     },
     filters(): void {
+      this.selectFirstRow();
       this.$emit('change', this.pagination, this.filters, this.sorter, { currentDataSource: this.currentDataSource });
     },
     sorter(): void {
+      this.selectFirstRow();
       this.$emit('change', this.pagination, this.filters, this.sorter, { currentDataSource: this.currentDataSource });
     },
     pagination: {
       handler(): void {
+        this.selectFirstRow();
         this.$emit('change', this.pagination, this.filters, this.sorter, { currentDataSource: this.currentDataSource });
       },
       deep: true,

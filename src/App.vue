@@ -119,9 +119,10 @@ export default defineComponent({
               ],
               fetch: {
                 api: getTableData,
-                params: {},
+                params: { currentPage: 1, pageSize: 500 },
                 dataKey: 'records',
               },
+              webPagination: true,
             },
             filterAliasMap: () => {
               return ['a1'];
@@ -873,6 +874,7 @@ export default defineComponent({
       selection: {
         type: 'checkbox',
         filterable: true,
+        // selectFirstRowOnChange: true,
         selectedRowKeys: this.selectedKeys,
         fetchAllRowKeys: {
           api: getTableKeys,
@@ -1026,13 +1028,14 @@ export default defineComponent({
             height={'auto'}
             stripe={true}
             columns={this.columns}
-            dataSource={this.list}
+            fetch={this.fetch}
+            // dataSource={this.list}
             rowKey={(row) => row.pageIndex}
-            scrollPagination={true}
+            // scrollPagination={true}
             footRender={this.footRender}
             showTableImport
             rowDraggable
-            webPagination
+            // webPagination
             rowSelection={this.selection}
             authConfig={this.authConfig}
             summation={this.summation}
