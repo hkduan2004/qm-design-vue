@@ -57,7 +57,7 @@
     "countup.js": "^2.0.8",
     "cropperjs": "^1.5.12",
     "dayjs": "^1.10.8",
-    "element-plus": "2.2.1",
+    "element-plus": "2.2.2",
     "exceljs": "^4.3.0",
     "localforage": "^1.10.0",
     "lodash-es": "^4.17.21",

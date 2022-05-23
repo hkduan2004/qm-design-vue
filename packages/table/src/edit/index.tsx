@@ -190,7 +190,7 @@ export default defineComponent({
           popper-class={'table-editable__popper'}
           {...selectProps}
           multiple={isMultiple}
-          collapseTags={isMultiple}
+          collapseTags={isMultiple && (extra.collapseTags ?? !0)}
           placeholder={t('qm.table.editable.selectPlaceholder')}
           clearable={extra.clearable ?? !0}
           onChange={(val) => {

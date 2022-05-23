@@ -95,8 +95,9 @@ const columnItem = {
  *     minDateTime: PropTypes.string,
  *     maxDateTime: PropTypes.string,
  *     text: PropTypes.string,
- *     disabled: PropTypes.bool // 表单禁用状态
- *     clearable: PropTypes.bool
+ *     disabled: PropTypes.bool, // 表单禁用状态
+ *     clearable: PropTypes.bool,
+ *     collapseTags: PropTypes.bool,
  *   }),
  *   helper: PropTypes.shape({
  *     filters: PropTypes.object,

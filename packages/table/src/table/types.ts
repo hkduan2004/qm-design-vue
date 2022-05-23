@@ -114,6 +114,7 @@ export type IEditerReturn = {
     text?: string;
     disabled?: boolean;
     clearable?: boolean;
+    collapseTags?: boolean;
   };
   helper?: {
     filters?: AnyObject<any>;
