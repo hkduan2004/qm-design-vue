@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2022-03-12 11:36:01
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-03-13 12:47:40
+ * @Last Modified time: 2022-05-24 11:48:16
  */
 import { defineComponent } from 'vue';
 import { merge, get, uniqBy } from 'lodash-es';
@@ -117,9 +117,9 @@ export default defineComponent({
     };
 
     // 搜索帮助关闭，回显值事件
-    const closeSearchHelper = (data: Record<string, any>[]): void => {
+    const closeSearchHelper = (data: Record<string, any>[], keys: string[] = []): void => {
       const { textKey, valueKey } = this.alias;
-      this.setRecords(uniqBy([...this._records, ...data], valueKey));
+      this.setRecords(uniqBy([...this._records.filter((x) => keys.includes(x[valueKey])), ...data], valueKey));
       const results = this._records.map((x) => ({ text: x[textKey], value: x[valueKey] }));
       this.setItemList(results);
       setFormItemValue(results.map((x) => x.value));
@@ -156,9 +156,9 @@ export default defineComponent({
       multiple: true,
       initialValue: merge({}, searchHelper.initialValue),
       defaultSelectedKeys: form[fieldName],
-      onClose: (visible: boolean, data): void => {
+      onClose: (visible: boolean, data, keys): void => {
         if (data) {
-          closeSearchHelper(data);
+          closeSearchHelper(data, keys);
         } else {
           this.visible = false;
         }

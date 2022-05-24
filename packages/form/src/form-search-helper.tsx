@@ -146,7 +146,7 @@ export default defineComponent({
     } = options;
 
     // 搜索帮助关闭，回显值事件
-    const closeSearchHelper = (visible: boolean, data: Record<string, unknown>, alias: Record<string, string>): void => {
+    const closeSearchHelper = (visible: boolean, data: Record<string, unknown>, _, alias: Record<string, string>): void => {
       const aliasKeys: string[] = Object.keys(alias);
       if (isObject(data) && aliasKeys.length) {
         for (let key in alias) {
@@ -211,7 +211,7 @@ export default defineComponent({
       const alias: Record<string, string> = await this.createFieldAlias();
       const records = list.filter((data) => (data[alias[fieldName]] as any)?.toString().toLowerCase().includes(val.toLowerCase()));
       if (records.length === 1) {
-        return closeSearchHelper(false, records[0], alias);
+        return closeSearchHelper(false, records[0], undefined, alias);
       }
       openSearchHelper(val);
     };

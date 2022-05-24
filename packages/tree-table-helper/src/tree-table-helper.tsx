@@ -82,7 +82,7 @@ export default defineComponent({
   },
   data() {
     const { fetch, webPagination = !1 } = this.table;
-    Object.assign(this, { responseList: [], currentPage: 1 });
+    Object.assign(this, { rowKeys: this.defaultSelectedKeys, responseList: [], currentPage: 1 });
     return {
       result: null,
       loading: false,
@@ -243,6 +243,7 @@ export default defineComponent({
       this.$nextTick(() => this.calcTableHeight());
     },
     selectedRowChange(keys: string[], rows: AnyObject<any>[]): void {
+      this.rowKeys = keys;
       this.result = rows.length ? (!this.multiple ? rows[0] : rows) : null;
     },
     dbClickHandle(row: AnyObject<any>): void {
@@ -258,7 +259,7 @@ export default defineComponent({
       this.cancelHandle(this.result);
     },
     cancelHandle(data): void {
-      this.$emit('close', false, data);
+      this.$emit('close', false, data, this.multiple ? this.rowKeys : undefined);
     },
     createDictList(code: string): IDict[] {
       const { global } = this.$DESIGN;
