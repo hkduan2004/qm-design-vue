@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2020-03-23 12:51:24
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2021-11-06 18:49:45
+ * @Last Modified time: 2022-05-25 13:21:34
  */
 import { isUndefined } from '../../../_utils/util';
 import { prevent } from '../../../_utils/dom';
@@ -67,27 +67,18 @@ const keyboardMixin = {
       // Tab
       if (keyCode === 9) {
         prevent(ev);
+        const { editableColumns } = this.$$table;
         // 非可编辑单元格
-        if (!this.editableColumns.length) {
+        if (!editableColumns.length) {
           return this.setClickedValues([]);
         }
-        const total = this.editableColumns.length;
-        let index = this.editableColumns.findIndex((x) => x.dataIndex === this.clicked[1]);
+        const total = editableColumns.length;
+        let index = editableColumns.findIndex((x) => x.dataIndex === this.clicked[1]);
         const yIndex = ++index % total;
-        const dataIndex = this.editableColumns[yIndex].dataIndex;
+        const dataIndex = editableColumns[yIndex].dataIndex;
         this.setClickedValues([this.clicked[0], dataIndex]);
         this.scrollXToColumn(dataIndex);
       }
-      // 左  右
-      // if (keyCode === 37 || keyCode === 39) {
-      //   prevent(ev);
-      //   const total = this.editableColumns.length;
-      //   let index = this.editableColumns.findIndex(x => x.dataIndex === this.clicked[1]);
-      //   let yIndex = keyCode === 37 ? (--index + total) % total : ++index % total;
-      //   const dataIndex = this.editableColumns[yIndex].dataIndex;
-      //   this.setClickedValues([this.clicked[0], dataIndex]);
-      //   this.scrollXToColumn(dataIndex);
-      // }
     },
     rowInViewport(index: number): boolean {
       const { layout, scrollYStore, scrollX } = this.$$table;
@@ -121,10 +112,10 @@ const keyboardMixin = {
       // this.$el.scrollLeft = 0;
     },
     createInputFocus(): void {
-      const { tableFullData, getRowKey } = this.$$table;
-      if (!this.editableColumns.length || !tableFullData.length) return;
+      const { tableFullData, editableColumns, getRowKey } = this.$$table;
+      if (!editableColumns.length || !tableFullData.length) return;
       const firstRecord = tableFullData[0];
-      const firstInputColumn = this.editableColumns.find((column) => {
+      const firstInputColumn = editableColumns.find((column) => {
         const options = column.editRender(firstRecord, column);
         return ['text', 'number', 'search-helper'].includes(options.type);
       });

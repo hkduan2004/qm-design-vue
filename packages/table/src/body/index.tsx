@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2020-02-28 23:01:43
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-05-15 11:41:14
+ * @Last Modified time: 2022-05-25 13:19:22
  */
 import { defineComponent, CSSProperties } from 'vue';
 import addEventListener from 'add-dom-event-listener';
@@ -75,9 +75,6 @@ export default defineComponent({
         return { ...result, height: `${viewportHeight}px` };
       }
       return result;
-    },
-    editableColumns(): IColumn[] {
-      return this.flattenColumns.filter((x) => isFunction(x.editRender));
     },
   },
   watch: {

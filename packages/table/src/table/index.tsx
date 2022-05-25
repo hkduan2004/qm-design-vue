@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-02-09 09:03:59
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-04-30 12:36:24
+ * @Last Modified time: 2022-05-25 13:19:15
  */
 import { defineComponent, CSSProperties } from 'vue';
 import { isEqual } from 'lodash-es';
@@ -151,6 +151,9 @@ export default defineComponent({
     flattenColumns(): IColumn[] {
       return columnsFlatMap(this.tableColumns);
     },
+    editableColumns(): IColumn[] {
+      return this.flattenColumns.filter((x) => typeof x.editRender === 'function');
+    },
     allTableData(): IRecord[] {
       return !this.isTreeTable ? this.tableFullData : getAllTableData(this.tableFullData);
     },
@@ -219,6 +222,9 @@ export default defineComponent({
     },
     isFastSearch(): boolean {
       return !this.isFetch && this.showFastSearch && this.isHeadFilter;
+    },
+    isTableClipboard(): boolean {
+      return !!this.showClipboard && this.editableColumns.length > 0;
     },
     isGroupSummary(): boolean {
       return this.flattenColumns.some((column) => !!column.groupSummary);

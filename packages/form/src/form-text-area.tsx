@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-02-23 21:56:33
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2021-10-19 15:16:07
+ * @Last Modified time: 2022-05-25 13:49:19
  */
 import { defineComponent } from 'vue';
 import { useLocale } from '../../hooks';
@@ -33,7 +33,7 @@ export default defineComponent({
       disabled,
       onChange = noop,
     } = this.option;
-    const { rows = 2, maxrows, maxlength = 200, onInput = noop, onClick = noop, onDblClick = noop } = options;
+    const { rows = 2, maxrows = 4, maxlength, onInput = noop, onClick = noop, onDblClick = noop } = options;
     this.$$form.setViewValue(fieldName, form[fieldName]);
     return (
       <el-form-item

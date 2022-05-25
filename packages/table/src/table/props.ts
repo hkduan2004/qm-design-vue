@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2020-02-28 23:04:58
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-05-22 13:02:22
+ * @Last Modified time: 2022-05-25 13:15:15
  */
 import { PropType } from 'vue';
 import PropTypes from '../../../_utils/vue-types';
@@ -308,6 +308,8 @@ export default {
   showRefresh: PropTypes.bool.def(true),
   // 是否显示导入按钮
   showTableImport: PropTypes.bool.def(false),
+  // 是否显示粘贴板
+  showClipboard: PropTypes.bool.def(true),
   // 是否显示行选合集
   showSelectCollection: PropTypes.bool.def(true),
   // 是否显示高级检索

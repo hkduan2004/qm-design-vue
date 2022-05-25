@@ -2,18 +2,17 @@
  * @Author: 焦质晔
  * @Date: 2021-04-07 08:23:32
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-04-30 17:58:21
+ * @Last Modified time: 2022-05-25 13:42:02
  */
 import { defineComponent } from 'vue';
 import { getPrefixCls } from '../../../_utils/prefix';
 import { sleep } from '../../../_utils/util';
 import { useLocale } from '../../../hooks';
-import { localeMixin } from '../../../mixins';
 import exportMixin from '../export/mixin';
 import config from '../config';
 
 import type { JSXNode } from '../../../_utils/types';
-import { IColumn, IRecord } from '../table/types';
+import type { IColumn, IRecord } from '../table/types';
 
 import Form from '../../../form';
 import Button from '../../../button';
@@ -24,7 +23,7 @@ export default defineComponent({
   props: ['columns', 'onClose'],
   emits: ['close'],
   inject: ['$$table'],
-  mixins: [localeMixin, exportMixin] as any,
+  mixins: [exportMixin] as any,
   data() {
     return {
       formList: this.createFormList(),

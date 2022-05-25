@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-06-19 08:45:54
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-05-15 11:03:33
+ * @Last Modified time: 2022-05-25 14:02:32
  */
 export default {
   name: 'zh-cn',
@@ -198,6 +198,16 @@ export default {
         custom: '自定义',
         footSummation: '底部合计',
         useStyle: '使用样式',
+      },
+      clipboard: {
+        text: '粘 贴',
+        settingTitle: '粘贴设置',
+        rowIndex: '粘贴起始行',
+        colIndex: '粘贴起始列',
+        content: '粘贴内容',
+        placeholder: '请在此处 ctrl+v 粘贴数据',
+        supportText: '说明：只支持粘贴 Excel 数据',
+        noEmpty: '不能为空',
       },
       print: {
         text: '打印',

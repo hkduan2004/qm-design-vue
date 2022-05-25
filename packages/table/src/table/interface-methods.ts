@@ -2,10 +2,10 @@
  * @Author: 焦质晔
  * @Date: 2020-04-14 16:03:27
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2021-12-07 18:58:50
+ * @Last Modified time: 2022-05-25 13:40:36
  */
 import { intersection } from 'lodash-es';
-import { isObject, isFunction } from '../../../_utils/util';
+import { isObject } from '../../../_utils/util';
 import { getCellValue, setCellValue } from '../utils';
 import { IRowKey } from './types';
 import type { AnyFunction, AnyObject } from '../../../_utils/types';
@@ -139,12 +139,11 @@ export default {
   REMOVE_RECORDS<T extends IRecord | IRowKey>(records: T | T[]): void {
     const rows = Array.isArray(records) ? records : [records];
     const rowKeys = rows.map((x) => (isObject(x) ? this.getRowKey(x, (x as IRecord).index) : x));
-    const editableColumns = this.flattenColumns.filter((column) => isFunction(column.editRender));
     let isRemoved = false;
     this.deepMapRemove(this.tableFullData, rowKeys, (row, rowKey) => {
       this.store.addToRemoved(row);
       // 移除表单校验记录
-      editableColumns.forEach((column) => {
+      this.editableColumns.forEach((column) => {
         const { dataIndex, editRender } = column;
         const options = editRender(row);
         if (!options) return;
@@ -176,9 +175,8 @@ export default {
   },
   // 表单校验
   VALIDATE_FIELDS(): Pick<ITableLog, 'required' | 'validate'> {
-    const editableColumns = this.flattenColumns.filter((column) => isFunction(column.editRender));
     this.allTableData.forEach((record) => {
-      editableColumns.forEach((column) => {
+      this.editableColumns.forEach((column) => {
         const { dataIndex, editRender } = column;
         const options = editRender(record);
         if (!options) return;

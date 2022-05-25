@@ -43,6 +43,7 @@
 | exportExcel          | 导出表格数据，[配置项](#exportExcel)                   | object                                                 | -      |
 | tablePrint           | 表格打印，[配置项](#tablePrint)                        | object                                                 | -      |
 | showTableImport      | 是否显示表格导入                                       | boolean                                                | false  |
+| showClipboard        | 是否显示粘贴板                                         | boolean                                                | true   |
 | showSelectCollection | 是否显示行选合集                                       | boolean                                                | true   |
 | showSuperSearch      | 是否显示高级检索                                       | boolean                                                | true   |
 | showFastSearch       | 是否显示数据定位查找                                   | boolean                                                | true   |
