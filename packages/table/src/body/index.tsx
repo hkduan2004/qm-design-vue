@@ -404,22 +404,25 @@ export default defineComponent({
       }
       return title;
     },
-    createSelectionKeys(rowKey: string): void {
+    doSelectHandle(rowKey: string, row: IRecord): void {
       const { rowSelection = {}, selectionKeys, isTreeTable } = this.$$table;
-      const { type, checkStrictly = !0 } = rowSelection;
+      const { type, checkStrictly = !0, onSelect } = rowSelection;
       if (type === 'radio') {
         this.setSelectionKeys([rowKey]);
       }
       if (type === 'checkbox') {
-        if (isTreeTable && !checkStrictly) {
-          this.setTreeSelectionKeys(rowKey, selectionKeys);
-        } else {
-          this.setSelectionKeys(!selectionKeys.includes(rowKey) ? [...selectionKeys, rowKey] : selectionKeys.filter((x) => x !== rowKey));
-        }
+        // 是否选中
+        const checked = !selectionKeys.includes(rowKey);
+        const selectedKeys =
+          isTreeTable && !checkStrictly
+            ? this.createTreeSelectionKeys(rowKey, selectionKeys, checked)
+            : this.createSelectionKeys(rowKey, selectionKeys, checked);
+        this.setSelectionKeys(selectedKeys);
+        onSelect?.(checked, row, selectedKeys);
       }
     },
     cellClickHandle(ev: MouseEvent, row: IRecord, column: IColumn): void {
-      const { getRowKey, rowSelection = {}, selectionKeys, rowHighlight, isTreeTable } = this.$$table;
+      const { getRowKey, rowSelection = {}, rowHighlight } = this.$$table;
       const { dataIndex } = column;
       if ([config.expandableColumn, config.operationColumn].includes(dataIndex)) return;
       const rowKey = getRowKey(row, row.index);
@@ -434,7 +437,7 @@ export default defineComponent({
       const { type, selectByClickRow = !0, disabled = noop } = rowSelection;
       if (type && !disabled(row) && !isEditable) {
         if (selectByClickRow || dataIndex === config.selectionColumn) {
-          this.createSelectionKeys(rowKey);
+          this.doSelectHandle(rowKey, row);
         }
       }
       // 单击 展开列、可选择列、操作列 不触发行单击事件
@@ -463,13 +466,10 @@ export default defineComponent({
     setSelectionKeys(arr: string[]): void {
       this.$$table.selectionKeys = arr;
     },
-    setTreeSelectionKeys(key: string, arr: string[]): void {
-      // on(选中)  off(取消)
-      const state = !arr.includes(key) ? 'on' : 'off';
-      const selectedKeys = this.createTreeSelectionKeys(key, arr, state);
-      this.setSelectionKeys(selectedKeys);
+    createSelectionKeys(key: string, arr: string[], checked: boolean): string[] {
+      return checked ? [...arr, key] : arr.filter((x) => x !== key);
     },
-    createTreeSelectionKeys(key: string, arr: string[], state: string): string[] {
+    createTreeSelectionKeys(key: string, arr: string[], checked: boolean): string[] {
       const { deriveRowKeys, getAllChildRowKeys, findParentRowKeys } = this.$$table;
       const target = deepFindRowKey(deriveRowKeys, key);
       let result: string[] = [];
@@ -479,7 +479,7 @@ export default defineComponent({
       // const parentRowKeys = findParentRowKeys(deriveRowKeys, key);
       const parentRowKeys = deepGetRowkey(deriveRowKeys, key)?.slice(0, -1).reverse() || [];
       // 处理后代节点
-      if (state === 'on') {
+      if (checked) {
         result = [...new Set([...arr, key, ...childRowKeys])];
       } else {
         result = arr.filter((x) => ![key, ...childRowKeys].includes(x));

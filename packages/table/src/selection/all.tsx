@@ -69,13 +69,16 @@ export default defineComponent({
     async changeHandle(val: boolean): Promise<void> {
       const { selectionKeys, filterAllRowKeys } = this;
       const { rowSelection } = this.$$table;
+      let results: string[] = [];
       if (rowSelection.fetchAllRowKeys) {
-        this.$$table.selectionKeys = val ? await this.getAllSelectionKeys() : [];
+        results = val ? await this.getAllSelectionKeys() : [];
       } else {
         // 性能待优化
-        // this.$$table.selectionKeys = val ? union(selectionKeys, filterAllRowKeys) : selectionKeys.filter((x) => !filterAllRowKeys.includes(x));
-        this.$$table.selectionKeys = val ? filterAllRowKeys.slice(0) : [];
+        // results = val ? union(selectionKeys, filterAllRowKeys) : selectionKeys.filter((x) => !filterAllRowKeys.includes(x));
+        results = val ? filterAllRowKeys.slice(0) : [];
       }
+      this.$$table.selectionKeys = results;
+      rowSelection.onSelectAll?.(val, results);
     },
     selectAllHandle(): void {
       this.changeHandle(true);
