@@ -4,8 +4,8 @@
  * @Last Modified by: 焦质晔
  * @Last Modified time: 2022-05-24 11:48:25
  */
-import { defineComponent } from 'vue';
-import { merge, get, uniqBy } from 'lodash-es';
+import { defineComponent, getCurrentInstance, watch, inject } from 'vue';
+import { merge, get, uniqBy, isEqual } from 'lodash-es';
 import { useLocale, useSize } from '../../hooks';
 import { noop } from './utils';
 import { warn } from '../../_utils/error';
@@ -31,6 +31,26 @@ export default defineComponent({
       visible: false,
       itemList: [],
     };
+  },
+  setup(props) {
+    const instance = getCurrentInstance() as any;
+    const { fieldName } = props.option;
+    const { form } = inject('$$form')!;
+    watch(
+      () => form[fieldName],
+      (next, prev) => {
+        const _this = instance.ctx;
+        if (
+          prev !== next &&
+          !isEqual(
+            next,
+            _this._records.map((x) => x[_this.alias.valueKey])
+          )
+        ) {
+          _this.getItemList();
+        }
+      }
+    );
   },
   created() {
     this.initialHandle();
