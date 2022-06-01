@@ -112,6 +112,7 @@ export type IEditerReturn = {
     minDateTime?: string;
     maxDateTime?: string;
     text?: string;
+    placeholder?: string;
     disabled?: boolean;
     clearable?: boolean;
     collapseTags?: boolean;

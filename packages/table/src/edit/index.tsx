@@ -110,7 +110,7 @@ export default defineComponent({
           ref={`${type}-${this.dataKey}`}
           size={this.size}
           {...inputProps}
-          placeholder={t('qm.table.editable.inputPlaceholder')}
+          placeholder={extra.placeholder || t('qm.table.editable.inputPlaceholder')}
           maxlength={extra.maxlength}
           onInput={(val) => {
             onInput({ [this.dataKey]: val }, row);
@@ -152,7 +152,7 @@ export default defineComponent({
           min={extra.min}
           max={extra.max}
           maxlength={extra.maxlength}
-          placeholder={t('qm.table.editable.inputPlaceholder')}
+          placeholder={extra.placeholder || t('qm.table.editable.inputPlaceholder')}
           style={{ width: '100%' }}
           onChange={(val) => {
             this.createFieldValidate(rules, val);
@@ -191,7 +191,7 @@ export default defineComponent({
           {...selectProps}
           multiple={isMultiple}
           collapseTags={isMultiple && (extra.collapseTags ?? !0)}
-          placeholder={t('qm.table.editable.selectPlaceholder')}
+          placeholder={extra.placeholder || t('qm.table.editable.selectPlaceholder')}
           clearable={extra.clearable ?? !0}
           onChange={(val) => {
             this.createFieldValidate(rules, val);
@@ -497,7 +497,7 @@ export default defineComponent({
             ref={`search-helper-${this.dataKey}`}
             size={this.size}
             {...inputProps}
-            placeholder={t('qm.table.editable.selectPlaceholder')}
+            placeholder={extra.placeholder || t('qm.table.editable.selectPlaceholder')}
             maxlength={extra.maxlength}
             readonly={extra.readonly}
             clearable={extra.clearable ?? !0}
@@ -664,7 +664,7 @@ export default defineComponent({
             ref={`tree-helper-${this.dataKey}`}
             size={this.size}
             modelValue={prevValue}
-            placeholder={t('qm.table.editable.selectPlaceholder')}
+            placeholder={extra.placeholder || t('qm.table.editable.selectPlaceholder')}
             clearable={extra.clearable ?? !0}
             readonly={extra.readonly}
             disabled={extra.disabled}
