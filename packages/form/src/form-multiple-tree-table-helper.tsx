@@ -177,6 +177,7 @@ export default defineComponent({
       multiple: true,
       initialValue: merge({}, searchHelper.initialValue),
       defaultSelectedKeys: form[fieldName],
+      selectionRows: this._records,
       onClose: (visible: boolean, data, keys): void => {
         if (data) {
           closeSearchHelper(data, keys);

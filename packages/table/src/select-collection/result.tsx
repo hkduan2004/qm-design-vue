@@ -59,7 +59,7 @@ export default defineComponent({
       return [
         {
           title: this.$t('qm.table.groupSummary.index'),
-          dataIndex: 'pageIndex',
+          dataIndex: 'index',
           width: 80,
           render: (text: number) => {
             return text + 1;

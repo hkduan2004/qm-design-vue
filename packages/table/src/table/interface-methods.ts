@@ -97,6 +97,10 @@ export default {
   SELECT_FIRST_RECORD(): void {
     this.selectFirstRow(true);
   },
+  // 设置选中的行记录
+  SET_SELECTION_ROWS(records: IRecord[]) {
+    this.selectionRows = records;
+  },
   // 滚动到指定数据行
   SCROLL_TO_RECORD(rowKey: IRowKey): void {
     this.tableBodyRef.scrollYToRecord(rowKey);

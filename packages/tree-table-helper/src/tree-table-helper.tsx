@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-02-09 09:03:59
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-04-14 14:27:27
+ * @Last Modified time: 2022-06-07 14:34:06
  */
 import { defineComponent, PropType } from 'vue';
 import PropTypes from '../../_utils/vue-types';
@@ -16,6 +16,7 @@ import { isValidComponentSize } from '../../_utils/validators';
 import { warn } from '../../_utils/error';
 import { SizeHeight } from '../../_utils/types';
 import type { JSXNode, ComponentSize, AnyObject } from '../../_utils/types';
+import type { IRecord } from '../../table/src/table/types';
 
 import Spin from '../../spin';
 import Split from '../../split';
@@ -67,6 +68,7 @@ export default defineComponent({
     filters: PropTypes.array.def([]),
     initialValue: PropTypes.object.def({}),
     defaultSelectedKeys: PropTypes.array.def([]),
+    selectionRows: PropTypes.array.def([]),
     showFilterCollapse: PropTypes.bool.def(true),
     table: PropTypes.shape({
       fetch: PropTypes.object.isRequired,
@@ -112,6 +114,11 @@ export default defineComponent({
   computed: {
     disabled(): boolean {
       return !this.result;
+    },
+  },
+  watch: {
+    selectionRows(next: IRecord[]) {
+      this.$refs[`table`].SET_SELECTION_ROWS(next);
     },
   },
   created() {
