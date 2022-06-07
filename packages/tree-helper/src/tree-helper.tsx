@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-02-09 09:03:59
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-05-24 11:51:04
+ * @Last Modified time: 2022-06-07 15:59:37
  */
 import { defineComponent, PropType } from 'vue';
 import PropTypes from '../../_utils/vue-types';
@@ -44,7 +44,7 @@ export default defineComponent({
       validator: isValidComponentSize,
     },
     multiple: PropTypes.bool,
-    defaultSelectedKeys: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).def([]),
+    defaultSelectedKeys: PropTypes.array.def([]),
     tree: PropTypes.shape({
       fetch: PropTypes.object.isRequired,
       asyncLoad: PropTypes.bool, // 按需加载
