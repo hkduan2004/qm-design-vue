@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-02-09 09:03:59
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-06-07 14:34:06
+ * @Last Modified time: 2022-06-07 15:39:17
  */
 import { defineComponent, PropType } from 'vue';
 import PropTypes from '../../_utils/vue-types';
@@ -117,8 +117,11 @@ export default defineComponent({
     },
   },
   watch: {
-    selectionRows(next: IRecord[]) {
-      this.$refs[`table`].SET_SELECTION_ROWS(next);
+    selectionRows: {
+      handler(next: IRecord[]) {
+        this.$nextTick(() => this.$refs[`table`].SET_SELECTION_ROWS(next));
+      },
+      immediate: true,
     },
   },
   created() {

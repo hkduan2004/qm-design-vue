@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2020-04-14 16:03:27
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-05-25 13:40:36
+ * @Last Modified time: 2022-06-07 15:36:32
  */
 import { intersection } from 'lodash-es';
 import { isObject } from '../../../_utils/util';
@@ -98,7 +98,7 @@ export default {
     this.selectFirstRow(true);
   },
   // 设置选中的行记录
-  SET_SELECTION_ROWS(records: IRecord[]) {
+  SET_SELECTION_ROWS(records: IRecord[]): void {
     this.selectionRows = records;
   },
   // 滚动到指定数据行

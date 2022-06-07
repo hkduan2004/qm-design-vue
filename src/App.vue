@@ -184,6 +184,11 @@ export default defineComponent({
                 dataKey: 'records',
               },
             },
+            request: {
+              fetchApi: getTableData,
+              params: { currentPage: 1, pageSize: 500 },
+              dataKey: 'records',
+            },
             filterAliasMap: () => {
               return ['a1'];
             },
@@ -1012,7 +1017,7 @@ export default defineComponent({
             uniqueKey="jzy_filter"
             formType={this.formType}
             list={this.formList}
-            initialValue={{ aa: '0', d: 123123 }}
+            initialValue={{ z: [21, 22] }}
             // authConfig={this.authConfig2}
             onFinish={this.finish}
             onCollapse={this.collapse}
