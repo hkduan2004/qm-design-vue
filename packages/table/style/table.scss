@@ -158,7 +158,7 @@ $prefix: '#{$qm-prefix}-table';
     &:not(.col--ellipsis) {
       padding: #{math.div($v-table-row-height-default - $v-table-row-line-height, 2)} 0;
       .cell {
-        line-height: 1.25;
+        line-height: 1.2;
       }
     }
     &.col--center:not(.header--column) {
