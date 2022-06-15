@@ -142,6 +142,7 @@ export default defineComponent({
           v-model={form[fieldName]}
           popper-class={`${prefixCls}__popper`}
           placeholder={!disabled ? placeholder : ''}
+          triggerOnFocus={false}
           clearable={clearable}
           readonly={readonly}
           disabled={disabled}
@@ -166,10 +167,6 @@ export default defineComponent({
               onChange(form[fieldName]);
             }
           }}
-          onFocus={(): void => {
-            if (!onlySelect) return;
-            this[`callback`]?.([]);
-          }}
           onBlur={(ev): void => {
             if (!onlySelect) return;
             if (ev.target.value) {
@@ -177,6 +174,7 @@ export default defineComponent({
             } else {
               this[`prevValue`] = '';
             }
+            setTimeout(() => this[`callback`]?.([]), 300);
           }}
           onDblclick={() => {
             this.$refs[type].focus();
