@@ -50,6 +50,7 @@ export default {
       stripe,
       customClass,
       tableStyles,
+      showTableInfo,
       showHeader,
       showFooter,
       showPagination,
@@ -144,40 +145,43 @@ export default {
 
     return (
       <div class={wrapperCls}>
-        <div ref="toper" class={`${prefixCls}-top`}>
-          <div class={`${prefixCls}-top__space`}>
-            {/* 顶部信息 */}
-            {showAlert && <Alert total={total} selectionKeys={selectionKeys} />}
-            <div class={`${prefixCls}-top__space-slot`} style={{ justifyContent: EAlign[topSpaceAlign] }}>
-              {/* 默认槽口 */}
-              {this.$slots.default?.()}
+        {/* 顶部信息 */}
+        {showTableInfo && (
+          <div ref="toper" class={`${prefixCls}-top`}>
+            <div class={`${prefixCls}-top__space`}>
+              {/* 顶部信息 */}
+              {showAlert && <Alert total={total} selectionKeys={selectionKeys} />}
+              <div class={`${prefixCls}-top__space-slot`} style={{ justifyContent: EAlign[topSpaceAlign] }}>
+                {/* 默认槽口 */}
+                {this.$slots.default?.()}
+              </div>
+            </div>
+            <div class={`${prefixCls}-top__actions`}>
+              {/* 全屏 */}
+              {showFullScreen && <FullScreen />}
+              {/* 刷新 */}
+              {showRefresh && isFetch && <Reload />}
+              {/* 打印 */}
+              {permission.print && tablePrint && <PrintTable {...printProps} />}
+              {/* 导入 */}
+              {permission.import && isTableImport && <TableImport columns={tableColumns} />}
+              {/* 导出 */}
+              {permission.export && exportExcel && <TableExport {...exportProps} />}
+              {/* 粘贴板 */}
+              {isTableClipboard && <TableClipboard columns={flattenColumns} />}
+              {/* 多选集合 */}
+              {isSelectCollection && <SelectCollection columns={tableColumns} />}
+              {/* 快速定位查找 */}
+              {isFastSearch && <FastSearch />}
+              {/* 高级检索 */}
+              {isSuperSearch && <HighSearch columns={flattenColumns} />}
+              {/* 分组汇总 */}
+              {isGroupSummary && <GroupSummary columns={flattenColumns} />}
+              {/* 列定义 */}
+              {showColumnDefine && <ColumnFilter columns={columns} />}
             </div>
           </div>
-          <div class={`${prefixCls}-top__actions`}>
-            {/* 全屏 */}
-            {showFullScreen && <FullScreen />}
-            {/* 刷新 */}
-            {showRefresh && isFetch && <Reload />}
-            {/* 打印 */}
-            {permission.print && tablePrint && <PrintTable {...printProps} />}
-            {/* 导入 */}
-            {permission.import && isTableImport && <TableImport columns={tableColumns} />}
-            {/* 导出 */}
-            {permission.export && exportExcel && <TableExport {...exportProps} />}
-            {/* 粘贴板 */}
-            {isTableClipboard && <TableClipboard columns={flattenColumns} />}
-            {/* 多选集合 */}
-            {isSelectCollection && <SelectCollection columns={tableColumns} />}
-            {/* 快速定位查找 */}
-            {isFastSearch && <FastSearch />}
-            {/* 高级检索 */}
-            {isSuperSearch && <HighSearch columns={flattenColumns} />}
-            {/* 分组汇总 */}
-            {isGroupSummary && <GroupSummary columns={flattenColumns} />}
-            {/* 列定义 */}
-            {showColumnDefine && <ColumnFilter columns={columns} />}
-          </div>
-        </div>
+        )}
         <Spin spinning={loading ?? showLoading} tip="Loading...">
           <div ref="table" class={tableCls} style={tableStyles}>
             {/* 主要内容 */}

@@ -49,6 +49,7 @@
 | showFastSearch       | 是否显示数据定位查找                                   | boolean                                                | true   |
 | showGroupSummary     | 是否显示分组汇总                                       | boolean                                                | true   |
 | showColumnDefine     | 是否显示列定义                                         | boolean                                                | true   |
+| showTableInfo        | 是否显示表格上方的信息栏，不建议隐藏                   | boolean                                                | true   |
 
 ### 事件
 

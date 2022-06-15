@@ -323,6 +323,8 @@ export default {
   showGroupSummary: PropTypes.bool.def(true),
   // 是否显示列定义
   showColumnDefine: PropTypes.bool.def(true),
+  // 是否显示表格上方的信息栏
+  showTableInfo: PropTypes.bool.def(true),
   // 只显示图标，不显示文字
   onlyShowIcon: PropTypes.bool.def(false),
   // 事件监听
